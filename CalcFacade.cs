@@ -1,21 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    public class CalcFacade
+    class CalcFacade
     {
-        Audit aud;
-        Calculation calc;
-        public CalcFacade(Audit aud, Calculation calc)
+        Audit audit;
+        Calculation calculation;
+        DataTable data;
+        internal CalcFacade(Audit audit,Calculation calculation, DataTable data)
         {
-            this.aud = aud;
-            this.calc = calc;
+            this.audit = audit;
+            this.calculation = calculation;
+            this.data = data;
         }
-        public void Start()
+        internal void Start()
         {
             for (; ; )
             {
@@ -23,24 +25,29 @@ namespace ConsoleApp2
                                            "1 - separated by +\n" +
                                            "2 - separated by -\n" +
                                            "3 - separated by /\n" +
-                                           "4 - separated by *\n");
+                                           "4 - separated by *\n" +
+                                           "5 - separated (x+y)/x*y-y\n");
                 switch (int.Parse(Console.ReadLine()))
                 {
                     case 1:
                         Console.Write("Write numbers separated by +: ");
-                        calc.CalcUnNumSpSb('+', aud);
+                        calculation.CalcUnNumSpSb('+', audit);
                         break;
                     case 2:
                         Console.Write("separated by -: ");
-                        calc.CalcUnNumSpSb('-', aud);
+                        calculation.CalcUnNumSpSb('-', audit);
                         break;
                     case 3:
                         Console.Write("separated by /: ");
-                        calc.CalcUnNumSpSb('/', aud);
+                        calculation.CalcUnNumSpSb('/', audit);
                         break;
                     case 4:
                         Console.Write("separated by *: ");
-                        calc.CalcUnNumSpSb('*', aud);
+                        calculation.CalcUnNumSpSb('*', audit);
+                        break;
+                    case 5:
+                        Console.Write("separated (x+y)/x*y-y: ");
+                        calculation.MatheXpression(data, audit);
                         break;
                     default:
                         Console.WriteLine("Incorrect input!!!");

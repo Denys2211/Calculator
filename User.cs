@@ -8,7 +8,7 @@ namespace ConsoleApp2
 {
     class User
     {
-        public void Star(CalcFacade ide)
+        internal void Star(CalcFacade ide)
         {
             ide.Start(); 
         }

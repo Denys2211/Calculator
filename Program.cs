@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace ConsoleApp2
 {
@@ -10,12 +6,13 @@ namespace ConsoleApp2
     {
          static void Main()
          {
-            Calculation calc = new Calculation();
-            Audit aud = new Audit();
-            CalcFacade ide = new CalcFacade(aud, calc);
+            Calculation calculation = new Calculation();
+            Audit audit = new Audit();
+            DataTable data = new DataTable();
+            CalcFacade ide = new CalcFacade(audit, calculation, data);
             User uss = new User();
             uss.Star(ide);
          }
     }
 }
-    
+
