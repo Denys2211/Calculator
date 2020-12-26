@@ -48,9 +48,9 @@ namespace ConsoleApp2
             for(; ; )
             {
                 bool a = false;
-                char[] symbol = { '*', '/', '+', '(', ')', '-' };
+                string[] symbol = { "*(", "+(", "-(", "/(", ")*", ")/", ")+", ")-", "-", "+", "/", "*", ")", "(", " (", ") " };
                 string input = Console.ReadLine();
-                string[] inputString = input.Split(symbol);
+                string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
                 float[] intArray = new float[inputString.Length];
                 if (string.IsNullOrEmpty(input))
                 {
@@ -70,7 +70,7 @@ namespace ConsoleApp2
                     Console.Write("This is not a numeric!Please try again:");
                     continue;
                 }
-                if (input.Split(symbol).Count() == 1)
+                if (input.Split(symbol, StringSplitOptions.RemoveEmptyEntries).Count() == 1)
                 {
                     Console.Write("You enter one numbers.Please try again: ");
                     continue;
