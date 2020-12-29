@@ -19,41 +19,19 @@ namespace ConsoleApp2
         }
         internal void Start()
         {
-            for (; ; )
+            for(; ; )
             {
-                Console.Write("Select the desired operation:\n" +
-                                           "1 - separated by +\n" +
-                                           "2 - separated by -\n" +
-                                           "3 - separated by /\n" +
-                                           "4 - separated by *\n" +
-                                           "5 - separated (x+y)/x*y-y\n");
-                switch (int.Parse(Console.ReadLine()))
-                {
-                    case 1:
-                        Console.Write("Write numbers separated by +: ");
-                        calculation.CalcUnNumSpSb('+', audit);
-                        break;
-                    case 2:
-                        Console.Write("separated by -: ");
-                        calculation.CalcUnNumSpSb('-', audit);
-                        break;
-                    case 3:
-                        Console.Write("separated by /: ");
-                        calculation.CalcUnNumSpSb('/', audit);
-                        break;
-                    case 4:
-                        Console.Write("separated by *: ");
-                        calculation.CalcUnNumSpSb('*', audit);
-                        break;
-                    case 5:
-                        Console.Write("separated (x+y)/x*y-y: ");
-                        calculation.MatheXpression(data, audit);
-                        break;
-                    default:
-                        Console.WriteLine("Incorrect input!!!");
-                        break;
-
-                }
+                calculation.DataEntry(out string input, out string[] symbol);
+                audit.CheckAvailability(input, out string verify);
+                if (verify == "false")
+                    continue;
+                audit.CheckQuantity(input, symbol, out string verify1);
+                if (verify1 == "false")
+                    continue;
+                audit.СheckNumericCharacter(input, symbol, out string verify2);
+                if (verify2 == "false")
+                    continue;
+                calculation.MatheXpression(data, input);
             }
         }
     }

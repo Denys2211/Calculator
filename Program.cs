@@ -4,7 +4,7 @@ namespace ConsoleApp2
 {
     class Program
     {
-         static void Main()
+          static void Main()
          {
             Calculation calculation = new Calculation();
             Audit audit = new Audit();
