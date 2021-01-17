@@ -9,19 +9,17 @@ namespace ConsoleApp2
     class CalcFacade
     {
         Audit audit;
-        Calculation calculation;
-        DataTable data;
-        internal CalcFacade(Audit audit,Calculation calculation, DataTable data)
+        Calculator calculator;
+        internal CalcFacade(Audit audit,Calculator calculator)
         {
             this.audit = audit;
-            this.calculation = calculation;
-            this.data = data;
+            this.calculator = calculator;
         }
         internal void Start()
         {
             for(; ; )
             {
-                calculation.DataEntry(out string input, out string[] symbol);
+                calculator.DataEntry(out string input, out string[] symbol);
                 audit.CheckAvailability(input, out string verify);
                 if (verify == "false")
                     continue;
@@ -31,7 +29,8 @@ namespace ConsoleApp2
                 audit.СheckNumericCharacter(input, symbol, out string verify2);
                 if (verify2 == "false")
                     continue;
-                calculation.MatheXpression(data, input);
+                calculator.Evaluate(input, out double result);
+                calculator.OutputDisplay(result);
             }
         }
     }

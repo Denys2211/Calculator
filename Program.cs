@@ -1,15 +1,13 @@
-﻿using System.Data;
-
+﻿
 namespace ConsoleApp2
 {
     class Program
     {
           static void Main()
          {
-            Calculation calculation = new Calculation();
+            Calculator calculator = new Calculator();
             Audit audit = new Audit();
-            DataTable data = new DataTable();
-            CalcFacade ide = new CalcFacade(audit, calculation, data);
+            CalcFacade ide = new CalcFacade(audit, calculator);
             User uss = new User();
             uss.Star(ide);
          }
