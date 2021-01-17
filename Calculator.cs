@@ -36,19 +36,12 @@ namespace ConsoleApp2
 
                     string innerExp = "";
                     i++; //отримати наступний символ
-                    int bracketCount = 0;
                     for (; i < input.Length; i++)
                     {
                         symbol = input.Substring(i, 1);
 
-                        if (symbol.Equals("("))
-                            bracketCount++;
-
                         if (symbol.Equals(")"))
-                            if (bracketCount == 0)
                                 break;
-                            else
-                                bracketCount--;
                         innerExp += symbol;
                     }
 
