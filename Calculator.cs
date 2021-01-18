@@ -16,113 +16,112 @@ namespace ConsoleApp2
         }
         internal void Evaluate(string input, out double result)
         {
-                Stack<String> stack = new Stack<String>();
+            Stack<String> stack = new Stack<String>();
 
-                string value = "";
-                for (int i = 0; i < input.Length; i++)
+            string value = "";
+            for (int j = 0; j < input.Length; j++)
+            {
+                String symbol = input.Substring(j, 1);
+                char chr = symbol.ToCharArray()[0];
+
+                if (!char.IsDigit(chr) && chr != '.' && value != "")
                 {
-                    String symbol = input.Substring(i, 1);
-                    char chr = symbol.ToCharArray()[0];
+                    stack.Push(value);
+                    value = "";
+                }
+                if (symbol.Equals("("))
+                {
+                    string innerExp = "";
+                    j++; 
+                    int bracketCount = 0;
+                    for (; j < input.Length; j++)
+                    {
+                    symbol = input.Substring(j, 1);
 
-                    if (!char.IsDigit(chr) && chr != '.' && value != "")
-                    {
-                        stack.Push(value);
-                        value = "";
-                    }
-                    if (symbol.Equals("("))
-                    {
-                        string innerExp = "";
-                        i++; 
-                        int bracketCount = 0;
-                        for (; i < input.Length; i++)
+                        if (symbol.Equals("(")) bracketCount++;
+
+                        if (symbol.Equals(")"))
                         {
-                        symbol = input.Substring(i, 1);
-
-                            if (symbol.Equals("(")) bracketCount++;
-
-                            if (symbol.Equals(")"))
-                            {
-                                if (bracketCount == 0) break;
-                                bracketCount--;
-                            }
-                            innerExp += symbol;
+                            if (bracketCount == 0) break;
+                            bracketCount--;
                         }
-                        Evaluate(innerExp, out result);
-                        stack.Push(result.ToString());
+                        innerExp += symbol;
                     }
-                    else if (symbol.Equals("+") ||
-                             symbol.Equals("-") ||
-                             symbol.Equals("*") ||
-                             symbol.Equals("/"))
-                    {
-                        stack.Push(symbol);
-                    }
-                    else if (char.IsDigit(chr) || chr == '.')
-                    {
-                        value += symbol;
-                        if (i == (input.Length - 1))
-                            stack.Push(value);
-
-                    }
+                    Evaluate(innerExp, out result);
+                    stack.Push(result.ToString());
                 }
-                List<String> list = stack.ToList<String>();
-            
-                for (int i = list.Count - 2; i >= 0; i--)
-                {
-                    if (list[i] == "/")
-                    {
-                        list[i] = (Convert.ToDouble(list[i + 1]) / Convert.ToDouble(list[i - 1])).ToString();
-                        list.RemoveAt(i + 1);
-                        list.RemoveAt(i - 1);
-                        i -= 2;
-                    }
-                }
-
-                for (int i = list.Count - 2; i >= 0; i--)
-                {
-                    if (list[i] == "*")
-                    {
-                        list[i] = (Convert.ToDouble(list[i + 1]) * Convert.ToDouble(list[i - 1])).ToString();
-                        list.RemoveAt(i + 1);
-                        list.RemoveAt(i - 1);
-                        i -= 2;
-                    }
-                }
-                for (int i = list.Count - 2; i >= 0; i--)
-                {
-                    if (list[i] == "+")
-                    {
-                        list[i] = (Convert.ToDouble(list[i + 1]) + Convert.ToDouble(list[i - 1])).ToString();
-                        list.RemoveAt(i + 1);
-                        list.RemoveAt(i - 1);
-                        i -= 2;
-                    }
-                }
-                for (int i = list.Count - 2; i >= 0; i--)
-                {
-                    if (list[i] == "-")
-                    {
-                        list[i] = (Convert.ToDouble(list[i + 1]) - Convert.ToDouble(list[i - 1])).ToString();
-                        list.RemoveAt(i + 1);
-                        list.RemoveAt(i - 1);
-                        i -= 2;
-                    }
-                }
-                stack.Clear();
-                for (int i = 0; i < list.Count; i++)
-                {
-                    stack.Push(list[i]);
-                }
-
-                result = Convert.ToDouble(stack.Pop());
-            
+                else if (symbol.Equals("+") ||
+                         symbol.Equals("-") ||
+                         symbol.Equals("*") ||
+                         symbol.Equals("/"))
                 
+                    stack.Push(symbol);
+                
+                else if (char.IsDigit(chr) || chr == '.')
+                {
+                    value += symbol;
+                    if (j == (input.Length - 1))
+                        stack.Push(value);
+
+                }
+            }
+
+            List<String> list = stack.ToList<String>();
+
+            for (int i = list.Count - 2; i >= 0; i--)
+            {
+                if (list[i] == "*")
+                {
+                    list[i] = (Convert.ToDouble(list[i + 1]) * Convert.ToDouble(list[i - 1])).ToString();
+                    list.RemoveAt(i + 1);
+                    list.RemoveAt(i - 1);
+                    i -= 1;
+                }
+            }
+
+            for (int i = list.Count - 2; i >= 0; i--)
+            {
+                if (list[i] == "/")
+                {
+                    list[i] = (Convert.ToDouble(list[i + 1]) / Convert.ToDouble(list[i - 1])).ToString();
+                    list.RemoveAt(i + 1);
+                    list.RemoveAt(i - 1);
+                    i -= 1;
+                }
+            }
+
+            for (int i = list.Count - 2; i >= 0; i--)
+            {
+                if (list[i] == "+")
+                {
+                    list[i] = (Convert.ToDouble(list[i + 1]) + Convert.ToDouble(list[i - 1])).ToString();
+                    list.RemoveAt(i + 1);
+                    list.RemoveAt(i - 1);
+                    i -= 1;
+                }
+            }
+            for (int i = list.Count - 2; i >= 0; i--)
+            {
+                if (list[i] == "-")
+                {
+                    list[i] = (Convert.ToDouble(list[i + 1]) - Convert.ToDouble(list[i - 1])).ToString();
+                    list.RemoveAt(i + 1);
+                    list.RemoveAt(i - 1);
+                    i -= 1;
+                }
+            }
+            stack.Clear();
+            for (int j = 0; j < list.Count; j++)
+            {
+                stack.Push(list[j]);
+            }
+
+            result = Convert.ToDouble(stack.Pop());
         }
             internal void OutputDisplay(double result)
             {
                 Console.WriteLine($"Calculation result: {result}");
                 Console.ReadKey();
             }
-        
     }
 }
