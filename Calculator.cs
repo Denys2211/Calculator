@@ -110,7 +110,8 @@ namespace ConsoleApp
                     i -= 1;
                 }
             }
-            
+            stack.Clear();
+
             result = Convert.ToDouble(list[0]);
         }
 
