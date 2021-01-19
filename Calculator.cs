@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleApp2
+namespace ConsoleApp
 {
 
     class Calculator
@@ -110,18 +110,14 @@ namespace ConsoleApp2
                     i -= 1;
                 }
             }
-            stack.Clear();
-            for (int j = 0; j < list.Count; j++)
-            {
-                stack.Push(list[j]);
-            }
-
-            result = Convert.ToDouble(stack.Pop());
+            
+            result = Convert.ToDouble(list[0]);
         }
-            internal void OutputDisplay(double result)
-            {
-                Console.WriteLine($"Calculation result: {result}");
-                Console.ReadKey();
-            }
+
+        internal void OutputDisplay(double result)
+        {
+            Console.WriteLine($"Calculation result: {result}");
+            Console.ReadKey();
+        }
     }
 }
