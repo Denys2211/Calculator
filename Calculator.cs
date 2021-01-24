@@ -77,10 +77,7 @@ namespace ConsoleApp
                     list.RemoveAt(i - 1);
                     i -= 1;
                 }
-            }
 
-            for (int i = list.Count - 2; i >= 0; i--)
-            {
                 if (list[i] == "/")
                 {
                     list[i] = (Convert.ToDouble(list[i + 1]) / Convert.ToDouble(list[i - 1])).ToString();
@@ -99,9 +96,7 @@ namespace ConsoleApp
                     list.RemoveAt(i - 1);
                     i -= 1;
                 }
-            }
-            for (int i = list.Count - 2; i >= 0; i--)
-            {
+          
                 if (list[i] == "-")
                 {
                     list[i] = (Convert.ToDouble(list[i + 1]) - Convert.ToDouble(list[i - 1])).ToString();
