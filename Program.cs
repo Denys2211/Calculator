@@ -5,7 +5,8 @@ namespace ConsoleApp
     {
           static void Main()
          {
-            Calculator calculator = new Calculator();
+            Context context = new Context();
+            Calculator calculator = new Calculator(context);
             Audit audit = new Audit();
             CalcFacade ide = new CalcFacade(audit, calculator);
             User uss = new User();

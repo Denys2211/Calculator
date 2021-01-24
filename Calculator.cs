@@ -7,6 +7,11 @@ namespace ConsoleApp
 
     class Calculator
     {
+        Context context;
+        internal Calculator(Context context)
+        {
+            this.context = context;
+        }
 
         internal void DataEntry(out string input, out string[] symbol)
         {
@@ -14,102 +19,35 @@ namespace ConsoleApp
             Console.Write("Separated MatheXpression: ");
             input = Console.ReadLine();
         }
-        internal void Evaluate(string input, out double result)
+        internal void Evaluate(string input, out int result)
         {
-            Stack<String> stack = new Stack<String>();
-
-            string value = "";
-            for (int j = 0; j < input.Length; j++)
+            List<String> list = context.FormationExpression(input);
+            IExpression[] Number = new IExpression[list.Count];
+            IExpression expression;
+            for (int i = list.Count - 1; i >= 0; i--)
             {
-                String symbol = input.Substring(j, 1);
-                char chr = symbol.ToCharArray()[0];
-
-                if (!char.IsDigit(chr) && chr != '.' && value != "")
+                if (list[i] != "+" &&
+                    list[i] != "-" &&
+                    list[i] != "*" &&
+                    list[i] != "/")
                 {
-                    stack.Push(value);
-                    value = "";
-                }
-                if (symbol.Equals("("))
-                {
-                    string innerExp = "";
-                    j++; 
-                    int bracketCount = 0;
-                    for (; j < input.Length; j++)
-                    {
-                    symbol = input.Substring(j, 1);
-
-                        if (symbol.Equals("(")) bracketCount++;
-
-                        if (symbol.Equals(")"))
-                        {
-                            if (bracketCount == 0) break;
-                            bracketCount--;
-                        }
-                        innerExp += symbol;
-                    }
-                    Evaluate(innerExp, out result);
-                    stack.Push(result.ToString());
-                }
-                else if (symbol.Equals("+") ||
-                         symbol.Equals("-") ||
-                         symbol.Equals("*") ||
-                         symbol.Equals("/"))
-                
-                    stack.Push(symbol);
-                
-                else if (char.IsDigit(chr) || chr == '.')
-                {
-                    value += symbol;
-                    if (j == (input.Length - 1))
-                        stack.Push(value);
-
+                    input = Convert.ToString(i);
+                    context.SetVariable(input, int.Parse(list[i]));
+                    Number[i] = new NumberExpression(input);
                 }
             }
-
-            List<String> list = stack.ToList<String>();
-
-            for (int i = list.Count - 2; i >= 0; i--)
-            {
-                if (list[i] == "*")
-                {
-                    list[i] = (Convert.ToDouble(list[i + 1]) * Convert.ToDouble(list[i - 1])).ToString();
-                    list.RemoveAt(i + 1);
-                    list.RemoveAt(i - 1);
-                    i -= 1;
-                }
-
-                if (list[i] == "/")
-                {
-                    list[i] = (Convert.ToDouble(list[i + 1]) / Convert.ToDouble(list[i - 1])).ToString();
-                    list.RemoveAt(i + 1);
-                    list.RemoveAt(i - 1);
-                    i -= 1;
-                }
-            }
-
+            result = 0;
             for (int i = list.Count - 2; i >= 0; i--)
             {
                 if (list[i] == "+")
                 {
-                    list[i] = (Convert.ToDouble(list[i + 1]) + Convert.ToDouble(list[i - 1])).ToString();
-                    list.RemoveAt(i + 1);
-                    list.RemoveAt(i - 1);
+                    expression = new AddExpression(Number[i + 1], Number[i - 1]);
+                    result = expression.Interpret(context);
                     i -= 1;
                 }
-          
-                if (list[i] == "-")
-                {
-                    list[i] = (Convert.ToDouble(list[i + 1]) - Convert.ToDouble(list[i - 1])).ToString();
-                    list.RemoveAt(i + 1);
-                    list.RemoveAt(i - 1);
-                    i -= 1;
-                }
+
             }
-            stack.Clear();
-
-            result = Convert.ToDouble(list[0]);
         }
-
         internal void OutputDisplay(double result)
         {
             Console.WriteLine($"Calculation result: {result}");

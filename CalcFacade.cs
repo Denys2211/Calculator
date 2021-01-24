@@ -27,7 +27,7 @@ namespace ConsoleApp
                 audit.СheckNumericCharacter(input, symbol, out string verify2);
                 if (verify2 == "false")
                     continue;
-                calculator.Evaluate(input, out double result);
+                calculator.Evaluate(input, out int result);
                 calculator.OutputDisplay(result);
             }
         }
