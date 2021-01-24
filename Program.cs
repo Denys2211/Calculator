@@ -8,7 +8,7 @@ namespace ConsoleApp
             Context context = new Context();
             Calculator calculator = new Calculator(context);
             Audit audit = new Audit();
-            CalcFacade ide = new CalcFacade(audit, calculator);
+            CalcFacade ide = new CalcFacade(audit, calculator, context);
             User uss = new User();
             uss.Star(ide);
          }

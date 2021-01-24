@@ -8,10 +8,12 @@ namespace ConsoleApp
     {
         Audit audit;
         Calculator calculator;
-        internal CalcFacade(Audit audit,Calculator calculator)
+        Context context;
+        internal CalcFacade(Audit audit,Calculator calculator, Context context)
         {
             this.audit = audit;
             this.calculator = calculator;
+            this.context = context;
         }
         internal void Start()
         {
@@ -29,6 +31,7 @@ namespace ConsoleApp
                     continue;
                 calculator.Evaluate(input, out int result);
                 calculator.OutputDisplay(result);
+                context.Clear();
             }
         }
     }

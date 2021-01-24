@@ -59,6 +59,11 @@ namespace ConsoleApp
         {
             variables.Remove(name);
         }
+        internal void Clear()
+        {
+            variables.Clear();
+            stack.Clear();
+        }
     }
     
 }

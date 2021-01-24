@@ -70,7 +70,9 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="CalcFacade.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="DivisionExpression.cs" />
     <Compile Include="IExpression.cs" />
+    <Compile Include="MultiplicationExpression.cs" />
     <Compile Include="NumberExpression.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
