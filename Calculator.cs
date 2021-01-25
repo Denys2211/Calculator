@@ -43,21 +43,20 @@ namespace ConsoleApp
                 {
                     expression = new MultiplicationExpression(Number[i + 1], Number[i - 1]);
                     result = expression.Interpret(context);
-                    context.RemoveVariables(Convert.ToString(i + 1));
-                    context.SetVariable(Convert.ToString(i + 1), result);
+                    context.RemoveVariables(Convert.ToString(i - 1));
+                    context.SetVariable(Convert.ToString(i - 1), result);
                     i -= 1;
                 }
                 if (list[i] == "/")
                 {
                     expression = new DivisionExpression(Number[i + 1], Number[i - 1]);
                     result = expression.Interpret(context);
-                    context.RemoveVariables(Convert.ToString(i + 1));
-                    context.SetVariable(Convert.ToString(i + 1), result);
+                    context.RemoveVariables(Convert.ToString(i - 1));
+                    context.SetVariable(Convert.ToString(i - 1), result);
                     i -= 1;
                 }
 
             }
-
             for (int i = list.Count - 2; i >= 0; i--)
             {
                 if (list[i] == "-")
