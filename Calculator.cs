@@ -21,7 +21,8 @@ namespace ConsoleApp
         }
         internal void Evaluate(string input, out int result)
         {
-            List<String> list = context.FormationExpression(input);
+            context.FormationExpression(input, out List<String> list);
+            context.Transfer(list);
             IExpression[] Number = new IExpression[list.Count];
             IExpression expression;
             for (int i = list.Count - 1; i >= 0; i--)
@@ -30,29 +31,28 @@ namespace ConsoleApp
                     list[i] != "-" &&
                     list[i] != "*" &&
                     list[i] != "/")
-                {
-                    input = Convert.ToString(i);
-                    context.SetVariable(input, int.Parse(list[i]));
-                    Number[i] = new NumberExpression(input);
-                }
+                
+                    Number[i] = new NumberExpression(i);
+                
             }
-            result = 0;
             for (int i = list.Count - 2; i >= 0; i--)
             {
                 if (list[i] == "*")
                 {
                     expression = new MultiplicationExpression(Number[i + 1], Number[i - 1]);
                     result = expression.Interpret(context);
-                    context.RemoveVariables(Convert.ToString(i - 1));
-                    context.SetVariable(Convert.ToString(i - 1), result);
+                    context.RemoveVariables(i - 1);
+                    context.RemoveVariables(i);
+                    context.SetVariable(i-1, result);
                     i -= 1;
                 }
                 if (list[i] == "/")
                 {
                     expression = new DivisionExpression(Number[i + 1], Number[i - 1]);
                     result = expression.Interpret(context);
-                    context.RemoveVariables(Convert.ToString(i - 1));
-                    context.SetVariable(Convert.ToString(i - 1), result);
+                    context.RemoveVariables(i - 1);
+                    context.RemoveVariables(i);
+                    context.SetVariable(i-1, result);
                     i -= 1;
                 }
 
@@ -63,20 +63,23 @@ namespace ConsoleApp
                 {
                     expression = new SubtractExpression(Number[i + 1], Number[i - 1]);
                     result = expression.Interpret(context);
-                    context.RemoveVariables(Convert.ToString(i - 1));
-                    context.SetVariable(Convert.ToString(i - 1), result);
+                    context.RemoveVariables(i - 1);
+                    context.RemoveVariables(i);
+                    context.SetVariable(i-1, result);
                     i -= 1;
                 }
                 if (list[i] == "+")
                 {
                     expression = new AddExpression(Number[i + 1], Number[i - 1]);
                     result = expression.Interpret(context);
-                    context.RemoveVariables(Convert.ToString(i - 1));
-                    context.SetVariable(Convert.ToString(i - 1), result);
+                    context.RemoveVariables(i - 1);
+                    context.RemoveVariables(i);
+                    context.SetVariable(i-1, result);
                     i -= 1;
                 }
 
             }
+            result = int.Parse(list[0]);
         }
         internal void OutputDisplay(double result)
         {

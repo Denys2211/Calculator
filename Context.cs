@@ -6,15 +6,13 @@ namespace ConsoleApp
 {
     class Context
     {
-        Dictionary<string, int> variables;
         Stack<String> stack;
         List<String> list;
         public Context()
         {
-            variables = new Dictionary<string, int>();
             stack = new Stack<String>();
         }
-        internal List<String> FormationExpression(string input)
+        internal void FormationExpression(string input, out List<String> list)
         {
             string value = "";
             for (int j = 0; j < input.Length; j++)
@@ -43,26 +41,29 @@ namespace ConsoleApp
                 }
             }
             list = stack.ToList<String>();
-            return list;
+        }
+        public void Transfer(List<String> list)
+        {
+            this.list = list;
+        }
+        public int GetVariable(int i)
+        {
+            return int.Parse(list[i]);
+        }
 
-        }
-        public int GetVariable(string name)
+        public void SetVariable(int index, int result)
         {
-            return variables[name];
-        }
 
-        public void SetVariable(string name, int value)
-        {
-                variables.Add(name, value);
+            list[index] = Convert.ToString(result);
         }
-        public void RemoveVariables(string name)
+        public void RemoveVariables(int index)
         {
-            variables.Remove(name);
+            list.RemoveAt(index);
         }
         internal void Clear()
         {
-            variables.Clear();
             stack.Clear();
+            list.Clear();
         }
     }
     

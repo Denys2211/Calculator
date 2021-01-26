@@ -7,14 +7,14 @@ namespace ConsoleApp
     // терминальное выражение
     class NumberExpression : IExpression
     {
-        string name; // имя переменной
-        public NumberExpression(string variableName)
+        int index;
+        public NumberExpression(int variableName)
         {
-            name = variableName;
+            index = variableName;
         }
         public int Interpret(Context context)
         {
-            return context.GetVariable(name);
+            return context.GetVariable(index);
         }
     }
 }
