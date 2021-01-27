@@ -29,9 +29,10 @@ namespace ConsoleApp
                 audit.СheckNumericCharacter(input, symbol, out string verify2);
                 if (verify2 == "false")
                     continue;
-                calculator.Evaluate(input, out int result);
+                calculator.Evaluate(0, input, out int result);
                 calculator.OutputDisplay(result);
-                context.Clear();
+                //context.ClearStack();
+                context.ClearList();
             }
         }
     }
