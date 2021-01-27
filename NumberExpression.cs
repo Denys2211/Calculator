@@ -14,7 +14,7 @@ namespace ConsoleApp
         }
         public int Interpret(Context context)
         {
-            return context.GetVariable(index);
+            return context.GetList(index);
         }
     }
 }
