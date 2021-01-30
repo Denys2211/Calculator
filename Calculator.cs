@@ -19,17 +19,58 @@ namespace ConsoleApp
             Console.Write("Separated MatheXpression: ");
             input = Console.ReadLine();
         }
-        internal void Evaluate(int indexStack, string input, out int result)
+        internal void Evaluate(string input, out double result)
         {
-            context.FormationExpression(indexStack, input, out bool temples, out string innerExp, out int bracketCount);
-            if (temples)
+            Stack<string> stack = new Stack<string>();
+            string value = "";
+            string innerExp = "";
+            for (int i = 0; i < input.Length; i++)
             {
-                indexStack = bracketCount;
-                Evaluate(indexStack, innerExp, out result);
-                context.SetStack(indexStack-1, result);
-                indexStack--;
+                String symbol = input.Substring(i, 1);
+                char chr = symbol.ToCharArray()[0];
+
+                if (!char.IsDigit(chr) && chr != '.' && value != "")
+                {
+                    stack.Push(value);
+                    value = "";
+                }
+                if (symbol.Equals("("))
+                {
+                    i++;
+                    int bracketCount = 0;
+                    for (; i < input.Length; i++)
+                    {
+                        symbol = input.Substring(i, 1);
+
+                        if (symbol.Equals("(")) bracketCount++;
+
+                        if (symbol.Equals(")"))
+                        {
+                            if (bracketCount == 0) break;
+                            bracketCount--;
+                        }
+                        innerExp += symbol;
+                    }
+                    Evaluate(innerExp, out result);
+                    stack.Push(Convert.ToString(result));
+                }
+
+                if (symbol.Equals("+") ||
+                    symbol.Equals("-") ||
+                    symbol.Equals("*") ||
+                    symbol.Equals("/"))
+
+                    stack.Push(symbol);
+
+                else if (char.IsDigit(chr) || chr == '.')
+                {
+                    value += symbol;
+                    if (i == (input.Length - 1))
+                        stack.Push(value);
+
+                }
             }
-            context.СreatureList(indexStack, out List <String> list);
+            context.СreatureList(stack, out List <String> list);
             IExpression[] Number = new IExpression[list.Count];
             IExpression expression;
             for (int i = list.Count - 1; i >= 0; i--)
@@ -86,9 +127,9 @@ namespace ConsoleApp
                 }
 
             }
-            result = int.Parse(list[0]);
+            result = double.Parse(list[0]);
         }
-        internal void OutputDisplay(int result)
+        internal void OutputDisplay(double result)
         {
             Console.WriteLine($"Calculation result: {result}");
             Console.ReadKey();

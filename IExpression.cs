@@ -7,6 +7,6 @@ namespace ConsoleApp
     // интерфейс интерпретатора
     interface IExpression
     {
-        int Interpret(Context context);
+        double Interpret(Context context);
     }
 }

@@ -21,17 +21,16 @@ namespace ConsoleApp
             {
                 calculator.DataEntry(out string input, out string[] symbol);
                 audit.CheckAvailability(input, out string verify);
-                if (verify == "false")
+                if (verify == null)
                     continue;
                 audit.CheckQuantity(input, symbol, out string verify1);
-                if (verify1 == "false")
+                if (verify1 == null)
                     continue;
                 audit.СheckNumericCharacter(input, symbol, out string verify2);
-                if (verify2 == "false")
+                if (verify2 == null)
                     continue;
-                calculator.Evaluate(0, input, out int result);
+                calculator.Evaluate(input, out double result);
                 calculator.OutputDisplay(result);
-                //context.ClearStack();
                 context.ClearList();
             }
         }

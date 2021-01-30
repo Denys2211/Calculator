@@ -21,8 +21,8 @@ namespace ConsoleApp
                     check = true;
                 }
             }
-            if(check == true)
-                verify = "false";
+            if(check)
+                verify = null;
             else
                 verify = input;
         }
@@ -31,7 +31,7 @@ namespace ConsoleApp
             if (string.IsNullOrEmpty(input))
             {
                 Console.Write("You did not enter numbers to calculate.Please try again. ");
-                verify = "false"; 
+                verify = null; 
             }
             else
             verify = input;
@@ -41,7 +41,7 @@ namespace ConsoleApp
             if (input.Split(symbol, StringSplitOptions.RemoveEmptyEntries).Count() == 1)
             {
                 Console.Write("You enter one numbers.Please try again. ");
-                verify = "false";
+                verify = null;
             }
             else
             verify = input;

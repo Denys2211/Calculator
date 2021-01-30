@@ -17,7 +17,7 @@ namespace ConsoleApp
             rightExpression = right;
         }
 
-        public int Interpret(Context context)
+        public double Interpret(Context context)
         {
             return leftExpression.Interpret(context) / rightExpression.Interpret(context);
         }
