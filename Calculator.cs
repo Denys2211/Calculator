@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ConsoleApp
 {
@@ -13,12 +12,6 @@ namespace ConsoleApp
             this.context = context;
         }
 
-        internal void DataEntry(out string input, out string[] symbol)
-        {
-            symbol = new[] { "*(", "+(", "-(", "/(", ")*", ")/", ")+", ")-", "-", "+", "/", "*", ")", "(", " (", ") ", };
-            Console.Write("Separated MatheXpression: ");
-            input = Console.ReadLine();
-        }
         internal void Evaluate(string input, out double result)
         {
             Stack<string> stack = new Stack<string>();
@@ -129,10 +122,6 @@ namespace ConsoleApp
             }
             result = double.Parse(list[0]);
         }
-        internal void OutputDisplay(double result)
-        {
-            Console.WriteLine($"Calculation result: {result}");
-            Console.ReadKey();
-        }
+        
     }
 }

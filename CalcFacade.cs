@@ -9,17 +9,19 @@ namespace ConsoleApp
         Audit audit;
         Calculator calculator;
         Context context;
-        internal CalcFacade(Audit audit,Calculator calculator, Context context)
+        IData data;
+        internal CalcFacade(IData data, Audit audit,Calculator calculator, Context context)
         {
             this.audit = audit;
             this.calculator = calculator;
             this.context = context;
+            this.data = data;
         }
         internal void Start()
         {
             for(; ; )
             {
-                calculator.DataEntry(out string input, out string[] symbol);
+                data.DataEntry(out string input, out string[] symbol);
                 audit.CheckAvailability(input, out string verify);
                 if (verify == null)
                     continue;
@@ -30,7 +32,7 @@ namespace ConsoleApp
                 if (verify2 == null)
                     continue;
                 calculator.Evaluate(input, out double result);
-                calculator.OutputDisplay(result);
+                data.OutputDisplay(result);
                 context.ClearList();
             }
         }
