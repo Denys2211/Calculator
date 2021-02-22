@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ConsoleApp
 {
-    class Context
+    class Context: IContext
     {
         List<String> list;
 
@@ -28,7 +28,7 @@ namespace ConsoleApp
             list.RemoveAt(index);
         }
 
-        internal void ClearList()
+        public void ClearList()
         {
             list.Clear();
         }

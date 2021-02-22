@@ -4,15 +4,15 @@ using System.Collections.Generic;
 namespace ConsoleApp
 {
 
-    class Calculator
+    class Calc_ExpParentheses : ICalculator
     {
-        Context context;
-        internal Calculator(Context context)
+        public IContext Context { get; private set; }
+        internal Calc_ExpParentheses(IContext context)
         {
-            this.context = context;
+            Context = context;
         }
 
-        internal void Evaluate(string input, out double result)
+        public void Evaluate(string input, out double result)
         {
             Stack<string> stack = new Stack<string>();
             string value = "";
@@ -63,7 +63,7 @@ namespace ConsoleApp
 
                 }
             }
-            context.СreatureList(stack, out List <String> list);
+            Context.СreatureList(stack, out List <String> list);
             IExpression[] Number = new IExpression[list.Count];
             IExpression expression;
             for (int i = list.Count - 1; i >= 0; i--)
@@ -81,19 +81,19 @@ namespace ConsoleApp
                 if (list[i] == "*")
                 {
                     expression = new MultiplicationExpression(Number[i + 1], Number[i - 1]);
-                    result = expression.Interpret(context);
-                    context.RemoveList(i - 1);
-                    context.RemoveList(i);
-                    context.SetList(i-1, result);
+                    result = expression.Interpret(Context);
+                    Context.RemoveList(i - 1);
+                    Context.RemoveList(i);
+                    Context.SetList(i-1, result);
                     i -= 1;
                 }
                 if (list[i] == "/")
                 {
                     expression = new DivisionExpression(Number[i + 1], Number[i - 1]);
-                    result = expression.Interpret(context);
-                    context.RemoveList(i - 1);
-                    context.RemoveList(i);
-                    context.SetList(i - 1, result);
+                    result = expression.Interpret(Context);
+                    Context.RemoveList(i - 1);
+                    Context.RemoveList(i);
+                    Context.SetList(i - 1, result);
                     i -= 1;
                 }
 
@@ -103,19 +103,19 @@ namespace ConsoleApp
                 if (list[i] == "-")
                 {
                     expression = new SubtractExpression(Number[i + 1], Number[i - 1]);
-                    result = expression.Interpret(context);
-                    context.RemoveList(i - 1);
-                    context.RemoveList(i);
-                    context.SetList(i - 1, result);
+                    result = expression.Interpret(Context);
+                    Context.RemoveList(i - 1);
+                    Context.RemoveList(i);
+                    Context.SetList(i - 1, result);
                     i -= 1;
                 }
                 if (list[i] == "+")
                 {
                     expression = new AddExpression(Number[i + 1], Number[i - 1]);
-                    result = expression.Interpret(context);
-                    context.RemoveList(i - 1);
-                    context.RemoveList(i);
-                    context.SetList(i - 1, result);
+                    result = expression.Interpret(Context);
+                    Context.RemoveList(i - 1);
+                    Context.RemoveList(i);
+                    Context.SetList(i - 1, result);
                     i -= 1;
                 }
 

@@ -17,7 +17,6 @@ namespace ConsoleApp
         public void OutputDisplay(double result)
         {
             Console.WriteLine($"Calculation result: {result}");
-            Console.ReadKey();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ConsoleApp
         {
             index = variableName;
         }
-        public double Interpret(Context context)
+        public double Interpret(IContext context)
         {
             return context.GetList(index);
         }

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
-    internal class Audit
+    internal class Audit_Input: IAudit
     {
-        internal void СheckNumericCharacter(string input, string[] symbol, out string verify)
+         public void СheckNumericCharacter(string input, string[] symbol, out string verify)
         {
             bool check = false; 
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
@@ -22,26 +18,26 @@ namespace ConsoleApp
                 }
             }
             if(check)
-                verify = null;
+                verify = default;
             else
                 verify = input;
         }
-        internal void CheckAvailability( string input, out string verify)
+         public void CheckAvailability( string input, out string verify)
         {
             if (string.IsNullOrEmpty(input))
             {
                 Console.Write("You did not enter numbers to calculate.Please try again. ");
-                verify = null; 
+                verify = default; 
             }
             else
             verify = input;
         }
-        internal void CheckQuantity( string input, string[] symbol, out string verify)
+         public void CheckQuantity( string input, string[] symbol, out string verify)
         {
-            if (input.Split(symbol, StringSplitOptions.RemoveEmptyEntries).Count() == 1)
+            if (input.Split(symbol, StringSplitOptions.RemoveEmptyEntries).Length == 1)
             {
                 Console.Write("You enter one numbers.Please try again. ");
-                verify = null;
+                verify = default;
             }
             else
             verify = input;

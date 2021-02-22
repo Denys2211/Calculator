@@ -6,12 +6,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{45BD3698-96F9-4CB2-8B22-82DB5377E202}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp2</RootNamespace>
-    <AssemblyName>ConsoleApp2</AssemblyName>
+    <RootNamespace>ConsoleApp</RootNamespace>
+    <AssemblyName>ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -47,6 +47,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -66,12 +67,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddExpression.cs" />
-    <Compile Include="Audit.cs" />
-    <Compile Include="Calculator.cs" />
+    <Compile Include="Audit_Input.cs" />
+    <Compile Include="Calc_ExpParentheses.cs" />
     <Compile Include="CalcFacade.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="DataConsole.cs" />
     <Compile Include="DivisionExpression.cs" />
+    <Compile Include="IAudit.cs" />
+    <Compile Include="ICalculator.cs" />
+    <Compile Include="IContext.cs" />
     <Compile Include="IData.cs" />
     <Compile Include="IExpression.cs" />
     <Compile Include="MultiplicationExpression.cs" />

@@ -6,34 +6,34 @@ namespace ConsoleApp
 {
     class CalcFacade
     {
-        Audit audit;
-        Calculator calculator;
-        Context context;
-        IData data;
-        internal CalcFacade(IData data, Audit audit,Calculator calculator, Context context)
+        public IAudit Audit{ get; set; }
+        public ICalculator Calculator { get; set; }
+        public IContext Context { get; set;}
+        public IData Data { get; set; }
+        internal CalcFacade(IData data, IAudit audit,ICalculator calculator, IContext context)
         {
-            this.audit = audit;
-            this.calculator = calculator;
-            this.context = context;
-            this.data = data;
+            Audit = audit;
+            Calculator = calculator;
+            Context = context;
+            Data = data;
         }
         internal void Start()
         {
             for(; ; )
             {
-                data.DataEntry(out string input, out string[] symbol);
-                audit.CheckAvailability(input, out string verify);
-                if (verify == null)
+                Data.DataEntry(out string input, out string[] symbol);
+                Audit.CheckAvailability(input, out string verify);
+                if (verify == default)
                     continue;
-                audit.CheckQuantity(input, symbol, out string verify1);
-                if (verify1 == null)
+                Audit.CheckQuantity(input, symbol, out string verify1);
+                if (verify1 == default)
                     continue;
-                audit.СheckNumericCharacter(input, symbol, out string verify2);
-                if (verify2 == null)
+                Audit.СheckNumericCharacter(input, symbol, out string verify2);
+                if (verify2 == default)
                     continue;
-                calculator.Evaluate(input, out double result);
-                data.OutputDisplay(result);
-                context.ClearList();
+                Calculator.Evaluate(input, out double result);
+                Data.OutputDisplay(result);
+                Context.ClearList();
             }
         }
     }
