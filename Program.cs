@@ -1,4 +1,7 @@
-﻿
+﻿using Interpreter;
+using Audit;
+using ConsoleAppData;
+
 namespace ConsoleApp
 {
     class Program
@@ -10,8 +13,7 @@ namespace ConsoleApp
             ICalculator calculator = new Calc_ExpParentheses(context);
             IAudit audit = new Audit_Input();
             CalcFacade ide = new CalcFacade(data, audit, calculator, context);
-            User uss = new User();
-            uss.Star(ide);
+            ide.Start();
          }
     }
 }

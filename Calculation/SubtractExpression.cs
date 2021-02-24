@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ConsoleApp;
 
-namespace ConsoleApp
+namespace Interpreter
 {
     // нетерминальное выражение для вычитания
     class SubtractExpression : IExpression

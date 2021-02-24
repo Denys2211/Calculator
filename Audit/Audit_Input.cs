@@ -1,10 +1,12 @@
 ﻿using System;
+using ConsoleApp;
 
-namespace ConsoleApp
+namespace Audit
 {
     internal class Audit_Input: IAudit
     {
-         public void СheckNumericCharacter(string input, string[] symbol, out string verify)
+        private string Verify { get; set; }
+        public string СheckNumericCharacter(string input, string[] symbol)
         {
             bool check = false; 
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
@@ -18,29 +20,32 @@ namespace ConsoleApp
                 }
             }
             if(check)
-                verify = default;
+                 Verify = default;
             else
-                verify = input;
+                 Verify = input;
+            return Verify;
         }
-         public void CheckAvailability( string input, out string verify)
+         public string CheckAvailability( string input)
         {
             if (string.IsNullOrEmpty(input))
             {
                 Console.Write("You did not enter numbers to calculate.Please try again. ");
-                verify = default; 
+                Verify = default; 
             }
             else
-            verify = input;
+                Verify = input;
+            return Verify;
         }
-         public void CheckQuantity( string input, string[] symbol, out string verify)
+         public string CheckQuantity( string input, string[] symbol)
         {
             if (input.Split(symbol, StringSplitOptions.RemoveEmptyEntries).Length == 1)
             {
                 Console.Write("You enter one numbers.Please try again. ");
-                verify = default;
+                Verify = default;
             }
             else
-            verify = input;
+                Verify = input;
+            return Verify;
         }
     }    
 }

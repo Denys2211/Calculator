@@ -1,7 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Linq;
-
+﻿
 namespace ConsoleApp
 {
     class CalcFacade
@@ -22,14 +19,11 @@ namespace ConsoleApp
             for(; ; )
             {
                 Data.DataEntry(out string input, out string[] symbol);
-                Audit.CheckAvailability(input, out string verify);
-                if (verify == default)
+                if (Audit.CheckAvailability(input) == default)
                     continue;
-                Audit.CheckQuantity(input, symbol, out string verify1);
-                if (verify1 == default)
+                if (Audit.CheckQuantity(input, symbol) == default)
                     continue;
-                Audit.СheckNumericCharacter(input, symbol, out string verify2);
-                if (verify2 == default)
+                if (Audit.СheckNumericCharacter(input, symbol) == default)
                     continue;
                 Calculator.Evaluate(input, out double result);
                 Data.OutputDisplay(result);

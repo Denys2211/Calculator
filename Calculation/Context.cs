@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConsoleApp;
 
-namespace ConsoleApp
+namespace Interpreter
 {
     class Context: IContext
     {

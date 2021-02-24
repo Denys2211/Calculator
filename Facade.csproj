@@ -66,24 +66,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddExpression.cs" />
-    <Compile Include="Audit_Input.cs" />
-    <Compile Include="Calc_ExpParentheses.cs" />
+    <Compile Include="Calculation\AddExpression.cs" />
+    <Compile Include="Audit\Audit_Input.cs" />
+    <Compile Include="Calculation\Calc_ExpParentheses.cs" />
     <Compile Include="CalcFacade.cs" />
-    <Compile Include="Context.cs" />
-    <Compile Include="DataConsole.cs" />
-    <Compile Include="DivisionExpression.cs" />
-    <Compile Include="IAudit.cs" />
-    <Compile Include="ICalculator.cs" />
-    <Compile Include="IContext.cs" />
-    <Compile Include="IData.cs" />
-    <Compile Include="IExpression.cs" />
-    <Compile Include="MultiplicationExpression.cs" />
-    <Compile Include="NumberExpression.cs" />
+    <Compile Include="Calculation\Context.cs" />
+    <Compile Include="Data\DataConsole.cs" />
+    <Compile Include="Calculation\DivisionExpression.cs" />
+    <Compile Include="Interface\IAudit.cs" />
+    <Compile Include="Interface\ICalculator.cs" />
+    <Compile Include="Interface\IContext.cs" />
+    <Compile Include="Interface\IData.cs" />
+    <Compile Include="Interface\IExpression.cs" />
+    <Compile Include="Calculation\MultiplicationExpression.cs" />
+    <Compile Include="Calculation\NumberExpression.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubtractExpression.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Calculation\SubtractExpression.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

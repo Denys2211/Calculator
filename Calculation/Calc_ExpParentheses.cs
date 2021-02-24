@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using ConsoleApp;
 
-namespace ConsoleApp
+namespace Interpreter
 {
 
     class Calc_ExpParentheses : ICalculator
     {
         public IContext Context { get; private set; }
-        internal Calc_ExpParentheses(IContext context)
+        public Calc_ExpParentheses(IContext context)
         {
             Context = context;
         }
