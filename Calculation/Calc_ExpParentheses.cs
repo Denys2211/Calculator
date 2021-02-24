@@ -7,13 +7,14 @@ namespace Interpreter
 
     class Calc_ExpParentheses : ICalculator
     {
+        private double Result { get; set; }
         public IContext Context { get; private set; }
         public Calc_ExpParentheses(IContext context)
         {
             Context = context;
         }
 
-        public void Evaluate(string input, out double result)
+        public double Evaluate(string input)
         {
             Stack<string> stack = new Stack<string>();
             string value = "";
@@ -45,8 +46,7 @@ namespace Interpreter
                         }
                         innerExp += symbol;
                     }
-                    Evaluate(innerExp, out result);
-                    stack.Push(Convert.ToString(result));
+                    stack.Push(Evaluate(innerExp).ToString());
                 }
 
                 if (symbol.Equals("+") ||
@@ -82,19 +82,19 @@ namespace Interpreter
                 if (list[i] == "*")
                 {
                     expression = new MultiplicationExpression(Number[i + 1], Number[i - 1]);
-                    result = expression.Interpret(Context);
+                    Result = expression.Interpret(Context);
                     Context.RemoveList(i - 1);
                     Context.RemoveList(i);
-                    Context.SetList(i-1, result);
+                    Context.SetList(i-1, Result);
                     i -= 1;
                 }
                 if (list[i] == "/")
                 {
                     expression = new DivisionExpression(Number[i + 1], Number[i - 1]);
-                    result = expression.Interpret(Context);
+                    Result = expression.Interpret(Context);
                     Context.RemoveList(i - 1);
                     Context.RemoveList(i);
-                    Context.SetList(i - 1, result);
+                    Context.SetList(i - 1, Result);
                     i -= 1;
                 }
 
@@ -104,24 +104,25 @@ namespace Interpreter
                 if (list[i] == "-")
                 {
                     expression = new SubtractExpression(Number[i + 1], Number[i - 1]);
-                    result = expression.Interpret(Context);
+                    Result = expression.Interpret(Context);
                     Context.RemoveList(i - 1);
                     Context.RemoveList(i);
-                    Context.SetList(i - 1, result);
+                    Context.SetList(i - 1, Result);
                     i -= 1;
                 }
                 if (list[i] == "+")
                 {
                     expression = new AddExpression(Number[i + 1], Number[i - 1]);
-                    result = expression.Interpret(Context);
+                    Result = expression.Interpret(Context);
                     Context.RemoveList(i - 1);
                     Context.RemoveList(i);
-                    Context.SetList(i - 1, result);
+                    Context.SetList(i - 1, Result);
                     i -= 1;
                 }
 
             }
-            result = double.Parse(list[0]);
+            Result = double.Parse(list[0]);
+            return Result;
         }
         
     }

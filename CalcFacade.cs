@@ -25,8 +25,7 @@ namespace ConsoleApp
                     continue;
                 if (Audit.СheckNumericCharacter(input, symbol) == default)
                     continue;
-                Calculator.Evaluate(input, out double result);
-                Data.OutputDisplay(result);
+                Data.OutputDisplay(Calculator.Evaluate(input));
                 Context.ClearList();
             }
         }

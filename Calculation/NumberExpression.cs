@@ -1,7 +1,7 @@
-﻿
-namespace ConsoleApp
+﻿using ConsoleApp;
+
+namespace Interpreter
 {
-    // терминальное выражение
     class NumberExpression : IExpression
     {
         int index;
