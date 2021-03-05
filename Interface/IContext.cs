@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp
+namespace Calculator
 {
     interface IContext
     {
-        void СreatureList(Stack<string> stack, out List<String> list);
+        Stack<string> СreatureStack();
+        List<String> СreatureList(Stack<string> stack);
         double GetList(int i);
         void SetList(int index, double result);
         void RemoveList(int index);

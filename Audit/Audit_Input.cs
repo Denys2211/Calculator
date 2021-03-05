@@ -1,5 +1,6 @@
 ﻿using System;
-using ConsoleApp;
+using Calculator;
+using System.Text.RegularExpressions;
 
 namespace Audit
 {
@@ -10,12 +11,12 @@ namespace Audit
         {
             bool check = false; 
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
-            float[] intArray = new float[inputString.Length];
             for (int i = 0; i < inputString.Length; i++)
             {
-                if (!float.TryParse(inputString[i], out intArray[i]))
+                char chr = inputString[i].ToCharArray()[0];
+                if (!char.IsDigit(chr))
                 {
-                    Console.Write("This is not a numeric!Please try again. ");
+                    Console.Write("This is not a numeric! ");
                     check = true;
                 }
             }
@@ -25,22 +26,31 @@ namespace Audit
                  Verify = input;
             return Verify;
         }
-         public string CheckAvailability( string input)
+         public string CheckQuantity( string input, string[] symbol)
         {
-            if (string.IsNullOrEmpty(input))
+            if (input.Split(symbol, StringSplitOptions.RemoveEmptyEntries).Length == 1)
             {
-                Console.Write("You did not enter numbers to calculate.Please try again. ");
-                Verify = default; 
+                Console.Write("You enter one symbol. ");
+                Verify = default;
             }
             else
                 Verify = input;
             return Verify;
         }
-         public string CheckQuantity( string input, string[] symbol)
+        public string CorrectInput(string input, string[] symbol)
         {
-            if (input.Split(symbol, StringSplitOptions.RemoveEmptyEntries).Length == 1)
+            char[] chr = input.ToCharArray();
+            if(chr.Length != 0 && chr[chr.Length - 1]!=')')
             {
-                Console.Write("You enter one numbers.Please try again. ");
+                if (!char.IsDigit(chr[chr.Length - 1]))
+                {
+                    Console.Write("Not the correct expression. ");
+                    Verify = default;
+                }
+            }
+            else if(chr.Length == 0)
+            {
+                Console.Write("You did not enter numbers to calculate. ");
                 Verify = default;
             }
             else

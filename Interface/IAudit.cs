@@ -1,12 +1,12 @@
 ﻿
-namespace ConsoleApp
+namespace Calculator
 {
     interface IAudit
     {
         string СheckNumericCharacter(string input, string[] symbol);
 
-        string CheckAvailability(string input);
-
         string CheckQuantity(string input, string[] symbol);
+
+        string CorrectInput(string input, string[] symbol);
     }
 }

@@ -1,6 +1,6 @@
-﻿using ConsoleApp;
+﻿using Calculator;
 
-namespace Interpreter
+namespace InterpreterCalc
 {
     // нетерминальное выражение для вычитания
     class SubtractExpression : IExpression

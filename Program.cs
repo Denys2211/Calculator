@@ -1,20 +1,20 @@
-﻿using Interpreter;
+﻿using InterpreterCalc;
 using Audit;
-using ConsoleAppData;
+using AppData;
 
-namespace ConsoleApp
+namespace Calculator
 {
     class Program
     {
-          static void Main()
-         {
+        static void Main()
+        {
             IData data = new DataConsole();
             IContext context = new Context();
-            ICalculator calculator = new Calc_ExpParentheses(context);
+            ICalculator exp_evaluate = new Calc_ExpParentheses(context);
             IAudit audit = new Audit_Input();
-            CalcFacade ide = new CalcFacade(data, audit, calculator, context);
+            CalcFacade ide = new CalcFacade(data, audit, exp_evaluate, context);
             ide.Start();
-         }
+        }
     }
+   
 }
-

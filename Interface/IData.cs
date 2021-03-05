@@ -1,5 +1,5 @@
 ﻿
-namespace ConsoleApp
+namespace Calculator
 {
     interface IData
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using ConsoleApp;
+using Calculator;
 
-namespace ConsoleAppData
+namespace AppData
 {
     class DataConsole: IData
     {

@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using ConsoleApp;
+using Calculator;
 
-namespace Interpreter
+namespace InterpreterCalc
 {
 
     class Calc_ExpParentheses : ICalculator
     {
         private double Result { get; set; }
-        public IContext Context { get; private set; }
-        public Calc_ExpParentheses(IContext context)
+        private IContext Context { get; set; }
+        internal Calc_ExpParentheses(IContext context)
         {
             Context = context;
         }
-
-        public double Evaluate(string input)
+        public double EvaluateExp(string input)
         {
-            Stack<string> stack = new Stack<string>();
+            Stack<string> stack = Context.СreatureStack();
             string value = "";
             string innerExp = "";
             for (int i = 0; i < input.Length; i++)
@@ -46,7 +45,7 @@ namespace Interpreter
                         }
                         innerExp += symbol;
                     }
-                    stack.Push(Evaluate(innerExp).ToString());
+                    stack.Push(EvaluateExp(innerExp).ToString());
                 }
 
                 if (symbol.Equals("+") ||
@@ -64,7 +63,7 @@ namespace Interpreter
 
                 }
             }
-            Context.СreatureList(stack, out List <String> list);
+            List<String> list = Context.СreatureList(stack);
             IExpression[] Number = new IExpression[list.Count];
             IExpression expression;
             for (int i = list.Count - 1; i >= 0; i--)
@@ -73,9 +72,9 @@ namespace Interpreter
                     list[i] != "-" &&
                     list[i] != "*" &&
                     list[i] != "/")
-                
+
                     Number[i] = new NumberExpression(i);
-                
+
             }
             for (int i = list.Count - 2; i >= 0; i--)
             {
@@ -85,7 +84,7 @@ namespace Interpreter
                     Result = expression.Interpret(Context);
                     Context.RemoveList(i - 1);
                     Context.RemoveList(i);
-                    Context.SetList(i-1, Result);
+                    Context.SetList(i - 1, Result);
                     i -= 1;
                 }
                 if (list[i] == "/")
@@ -119,7 +118,6 @@ namespace Interpreter
                     Context.SetList(i - 1, Result);
                     i -= 1;
                 }
-
             }
             Result = double.Parse(list[0]);
             return Result;
