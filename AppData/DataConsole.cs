@@ -22,7 +22,7 @@ namespace AppData
         {
             Console.WriteLine($"Calculation result: {result}");
             string date_time = (DateTime.Now).ToString();
-            string sqlAdd = $"INSERT INTO Users(Result_separated, Date_Time) VALUES ('{Input} = {result}','{date_time}')";
+            string sqlAdd = $"INSERT INTO History(Expression, Result, DateTime) VALUES ('{Input}','{result}','{date_time}')";
             using (Connect)
             {
                 Connect.Open();
@@ -30,13 +30,14 @@ namespace AppData
                 var command = new SqliteCommand();
 
                 command.Connection = Connect;
+                //command.CommandText = "CREATE TABLE History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression TEXT NOT NULL,Result DOUBLE NOT NULL, DateTime TEXT NOT NULL)";
                 command.CommandText = sqlAdd;
                 command.ExecuteNonQuery();
             }
         }
         public void ReaderDataBase()
         {
-            string sqlExpression = "SELECT * FROM Users";
+            string sqlExpression = "SELECT * FROM History";
             using (Connect)
             {
                 Connect.Open();
@@ -48,10 +49,12 @@ namespace AppData
                     {
                         while (reader.Read())
                         {
-                            var Result_separated = reader.GetValue(0);
-                            var Date_Time = reader.GetValue(1);
+                            var Id_ = reader.GetValue(0);
+                            var Expression = reader.GetValue(1);
+                            var Result = reader.GetValue(2);
+                            var DateTime = reader.GetValue(3);
 
-                            Console.WriteLine($"{Result_separated} \t {Date_Time}");
+                            Console.WriteLine($"{Id_}\t{Expression}\t{Result}\t{DateTime}");
                         }
                     }
                 }
