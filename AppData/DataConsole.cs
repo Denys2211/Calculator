@@ -47,6 +47,7 @@ namespace AppData
                 {
                     if (reader.HasRows)
                     {
+                        Console.WriteLine("Id_\tExpression\tResult\t\tDateTime");
                         while (reader.Read())
                         {
                             var Id_ = reader.GetValue(0);
