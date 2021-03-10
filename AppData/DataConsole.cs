@@ -54,8 +54,10 @@ namespace AppData
                             var Result = reader.GetValue(2);
                             var DateTime = reader.GetValue(3);
 
-                            Console.WriteLine($"{Id_}\t{Expression}\t{Result}\t{DateTime}");
+                            Console.WriteLine(new string('_', 55));
+                            Console.WriteLine($"{Id_}\t{Expression}\t\t{Result}\t{DateTime}");
                         }
+                        Console.WriteLine(new string('_', 55));
                     }
                 }
             }
