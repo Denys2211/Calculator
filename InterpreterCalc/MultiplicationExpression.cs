@@ -1,5 +1,4 @@
 ﻿using Calculator;
-
 namespace InterpreterCalc
 {
     class MultiplicationExpression : IExpression

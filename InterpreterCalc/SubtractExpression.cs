@@ -2,7 +2,6 @@
 
 namespace InterpreterCalc
 {
-    // нетерминальное выражение для вычитания
     class SubtractExpression : IExpression
     {
         IExpression leftExpression;

@@ -1,0 +1,12 @@
+D:\Solutions\Calculator(.NET Core)\Calculator\bin\Debug\netcoreapp2.0\Calculator.deps.json
+D:\Solutions\Calculator(.NET Core)\Calculator\bin\Debug\netcoreapp2.0\Calculator.runtimeconfig.json
+D:\Solutions\Calculator(.NET Core)\Calculator\bin\Debug\netcoreapp2.0\Calculator.runtimeconfig.dev.json
+D:\Solutions\Calculator(.NET Core)\Calculator\bin\Debug\netcoreapp2.0\Calculator.dll
+D:\Solutions\Calculator(.NET Core)\Calculator\bin\Debug\netcoreapp2.0\Calculator.pdb
+D:\Solutions\Calculator(.NET Core)\Calculator\obj\Debug\netcoreapp2.0\Calculator.csprojAssemblyReference.cache
+D:\Solutions\Calculator(.NET Core)\Calculator\obj\Debug\netcoreapp2.0\Calculator.AssemblyInfoInputs.cache
+D:\Solutions\Calculator(.NET Core)\Calculator\obj\Debug\netcoreapp2.0\Calculator.AssemblyInfo.cs
+D:\Solutions\Calculator(.NET Core)\Calculator\obj\Debug\netcoreapp2.0\Calculator.csproj.CoreCompileInputs.cache
+D:\Solutions\Calculator(.NET Core)\Calculator\obj\Debug\netcoreapp2.0\Calculator.dll
+D:\Solutions\Calculator(.NET Core)\Calculator\obj\Debug\netcoreapp2.0\Calculator.pdb
+D:\Solutions\Calculator(.NET Core)\Calculator\obj\Debug\netcoreapp2.0\Calculator.genruntimeconfig.cache

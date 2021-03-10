@@ -78,50 +78,50 @@ namespace InterpreterCalc
             }
             for (int i = list.Count - 2; i >= 0; i--)
             {
-                if (list[i] == "*")
+                switch (list[i])
                 {
-                    expression = new MultiplicationExpression(Number[i + 1], Number[i - 1]);
-                    Result = expression.Interpret(Context);
-                    Context.RemoveList(i - 1);
-                    Context.RemoveList(i);
-                    Context.SetList(i - 1, Result);
-                    i -= 1;
+                    case "*":
+                        expression = new MultiplicationExpression(Number[i + 1], Number[i - 1]);
+                        Result = expression.Interpret(Context);
+                        Context.RemoveList(i - 1);
+                        Context.RemoveList(i);
+                        Context.SetList(i - 1, Result);
+                        i -= 1;
+                        break;
+                    case "/":
+                        expression = new DivisionExpression(Number[i + 1], Number[i - 1]);
+                        Result = expression.Interpret(Context);
+                        Context.RemoveList(i - 1);
+                        Context.RemoveList(i);
+                        Context.SetList(i - 1, Result);
+                        i -= 1;
+                        break;
                 }
-                if (list[i] == "/")
-                {
-                    expression = new DivisionExpression(Number[i + 1], Number[i - 1]);
-                    Result = expression.Interpret(Context);
-                    Context.RemoveList(i - 1);
-                    Context.RemoveList(i);
-                    Context.SetList(i - 1, Result);
-                    i -= 1;
-                }
-
             }
             for (int i = list.Count - 2; i >= 0; i--)
             {
-                if (list[i] == "-")
+                switch (list[i])
                 {
-                    expression = new SubtractExpression(Number[i + 1], Number[i - 1]);
-                    Result = expression.Interpret(Context);
-                    Context.RemoveList(i - 1);
-                    Context.RemoveList(i);
-                    Context.SetList(i - 1, Result);
-                    i -= 1;
-                }
-                if (list[i] == "+")
-                {
-                    expression = new AddExpression(Number[i + 1], Number[i - 1]);
-                    Result = expression.Interpret(Context);
-                    Context.RemoveList(i - 1);
-                    Context.RemoveList(i);
-                    Context.SetList(i - 1, Result);
-                    i -= 1;
+                    case "-":
+                        expression = new SubtractExpression(Number[i + 1], Number[i - 1]);
+                        Result = expression.Interpret(Context);
+                        Context.RemoveList(i - 1);
+                        Context.RemoveList(i);
+                        Context.SetList(i - 1, Result);
+                        i -= 1;
+                        break;
+                    case "+":
+                        expression = new AddExpression(Number[i + 1], Number[i - 1]);
+                        Result = expression.Interpret(Context);
+                        Context.RemoveList(i - 1);
+                        Context.RemoveList(i);
+                        Context.SetList(i - 1, Result);
+                        i -= 1;
+                        break;
                 }
             }
-            Result = double.Parse(list[0]);
-            return Result;
+            return Result = double.Parse(list[0]);
         }
-        
+
     }
 }

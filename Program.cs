@@ -1,12 +1,12 @@
-﻿using InterpreterCalc;
+﻿using AppData;
 using Audit;
-using AppData;
+using InterpreterCalc;
 
 namespace Calculator
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
             IData data = new DataConsole();
             IContext context = new Context();
@@ -16,5 +16,4 @@ namespace Calculator
             ide.Start();
         }
     }
-   
 }

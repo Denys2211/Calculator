@@ -5,7 +5,7 @@ using Calculator;
 
 namespace InterpreterCalc
 {
-    class Context: IContext
+    class Context : IContext
     {
         public Stack<string> Stack { get; set; }
 
@@ -18,7 +18,7 @@ namespace InterpreterCalc
 
         public List<String> СreatureList(Stack<string> stack)
         {
-             return List = stack.ToList<String>();
+            return List = stack.ToList<String>();
         }
 
         public double GetList(int i)
@@ -41,5 +41,5 @@ namespace InterpreterCalc
             List.Clear();
         }
     }
-    
+
 }

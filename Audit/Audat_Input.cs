@@ -1,15 +1,14 @@
 ﻿using System;
 using Calculator;
-using System.Text.RegularExpressions;
 
 namespace Audit
 {
-    internal class Audit_Input: IAudit
+    internal class Audit_Input : IAudit
     {
         private string Verify { get; set; }
         public string СheckNumericCharacter(string input, string[] symbol)
         {
-            bool check = false; 
+            bool check = false;
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < inputString.Length; i++)
             {
@@ -20,15 +19,15 @@ namespace Audit
                     check = true;
                 }
             }
-            if(check)
-                 Verify = default;
+            if (check)
+                Verify = default;
             else
-                 Verify = input;
+                Verify = input;
             return Verify;
         }
-         public string CheckQuantity( string input, string[] symbol)
+        public string CheckQuantity(string input)
         {
-            if (input.Split(symbol, StringSplitOptions.RemoveEmptyEntries).Length == 1)
+            if (input.ToCharArray().Length == 1)
             {
                 Console.Write("You enter one symbol. ");
                 Verify = default;
@@ -37,10 +36,10 @@ namespace Audit
                 Verify = input;
             return Verify;
         }
-        public string CorrectInput(string input, string[] symbol)
+        public string CorrectInput(string input)
         {
             char[] chr = input.ToCharArray();
-            if(chr.Length != 0 && chr[chr.Length - 1]!=')')
+            if (chr.Length != 0 && chr[chr.Length - 1] != ')')
             {
                 if (!char.IsDigit(chr[chr.Length - 1]))
                 {
@@ -48,14 +47,21 @@ namespace Audit
                     Verify = default;
                 }
             }
-            else if(chr.Length == 0)
+            else
+                Verify = input;
+            return Verify;
+        }
+        public string CheckAvailability(string input)
+        {
+            if (input == string.Empty)
             {
                 Console.Write("You did not enter numbers to calculate. ");
                 Verify = default;
+
             }
             else
                 Verify = input;
             return Verify;
         }
-    }    
+    }
 }

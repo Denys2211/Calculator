@@ -3,7 +3,7 @@ using Calculator;
 
 namespace AppData
 {
-    class DataConsole: IData
+    class DataConsole : IData
     {
         public void DataEntry(out string input, out string[] symbol)
         {

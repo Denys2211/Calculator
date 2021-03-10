@@ -1,5 +1,6 @@
 ﻿using Calculator;
 using System;
+
 namespace InterpreterCalc
 {
     class DivisionExpression : IExpression
