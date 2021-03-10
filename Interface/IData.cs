@@ -3,7 +3,10 @@ namespace Calculator
 {
     interface IData
     {
-        void DataEntry(out string input, out string[] symbol);
+        string DataEntry( out string[] symbol);
+
         void OutputDisplay(double result);
+
+        void ReaderDataBase();
     }
 }

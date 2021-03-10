@@ -18,7 +18,7 @@ namespace Calculator
         {
             for (; ; )
             {
-                Data.DataEntry(out string input, out string[] symbol);
+                string input = Data.DataEntry(out string[] symbol);
                 if (Audit.CheckQuantity(input) == default)
                     continue;
                 if (Audit.СheckNumericCharacter(input, symbol) == default)
@@ -29,8 +29,14 @@ namespace Calculator
                     continue;
                 Data.OutputDisplay(Calculator.EvaluateExp(input));
                 Context.ClearList();
+                break;
             }
         }
+        internal void Calculation_history()
+        {
+            Data.ReaderDataBase();
+        }
+
     }
 }
 
