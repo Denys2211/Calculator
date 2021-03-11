@@ -2,6 +2,7 @@
 
 namespace InterpreterCalc
 {
+    // нетерминальное выражение для сложения
     class AddExpression : IExpression
     {
         IExpression leftExpression;

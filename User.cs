@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Calculator
 {
@@ -13,7 +11,7 @@ namespace Calculator
         }
         public void Operation()
         {
-            for(; ; )
+            for (; ; )
             {
                 Console.WriteLine("Select an operation:\n\t1 - Show calculation history\n\t2 - Expression calculation\n\t3 - To clean history ");
                 switch (int.Parse(Console.ReadLine()))

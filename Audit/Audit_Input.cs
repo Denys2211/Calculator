@@ -49,11 +49,11 @@ namespace Audit
                 if (symbol.Equals(")"))
                     bracketCount2++;
             }
-            if (bracketCount1 != bracketCount2 || (chr.Length!=0 &&!char.IsDigit(chr[chr.Length - 1])))
+            if (bracketCount1 != bracketCount2 || (chr.Length != 0 && !char.IsDigit(chr[chr.Length - 1])))
             {
                 Console.Write("Not the correct expression. ");
                 Verify = default;
-            }  
+            }
             else
                 Verify = input;
             return Verify;
