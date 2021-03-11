@@ -38,15 +38,22 @@ namespace Audit
         }
         public string CorrectInput(string input)
         {
+            int bracketCount1 = 0;
+            int bracketCount2 = 0;
             char[] chr = input.ToCharArray();
-            if (chr.Length != 0 && chr[chr.Length - 1] != ')')
+            for (int i = 0; i < input.Length; i++)
             {
-                if (!char.IsDigit(chr[chr.Length - 1]))
-                {
-                    Console.Write("Not the correct expression. ");
-                    Verify = default;
-                }
+                string symbol = input.Substring(i, 1);
+                if (symbol.Equals("("))
+                    bracketCount1++;
+                if (symbol.Equals(")"))
+                    bracketCount2++;
             }
+            if (bracketCount1 != bracketCount2 || (chr.Length!=0 &&!char.IsDigit(chr[chr.Length - 1])))
+            {
+                Console.Write("Not the correct expression. ");
+                Verify = default;
+            }  
             else
                 Verify = input;
             return Verify;

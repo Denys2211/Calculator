@@ -11,6 +11,15 @@ namespace AppData
         public DataConsole(SqliteConnection connection)
         {
             Connect = connection;
+            using (Connect)
+            {
+                Connect.Open();
+
+                var command = new SqliteCommand();
+                command.Connection = Connect;
+                command.CommandText = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression TEXT NOT NULL, Result DOUBLE NOT NULL, DateTime TEXT NOT NULL)";
+                command.ExecuteNonQuery();
+            }
         }
         public string DataEntry(out string[] symbol)
         {
@@ -30,12 +39,13 @@ namespace AppData
                 var command = new SqliteCommand();
 
                 command.Connection = Connect;
-                //command.CommandText = "CREATE TABLE History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression TEXT NOT NULL,Result DOUBLE NOT NULL, DateTime TEXT NOT NULL)";
                 command.CommandText = sqlAdd;
                 command.ExecuteNonQuery();
             }
         }
+
         public void ReaderDataBase()
+    
         {
             string sqlExpression = "SELECT * FROM History";
             using (Connect)
@@ -60,9 +70,29 @@ namespace AppData
                         }
                         Console.WriteLine(new string('_', 55));
                     }
+                    else
+                        Console.WriteLine("There is no history of calculations!");
+
                 }
             }
 
         }
+        public void DeleteDataBase()
+        {
+            string sqlExpres = "DELETE FROM History";
+            using (Connect)
+            {
+                Connect.Open();
+
+                var command = new SqliteCommand();
+
+                command.Connection = Connect;
+                command.CommandText = sqlExpres;
+                command.ExecuteNonQuery();
+                Console.WriteLine("-----------Done!---------");
+            }
+
+        }
     }
+
 }

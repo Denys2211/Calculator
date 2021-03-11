@@ -36,7 +36,10 @@ namespace Calculator
         {
             Data.ReaderDataBase();
         }
-
+        internal void Toclean_history()
+        {
+            Data.DeleteDataBase();
+        }
     }
 }
 

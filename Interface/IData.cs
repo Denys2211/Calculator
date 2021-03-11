@@ -8,5 +8,7 @@ namespace Calculator
         void OutputDisplay(double result);
 
         void ReaderDataBase();
+
+        void DeleteDataBase();
     }
 }

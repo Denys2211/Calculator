@@ -15,7 +15,7 @@ namespace Calculator
         {
             for(; ; )
             {
-                Console.WriteLine("Select an operation:\n\t1 - Show calculation history\n\t2 - Expression calculation ");
+                Console.WriteLine("Select an operation:\n\t1 - Show calculation history\n\t2 - Expression calculation\n\t3 - To clean history ");
                 switch (int.Parse(Console.ReadLine()))
                 {
                     case 2:
@@ -24,6 +24,9 @@ namespace Calculator
 
                     case 1:
                         IDE.Calculation_history();
+                        break;
+                    case 3:
+                        IDE.Toclean_history();
                         break;
                     default:
                         Console.WriteLine("Incorrect input");
