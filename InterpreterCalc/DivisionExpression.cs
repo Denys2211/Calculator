@@ -16,9 +16,16 @@ namespace InterpreterCalc
 
         public double Interpret(IContext context)
         {
-            if (RightExpression.Interpret(context) == 0)
-                throw new Exception("Division by 0!!! ");
-            return LeftExpression.Interpret(context) / RightExpression.Interpret(context);
+            try
+            {
+                return LeftExpression.Interpret(context) / RightExpression.Interpret(context);
+
+            }
+            catch
+            {
+                Console.WriteLine("Division by 0!");
+                return double.NaN;
+            }
         }
     }
 }

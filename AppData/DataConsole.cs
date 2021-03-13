@@ -11,15 +11,7 @@ namespace AppData
         public DataConsole(SqliteConnection connection)
         {
             Connect = connection;
-            using (Connect)
-            {
-                Connect.Open();
-
-                var command = new SqliteCommand();
-                command.Connection = Connect;
-                command.CommandText = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression TEXT NOT NULL, Result DOUBLE NOT NULL, DateTime TEXT NOT NULL)";
-                command.ExecuteNonQuery();
-            }
+            CreateDataTable();
         }
         public string DataEntry(out string[] symbol)
         {
@@ -75,11 +67,9 @@ namespace AppData
 
                 }
             }
-
         }
         public void DeleteDataBase()
         {
-            string sqlExpres = "DELETE FROM History";
             using (Connect)
             {
                 Connect.Open();
@@ -87,11 +77,23 @@ namespace AppData
                 var command = new SqliteCommand();
 
                 command.Connection = Connect;
-                command.CommandText = sqlExpres;
+                command.CommandText = "DELETE FROM History";
                 command.ExecuteNonQuery();
                 Console.WriteLine("-----------Done!---------");
             }
 
+        }
+        public void CreateDataTable()
+        {
+            using (Connect)
+            {
+                Connect.Open();
+
+                var command = new SqliteCommand();
+                command.Connection = Connect;
+                command.CommandText = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression TEXT NOT NULL, Result DOUBLE NOT NULL, DateTime TEXT NOT NULL)";
+                command.ExecuteNonQuery();
+            }
         }
     }
 

@@ -10,5 +10,7 @@ namespace Calculator
         void ReaderDataBase();
 
         void DeleteDataBase();
+
+        void CreateDataTable();
     }
 }

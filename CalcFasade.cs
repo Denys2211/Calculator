@@ -18,19 +18,27 @@ namespace Calculator
         {
             for (; ; )
             {
-                string input = Data.DataEntry(out string[] symbol);
-                if (Audit.CheckQuantity(input) == default)
-                    continue;
-                if (Audit.СheckNumericCharacter(input, symbol) == default)
-                    continue;
-                if (Audit.CorrectInput(input) == default)
-                    continue;
-                if (Audit.CheckAvailability(input) == default)
-                    continue;
-                Data.OutputDisplay(Calculator.EvaluateExp(input));
-                Context.ClearList();
+                    string input = Data.DataEntry(out string[] symbol);
+                    if (Audit.СheckNumericCharacter(input, symbol) == default)
+                        continue;
+                    if (Audit.CheckQuantity(input) == default)
+                        continue;
+                    if (Audit.CorrectInput(input) == default)
+                        continue;
+                    if (Audit.CheckAvailability(input) == default)
+                        continue;
+                try
+                {
+                    Data.OutputDisplay(Calculator.EvaluateExp(input));
+                    Context.ClearList();
+                }
+                catch
+                {
+                    System.Console.WriteLine("--------An unforeseen mistake!--------");
+                }
                 break;
             }
+            
         }
         internal void Calculation_history()
         {

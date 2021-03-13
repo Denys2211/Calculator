@@ -27,9 +27,9 @@ namespace Audit
         }
         public string CheckQuantity(string input)
         {
-            if (input.ToCharArray().Length == 1)
+            if (input.Length == 1)
             {
-                Console.Write("You enter one symbol. ");
+                Console.Write("You enter one number. ");
                 Verify = default;
             }
             else
@@ -44,9 +44,17 @@ namespace Audit
             {
                 string symbol = input.Substring(i, 1);
                 if (symbol.Equals("("))
+                {
                     bracketCount++;
+                    if (chr[0] != '(' && char.IsDigit(chr[i - 1]))
+                        bracketCount++;
+                }
                 if (symbol.Equals(")"))
+                {
                     bracketCount--;
+                    if (chr[chr.Length - 1] != ')' && char.IsDigit(chr[i + 1]))
+                        bracketCount++;
+                }
             }
             if (bracketCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[chr.Length - 1]) && chr[chr.Length - 1] != ')'))
             {
