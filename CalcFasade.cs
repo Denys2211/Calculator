@@ -19,6 +19,8 @@ namespace Calculator
             for (; ; )
             {
                     string input = Data.DataEntry(out string[] symbol);
+                try 
+                {
                     if (Audit.СheckNumericCharacter(input, symbol) == default)
                         continue;
                     if (Audit.CheckQuantity(input) == default)
@@ -27,6 +29,12 @@ namespace Calculator
                         continue;
                     if (Audit.CheckAvailability(input) == default)
                         continue;
+
+                }
+                catch
+                {
+                    System.Console.WriteLine("Input validation error!");
+                }
                 try
                 {
                     Data.OutputDisplay(Calculator.EvaluateExp(input));
@@ -34,7 +42,7 @@ namespace Calculator
                 }
                 catch
                 {
-                    System.Console.WriteLine("--------An unforeseen mistake!--------");
+                    System.Console.WriteLine("--------Unforeseen calculation error!--------");
                 }
                 break;
             }
@@ -42,11 +50,25 @@ namespace Calculator
         }
         internal void Calculation_history()
         {
-            Data.ReaderDataBase();
+            try
+            {
+                Data.ReaderDataBase();
+            }
+            catch
+            {
+                System.Console.WriteLine("Database read error");
+            }
         }
         internal void Toclean_history()
         {
-            Data.DeleteDataBase();
+            try
+            {
+                Data.DeleteDataBase();
+            }
+            catch
+            {
+                System.Console.WriteLine("Database clean error");
+            }
         }
     }
 }
