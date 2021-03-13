@@ -1,12 +1,12 @@
 ﻿using System;
 using Calculator;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;                  
 
 namespace AppData
 {
     class DataConsole : IData
     {
-        private SqliteConnection Connect { get; set; }
+        private SqliteConnection Connect{ get; set;}
         private string Input { get; set; }
         public DataConsole(SqliteConnection connection)
         {
@@ -25,32 +25,27 @@ namespace AppData
         {
             symbol = new[] { "*(", "+(", "-(", "/(", ")*", ")/", ")+", ")-", "-", "+", "/", "*", ")", "(", " (", ") ", };
             Console.Write("Separated MatheXpression: ");
-            return Input = Console.ReadLine();
+            return  Input = Console.ReadLine();
         }
         public void OutputDisplay(double result)
         {
-            if (result == double.PositiveInfinity || result == double.NegativeInfinity)
-                Console.WriteLine($"Division by 0 !");
-            else
+            Console.WriteLine($"Calculation result: {result}");
+            string date_time = (DateTime.Now).ToString();
+            string sqlAdd = $"INSERT INTO History(Expression, Result, DateTime) VALUES ('{Input}','{result}','{date_time}')";
+            using (Connect)
             {
-                Console.WriteLine($"Calculation result: {result}");
-                string date_time = (DateTime.Now).ToString();
-                string sqlAdd = $"INSERT INTO History(Expression, Result, DateTime) VALUES ('{Input}','{result}','{date_time}')";
-                using (Connect)
-                {
-                    Connect.Open();
+                Connect.Open();
 
-                    var command = new SqliteCommand();
+                var command = new SqliteCommand();
 
-                    command.Connection = Connect;
-                    command.CommandText = sqlAdd;
-                    command.ExecuteNonQuery();
-                }
-            } 
+                command.Connection = Connect;
+                command.CommandText = sqlAdd;
+                command.ExecuteNonQuery();
+            }
         }
 
         public void ReaderDataBase()
-
+    
         {
             string sqlExpression = "SELECT * FROM History";
             using (Connect)

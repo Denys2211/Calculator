@@ -78,7 +78,7 @@ namespace InterpreterCalc
             }
             for (int i = list.Count - 2; i >= 0; i--)
             {
-                switch(list[i])
+                switch (list[i])
                 {
                     case "*":
                         expression = new MultiplicationExpression(Number[i + 1], Number[i - 1]);
@@ -100,7 +100,7 @@ namespace InterpreterCalc
             }
             for (int i = list.Count - 2; i >= 0; i--)
             {
-                switch(list[i])
+                switch (list[i])
                 {
                     case "-":
                         expression = new SubtractExpression(Number[i + 1], Number[i - 1]);
@@ -122,6 +122,6 @@ namespace InterpreterCalc
             }
             return Result = double.Parse(list[0]);
         }
-        
+
     }
 }

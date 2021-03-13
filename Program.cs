@@ -12,11 +12,11 @@ namespace Calculator
         {
             var connection = new SqliteConnection("Data Source=usersdata.db");
             IData data = new DataConsole(connection);
-            IAudit audit = new Audit_Input();
             IContext context = new Context();
             ICalculator exp_evaluate = new Calc_ExpParentheses(context);
+            IAudit audit = new Audit_Input();
             var ide = new CalcFacade(data, audit, exp_evaluate, context);
-            var user = new User(ide);
+            User user = new User(ide);
             user.Operation();
         }
     }
