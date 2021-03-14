@@ -67,6 +67,7 @@ namespace AppData
 
                 }
             }
+
         }
         public void DeleteDataBase()
         {
@@ -78,6 +79,8 @@ namespace AppData
 
                 command.Connection = Connect;
                 command.CommandText = "DELETE FROM History";
+                command.ExecuteNonQuery();
+                command.CommandText = "UPDATE SQLITE_SEQUENCE SET SEQ = 0 WHERE NAME = 'History'";
                 command.ExecuteNonQuery();
                 Console.WriteLine("-----------Done!---------");
             }

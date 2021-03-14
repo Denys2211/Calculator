@@ -21,9 +21,9 @@ namespace InterpreterCalc
                 return LeftExpression.Interpret(context) / RightExpression.Interpret(context);
 
             }
-            catch
+            catch(DivideByZeroException ex) 
             {
-                Console.WriteLine("Division by 0!");
+                Console.WriteLine($"Error!{ex.Message}");
                 return double.NaN;
             }
         }

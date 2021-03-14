@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Exeption;
 
 namespace Calculator
 {
@@ -18,7 +17,8 @@ namespace Calculator
                 try
                 {
                     Console.WriteLine("Select an operation:\n\t1 - Show calculation history\n\t2 - Expression calculation\n\t3 - To clean history ");
-                    switch (int.Parse(Console.ReadLine()))
+                    int choice = int.Parse(Console.ReadLine());
+                    switch (choice)
                     {
                         case 2:
                             IDE.Start();
@@ -31,14 +31,19 @@ namespace Calculator
                             IDE.Toclean_history();
                             break;
                         default:
-                            Console.WriteLine("Incorrect input");
-                            break;
+                            throw new UserExeption("Error!", choice);
                     }
+                }
+                catch(UserExeption ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine($"Incorect input: {ex.Value}");
                 }
                 catch
                 {
                     Console.WriteLine("An error has occurred. Repeat the entry!");
                 }
+
             }
         }
     }
