@@ -34,6 +34,7 @@ namespace Calculator
                 catch
                 {
                     System.Console.WriteLine("Input validation error!");
+                    break;
                 }
                 try
                 {

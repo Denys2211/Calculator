@@ -120,7 +120,7 @@ namespace InterpreterCalc
                         break;
                 }
             }
-            return Result = double.Parse(list[0]);
+            return Result;
         }
 
     }

@@ -18,7 +18,13 @@ namespace InterpreterCalc
         {
             try
             {
-                return LeftExpression.Interpret(context) / RightExpression.Interpret(context);
+                if (LeftExpression != null && RightExpression != null)
+                    return LeftExpression.Interpret(context) / RightExpression.Interpret(context);
+                else
+                {
+                    Console.WriteLine("Incorrect input! Division failed.");
+                    return double.NaN;
+                }
 
             }
             catch(DivideByZeroException ex) 

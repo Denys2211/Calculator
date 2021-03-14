@@ -4,18 +4,24 @@ namespace InterpreterCalc
 {
     class SubtractExpression : IExpression
     {
-        IExpression leftExpression;
-        IExpression rightExpression;
+        private IExpression LeftExpression { get; set; }
+        private IExpression RightExpression { get; set; }
 
         public SubtractExpression(IExpression left, IExpression right)
         {
-            leftExpression = left;
-            rightExpression = right;
+            LeftExpression = left;
+            RightExpression = right;
         }
 
         public double Interpret(IContext context)
         {
-            return leftExpression.Interpret(context) - rightExpression.Interpret(context);
+            if (LeftExpression != null && RightExpression != null)
+                return LeftExpression.Interpret(context) - RightExpression.Interpret(context);
+            else
+            {
+                System.Console.WriteLine("Incorrect input! Subtract failed.");
+                return double.NaN;
+            }
         }
     }
 }

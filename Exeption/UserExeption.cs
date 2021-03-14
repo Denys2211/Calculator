@@ -7,8 +7,8 @@ namespace Exeption
     class UserExeption : ArgumentException
     {
         public int Value { get; }
-        public UserExeption(string masseg, int val)
-            :base(masseg)
+        public UserExeption(string messag, int val)
+            :base(messag)
         {
             Value = val;
         }

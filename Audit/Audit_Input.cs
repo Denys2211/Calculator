@@ -10,6 +10,11 @@ namespace Audit
         {
             bool check = false;
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
+            if (inputString.Length == 0 && input.Length !=0)
+            {
+                Console.Write("This is not a numeric! ");
+                check = true;
+            }
             for (int i = 0; i < inputString.Length; i++)
             {
                 char chr = inputString[i].ToCharArray()[0];
@@ -54,6 +59,11 @@ namespace Audit
                     bracketCount--;
                     if (chr[chr.Length - 1] != ')' && char.IsDigit(chr[i + 1]))
                         bracketCount++;
+                }
+                if (symbol.Equals("+") || symbol.Equals("-") || symbol.Equals("/") || symbol.Equals("*"))
+                {
+                    if (!char.IsDigit(chr[i+1]) && chr[i+1] != '(' && chr[i+1] != ')')
+                        bracketCount++; 
                 }
             }
             if (bracketCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[chr.Length - 1]) && chr[chr.Length - 1] != ')'))
