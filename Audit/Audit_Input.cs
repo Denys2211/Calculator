@@ -6,7 +6,6 @@ namespace Audit
 {
     internal class Audit_Input : IAudit
     {
-        private int CheckCount { get; set; }
         public void СheckNumericCharacter(string input, string[] symbol)
         {
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
@@ -34,31 +33,32 @@ namespace Audit
         }
         public void CorrectInput(string input)
         {
+            int checkCount = 0;
             char[] chr = input.ToCharArray();
             for (int i = 0; i < input.Length; i++)
             {
                 string symbol = input.Substring(i, 1);
                 if (!char.IsDigit(chr[0]) && chr[0] != '(' && chr[0] != ')')
-                    CheckCount++;
+                    checkCount++;
                 if (symbol.Equals("("))
                 {
-                    CheckCount++;
+                    checkCount++;
                     if (chr[0] != '(' && char.IsDigit(chr[i - 1]))
-                        CheckCount++;
+                        checkCount++;
                 }
                 if (symbol.Equals(")"))
                 {
-                    CheckCount--;
+                    checkCount--;
                     if (chr[chr.Length - 1] != ')' && char.IsDigit(chr[i + 1]))
-                        CheckCount++;
+                        checkCount++;
                 }
                 if (symbol.Equals("+") || symbol.Equals("-") || symbol.Equals("/") || symbol.Equals("*"))
                 {
                     if (i + 1 < chr.Length && !char.IsDigit(chr[i + 1]) && chr[i + 1] != '(' && chr[i + 1] != ')')
-                        CheckCount++;
+                        checkCount++;
                 }
             } 
-            if (CheckCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[chr.Length - 1]) && chr[chr.Length - 1] != ')') )
+            if (checkCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[chr.Length - 1]) && chr[chr.Length - 1] != ')') )
             {
 
                 throw new AudExceptions("Not the correct expression. ");

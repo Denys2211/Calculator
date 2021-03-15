@@ -61,7 +61,6 @@ namespace Calculator
                 {
                     Console.WriteLine("An error has occurred. Repeat the entry!");
                 }
-
             }
         }
     }

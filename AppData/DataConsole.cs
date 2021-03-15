@@ -18,6 +18,5 @@ namespace AppData
             Console.WriteLine($"Calculation result: {result}");
 
         }
-
     }
 }
