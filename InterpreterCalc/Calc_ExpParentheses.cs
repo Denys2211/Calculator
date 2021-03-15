@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Calculator;
+using Exception;
 
 namespace InterpreterCalc
 {
@@ -15,6 +16,7 @@ namespace InterpreterCalc
         }
         public double EvaluateExp(string input)
         {
+
             Stack<string> stack = Context.СreatureStack();
             string value = "";
             string innerExp = "";
@@ -122,6 +124,6 @@ namespace InterpreterCalc
             }
             return Result;
         }
-
+        
     }
 }

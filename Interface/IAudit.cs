@@ -3,12 +3,12 @@ namespace Calculator
 {
     interface IAudit
     {
-        string СheckNumericCharacter(string input, string[] symbol);
+        void СheckNumericCharacter(string input, string[] symbol);
 
-        string CheckQuantity(string input);
+        void CheckQuantity(string input);
 
-        string CorrectInput(string input);
+        void CorrectInput(string input);
 
-        string CheckAvailability(string input);
+        void CheckAvailability(string input);
     }
 }

@@ -17,20 +17,19 @@ namespace InterpreterCalc
 
         public double Interpret(IContext context)
         {
-            try
-            {
-                if (LeftExpression != null && RightExpression != null)
-                    return LeftExpression.Interpret(context) / RightExpression.Interpret(context);
-                else
-                {
-                    throw new CalcExceptions("Incorrect input! Division failed.");
-                }
 
-            }
-            catch
+            if (LeftExpression != null && RightExpression != null)
             {
-                throw new DivideByZeroException("Division by 0 !");
+                if (RightExpression.Interpret(context) == 0)
+
+                    throw new DivideByZeroException();
+
+                return LeftExpression.Interpret(context) / RightExpression.Interpret(context);
             }
+
+            else
+                
+                throw new CalcExceptions("Incorrect input! Division failed.");
         }
     }
 }

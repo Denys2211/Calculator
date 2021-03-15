@@ -7,68 +7,47 @@ namespace Calculator
         public ICalculator Calculator { get; set; }
         public IContext Context { get; set; }
         public IData Data { get; set; }
-        internal CalcFacade(IData data, IAudit audit, ICalculator exp_evaluate, IContext context)
+        public SqlExpression Command { get; set; }
+        internal CalcFacade(IData data, SqlExpression command,  IAudit audit, ICalculator exp_evaluate, IContext context)
         {
             Audit = audit;
             Calculator = exp_evaluate;
             Context = context;
             Data = data;
+            Command = command;
         }
         internal void Start()
         {
-            for (; ; )
-            {
-                    string input = Data.DataEntry(out string[] symbol);
-                try 
-                {
-                    if (Audit.СheckNumericCharacter(input, symbol) == default)
-                        continue;
-                    if (Audit.CheckQuantity(input) == default)
-                        continue;
-                    if (Audit.CorrectInput(input) == default)
-                        continue;
-                    if (Audit.CheckAvailability(input) == default)
-                        continue;
+            string input = Data.DataEntry(out string[] symbol);
+          
+            Audit.СheckNumericCharacter(input, symbol);
 
-                }
-                catch
-                {
-                    throw new AudExceptions("Input validation error!");
-                }
-                try
-                {
-                    Data.OutputDisplay(Calculator.EvaluateExp(input));
-                    Context.ClearList();
-                }
-                catch
-                {
-                    throw new CalcExceptions("--------Unforeseen calculation error!--------");
-                }
-                break;
-            }
-            
+            Audit.CheckQuantity(input);
+
+            Audit.CorrectInput(input);
+
+            Audit.CheckAvailability(input);
+
+            double result = Calculator.EvaluateExp(input);
+
+            Data.OutputDisplay(result);
+
+            Context.ClearList();
+
+            Command.AddInDB(result, input);
+
         }
         internal void Calculation_history()
         {
-            try
-            {
-                Data.ReaderDataBase();
-            }
-            catch
-            {
-                throw new DataBExceptions("Database read error");
-            }
+
+            Command.ReaderDataBase();
+
         }
         internal void Toclean_history()
         {
-            try
-            {
-                Data.DeleteDataBase();
-            }
-            catch
-            {
-                throw new DataBExceptions("Database clean error"); 
-            }
+
+            Command.DeleteDataBase();
+            
         }
     }
 }
