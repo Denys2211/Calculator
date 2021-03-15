@@ -1,4 +1,6 @@
 ﻿using Calculator;
+using Exception;
+
 namespace InterpreterCalc
 {
     class MultiplicationExpression : IExpression
@@ -18,8 +20,7 @@ namespace InterpreterCalc
                 return LeftExpression.Interpret(context) * RightExpression.Interpret(context);
             else 
             { 
-                System.Console.WriteLine("Incorrect input! Multiplication failed.");
-                return double.NaN;
+                throw new CalcExceptions("Incorrect input! Multiplication failed.");
             }
         }
     }

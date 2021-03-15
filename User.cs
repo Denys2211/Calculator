@@ -53,6 +53,10 @@ namespace Calculator
                 {
                     Console.WriteLine(ex.Message);
                 }
+                catch (DivideByZeroException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
                 catch
                 {
                     Console.WriteLine("An error has occurred. Repeat the entry!");

@@ -1,5 +1,6 @@
 ﻿using Calculator;
 using System;
+using Exception;
 
 namespace InterpreterCalc
 {
@@ -22,15 +23,13 @@ namespace InterpreterCalc
                     return LeftExpression.Interpret(context) / RightExpression.Interpret(context);
                 else
                 {
-                    Console.WriteLine("Incorrect input! Division failed.");
-                    return double.NaN;
+                    throw new CalcExceptions("Incorrect input! Division failed.");
                 }
 
             }
-            catch(DivideByZeroException ex) 
+            catch
             {
-                Console.WriteLine($"Error!{ex.Message}");
-                return double.NaN;
+                throw new DivideByZeroException("Division by 0 !");
             }
         }
     }

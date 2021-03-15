@@ -1,4 +1,5 @@
 ﻿using Calculator;
+using Exception;
 
 namespace InterpreterCalc
 {
@@ -19,8 +20,7 @@ namespace InterpreterCalc
                 return LeftExpression.Interpret(context) + RightExpression.Interpret(context);
             else
             {
-                System.Console.WriteLine("Incorrect input! Addition failed.");
-                return double.NaN;
+                throw new CalcExceptions("Incorrect input! Addition failed.");
             }
         }
     }
