@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Exeption
+namespace Exception
 {
-    class UserExeption : ArgumentException
+    class UserExceptions : ArgumentException
     {
         public int Value { get; }
-        public UserExeption(string messag, int val)
-            :base(messag)
+        public UserExceptions(string message, int val)
+            :base(message)
         {
             Value = val;
         }

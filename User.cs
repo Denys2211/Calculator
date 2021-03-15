@@ -1,5 +1,5 @@
 ﻿using System;
-using Exeption;
+using Exception;
 
 namespace Calculator
 {
@@ -27,17 +27,31 @@ namespace Calculator
                         case 1:
                             IDE.Calculation_history();
                             break;
+
                         case 3:
                             IDE.Toclean_history();
                             break;
+
                         default:
-                            throw new UserExeption("Error!", choice);
+                            throw new UserExceptions("Error!", choice);
                     }
                 }
-                catch(UserExeption ex)
+                catch(UserExceptions ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine($"Incorect input: {ex.Value}");
+                }
+                catch(DataBExceptions ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (CalcExceptions ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (AudExceptions ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
                 catch
                 {

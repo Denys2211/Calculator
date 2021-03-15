@@ -48,6 +48,8 @@ namespace Audit
             for (int i = 0; i < input.Length; i++)
             {
                 string symbol = input.Substring(i, 1);
+                if (!char.IsDigit(chr[0]) && chr[0] != '(' && chr[0] != ')')
+                    bracketCount++;
                 if (symbol.Equals("("))
                 {
                     bracketCount++;
@@ -62,11 +64,11 @@ namespace Audit
                 }
                 if (symbol.Equals("+") || symbol.Equals("-") || symbol.Equals("/") || symbol.Equals("*"))
                 {
-                    if (!char.IsDigit(chr[i+1]) && chr[i+1] != '(' && chr[i+1] != ')')
-                        bracketCount++; 
+                    if (i + 1 < chr.Length && !char.IsDigit(chr[i + 1]) && chr[i + 1] != '(' && chr[i + 1] != ')')
+                        bracketCount++;
                 }
-            }
-            if (bracketCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[chr.Length - 1]) && chr[chr.Length - 1] != ')'))
+            } 
+            if (bracketCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[chr.Length - 1]) && chr[chr.Length - 1] != ')') )
             {
                 Console.Write("Not the correct expression. ");
                 Verify = default;

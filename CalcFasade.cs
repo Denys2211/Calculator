@@ -1,4 +1,4 @@
-﻿
+﻿using Exception;
 namespace Calculator
 {
     class CalcFacade
@@ -33,8 +33,7 @@ namespace Calculator
                 }
                 catch
                 {
-                    System.Console.WriteLine("Input validation error!");
-                    break;
+                    throw new AudExceptions("Input validation error!");
                 }
                 try
                 {
@@ -43,7 +42,7 @@ namespace Calculator
                 }
                 catch
                 {
-                    System.Console.WriteLine("--------Unforeseen calculation error!--------");
+                    throw new CalcExceptions("--------Unforeseen calculation error!--------");
                 }
                 break;
             }
@@ -57,7 +56,7 @@ namespace Calculator
             }
             catch
             {
-                System.Console.WriteLine("Database read error");
+                throw new DataBExceptions("Database read error");
             }
         }
         internal void Toclean_history()
@@ -68,7 +67,7 @@ namespace Calculator
             }
             catch
             {
-                System.Console.WriteLine("Database clean error");
+                throw new DataBExceptions("Database clean error"); 
             }
         }
     }

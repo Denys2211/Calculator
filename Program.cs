@@ -2,7 +2,6 @@
 using Audit;
 using InterpreterCalc;
 using Microsoft.Data.Sqlite;
-using System;
 
 namespace Calculator
 {
