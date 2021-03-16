@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Exception
 {
-    class AudExceptions : ArgumentException
+    public class AudExceptions : ArgumentException
     {
         public AudExceptions(string message)
             : base(message)

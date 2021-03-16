@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Exception
 {
-    class DataBExceptions : ArgumentException
+    public class DataBExceptions : ArgumentException
     {
         public DataBExceptions(string message)
             : base(message)

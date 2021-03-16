@@ -1,14 +1,14 @@
 ﻿using Exception;
 namespace Calculator
 {
-    class CalcFacade
+    public class CalcFacade
     {
-        public IAudit Audit { get; set; }
-        public ICalculator Calculator { get; set; }
-        public IContext Context { get; set; }
-        public IData Data { get; set; }
-        public SqlExpression Command { get; set; }
-        internal CalcFacade(IData data, SqlExpression command,  IAudit audit, ICalculator exp_evaluate, IContext context)
+        private IAudit Audit { get; set; }
+        private ICalculator Calculator { get; set; }
+        private IContext Context { get; set; }
+        private IData Data { get; set; }
+        private ISqlExpression Command { get; set; }
+        internal CalcFacade(IData data, ISqlExpression command,  IAudit audit, ICalculator exp_evaluate, IContext context)
         {
             Audit = audit;
             Calculator = exp_evaluate;
@@ -16,9 +16,9 @@ namespace Calculator
             Data = data;
             Command = command;
         }
-        internal void Start()
+        public double Start(string input)
         {
-            string input = Data.DataEntry(out string[] symbol);
+            Data.DataEntry(out string[] symbol);
           
             Audit.СheckNumericCharacter(input, symbol);
 
@@ -30,20 +30,22 @@ namespace Calculator
 
             double result = Calculator.EvaluateExp(input);
 
-            Data.OutputDisplay(result);
-
             Context.ClearList();
+
+            Command.CreateDataTable();
 
             Command.AddInDB(result, input);
 
+            return result;
+
         }
-        internal void Calculation_history()
+        public object[,] Calculation_history()
         {
 
-            Command.ReaderDataBase();
+            return Command.ReaderDataBase();
 
         }
-        internal void Toclean_history()
+        public void Toclean_history()
         {
 
             Command.DeleteDataBase();

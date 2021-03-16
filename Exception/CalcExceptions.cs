@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Exception
 {
-    class CalcExceptions : ArgumentException
+    public class CalcExceptions : ArgumentException
     {
         public CalcExceptions(string message)
             : base(message)

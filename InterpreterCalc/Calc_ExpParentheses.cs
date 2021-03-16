@@ -6,7 +6,7 @@ using Exception;
 namespace InterpreterCalc
 {
 
-    class Calc_ExpParentheses : ICalculator
+    public class Calc_ExpParentheses : ICalculator
     {
         private double Result { get; set; }
         private IContext Context { get; set; }

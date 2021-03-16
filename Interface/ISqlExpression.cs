@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Calculator
 {
-    interface SqlExpression
+    interface ISqlExpression
     {
         void AddInDB(double result, string input);
 
-        void ReaderDataBase();
+        object[,] ReaderDataBase();
 
         void DeleteDataBase();
 

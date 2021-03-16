@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Exception
 {
-    class UserExceptions : ArgumentException
+    public class UserExceptions : ArgumentException
     {
         public int Value { get; }
         public UserExceptions(string message, int val)

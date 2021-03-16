@@ -4,7 +4,7 @@ using Exception;
 
 namespace Audit
 {
-    internal class Audit_Input : IAudit
+    public class Audit_Input : IAudit
     {
         public void СheckNumericCharacter(string input, string[] symbol)
         {

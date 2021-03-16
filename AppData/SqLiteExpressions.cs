@@ -5,13 +5,12 @@ using Exception;
 
 namespace AppData 
 {
-    class SqLiteExpressions : SqlExpression
+    public class SqLiteExpressions : ISqlExpression
     {
         private SqliteConnection Connect { get; set; }
         public SqLiteExpressions(SqliteConnection connection)
         {
             Connect = connection;
-            CreateDataTable();
         }
         public void AddInDB(double result, string input)
         {
@@ -37,38 +36,52 @@ namespace AppData
             
         }
 
-        public void ReaderDataBase()
+        public object[,] ReaderDataBase()
 
         {
-            string sqlExpress = "SELECT * FROM History";
-
-            using (Connect)
+            try
             {
-                Connect.Open();
+                string sqlExpress = "SELECT * FROM History";
 
-                SqliteCommand command = new SqliteCommand(sqlExpress, Connect);
-                using (SqliteDataReader reader = command.ExecuteReader())
+                using (Connect)
                 {
-                    if (reader.HasRows)
+                    Connect.Open();
+
+                    SqliteCommand command = new SqliteCommand(sqlExpress, Connect);
+                    using (SqliteDataReader reader = command.ExecuteReader())
                     {
-                        Console.WriteLine("Id_\tExpression\tResult\t\tDateTime");
-                        while (reader.Read())
+                        if (reader.HasRows)
                         {
-                            var Id_ = reader.GetValue(0);
-                            var Expression = reader.GetValue(1);
-                            var Result = reader.GetValue(2);
-                            var DateTime = reader.GetValue(3);
-
-                            Console.WriteLine(new string('_', 55));
-                            Console.WriteLine($"{Id_}\t{Expression}\t\t{Result}\t{DateTime}");
+                           
+                            object[,] mas = new object[10, 4];
+                            int i = 0;
+                            int j = 10;
+                            while (reader.Read() && j<=10)
+                            {
+                                mas[i, 0] = reader.GetValue(0);
+                                mas[i, 1] = reader.GetValue(1);
+                                mas[i, 2] = reader.GetValue(2);
+                                mas[i, 3] = reader.GetValue(3);
+                                i++;
+                                j--;
+                            }
+                            return  mas;
                         }
-                        Console.WriteLine(new string('_', 55));
-                    }
-                    else
+                        else
 
-                        throw new DataBExceptions("There is no history of calculations!");
+                            throw new ArgumentException("There is no history of calculations!");
+                    }
                 }
             }
+            catch (ArgumentException ex)
+            {
+                throw new DataBExceptions(ex.Message);
+            }
+            catch
+            {
+                throw new DataBExceptions("Database reader error");
+            }
+            
         
         }
         public void DeleteDataBase()
@@ -86,7 +99,6 @@ namespace AppData
                     command.ExecuteNonQuery();
                     command.CommandText = "UPDATE SQLITE_SEQUENCE SET SEQ = 0 WHERE NAME = 'History'";
                     command.ExecuteNonQuery();
-                    Console.WriteLine("-----------Done!---------");
                 }
             }
             catch
