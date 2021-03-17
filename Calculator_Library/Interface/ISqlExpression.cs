@@ -13,5 +13,7 @@ namespace Calculator
         void DeleteDataBase();
 
         void CreateDataTable();
+
+        int GetNumberOfItemsInDB();
     }
 }

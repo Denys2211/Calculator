@@ -29,6 +29,7 @@ namespace AppData
                     command.Connection = Connect;
                     command.CommandText = sqlAdd;
                     command.ExecuteNonQuery();
+                    
                 }
             }
             catch
@@ -43,6 +44,7 @@ namespace AppData
         {
             try
             {
+                int numberOfItems = GetNumberOfItemsInDB();
                 string sqlExpress = "SELECT * FROM History";
 
                 using (Connect)
@@ -50,22 +52,22 @@ namespace AppData
                     Connect.Open();
 
                     SqliteCommand command = new SqliteCommand(sqlExpress, Connect);
+                    
                     using (SqliteDataReader reader = command.ExecuteReader())
                     {
+
                         if (reader.HasRows)
                         {
-                           
-                            object[,] mas = new object[10, 4];
-                            int i = 0;
-                            int j = 10;
-                            while (reader.Read() && j<=10)
+                            
+                            object[,] mas = new object[numberOfItems, 4];
+                            
+                            for (int i = 0; reader.Read(); i++)
                             {
+
                                 mas[i, 0] = reader.GetValue(0);
                                 mas[i, 1] = reader.GetValue(1);
                                 mas[i, 2] = reader.GetValue(2);
                                 mas[i, 3] = reader.GetValue(3);
-                                i++;
-                                j--;
                             }
                             return  mas;
                         }
@@ -120,11 +122,26 @@ namespace AppData
                     command.Connection = Connect;
                     command.CommandText = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression TEXT NOT NULL, Result DOUBLE NOT NULL, DateTime TEXT NOT NULL)";
                     command.ExecuteNonQuery();
+
                 }
             }
             catch
             {
                 throw new DataBExceptions("Database create error");
+            }
+        }
+        public  int GetNumberOfItemsInDB()
+        {
+            
+            using (Connect)
+            {
+                Connect.Open();
+
+                SqliteCommand queryCommand = new SqliteCommand();
+                queryCommand.Connection = Connect;
+                queryCommand.CommandText = "SELECT COUNT(Expression) FROM History";
+                queryCommand.ExecuteNonQuery();
+                return Convert.ToInt32(queryCommand.ExecuteScalar());
             }
         }
     }
