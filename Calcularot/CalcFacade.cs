@@ -32,8 +32,6 @@ namespace Calculator
 
             Context.ClearList();
 
-            Command.CreateDataTable();
-
             Command.AddInDB(result, input);
 
             return result;

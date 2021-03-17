@@ -11,6 +11,8 @@ namespace AppData
         public SqLiteExpressions(SqliteConnection connection)
         {
             Connect = connection;
+            CreateDataTable();
+
         }
         public void AddInDB(double result, string input)
         {
