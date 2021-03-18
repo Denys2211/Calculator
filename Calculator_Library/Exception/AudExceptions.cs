@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Exception
+namespace Exceptions
 {
-    public class AudExceptions : ArgumentException
+    public class AudExceptions : Exception
     {
         public AudExceptions(string message)
             : base(message)

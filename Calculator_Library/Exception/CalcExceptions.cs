@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Exception
+namespace Exceptions
 {
-    public class CalcExceptions : ArgumentException
+    public class CalcExceptions : Exception
     {
         public CalcExceptions(string message)
             : base(message)

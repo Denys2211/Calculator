@@ -1,6 +1,6 @@
 ﻿using Calculator;
 using System;
-using Exception;
+using Exceptions;
 
 namespace InterpreterCalc
 {

@@ -1,5 +1,5 @@
 ﻿using Calculator;
-using Exception;
+using Exceptions;
 
 namespace InterpreterCalc
 {

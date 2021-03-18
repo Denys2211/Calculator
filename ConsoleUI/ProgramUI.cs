@@ -1,6 +1,7 @@
 ﻿using System;
 using Calculator;
-using Exception;
+using Exceptions;
+using System.Collections.Generic;
 
 namespace ConsoleUI
 {
@@ -26,19 +27,17 @@ namespace ConsoleUI
                             break;
 
                         case 1:
-                            object[,] mas = Canculator.IDE.Calculation_history();
-                            Console.WriteLine("Id_\tExpression\tResult\t\tDateTime");
-                            Console.WriteLine(new string('_', 55));
-                            int rows = mas.GetUpperBound(0) + 1;
-                            int columns = mas.Length / rows;
-                            for (int i = 0; i < rows; i++)
+                            List<object[]> history= Canculator.IDE.Calculation_history();
+                            Console.WriteLine("Id_\t\tExpression\tResult\t\tDateTime");
+                            Console.WriteLine(new string('_', 70));
+                            foreach(object[] str in history)
                             {
-                                for (int j = 0; j < columns; j++)
+                                foreach(object i in str)
                                 {
-                                    Console.Write($"{mas[i, j]} \t");
+                                    Console.Write(i+"\t\t");
                                 }
                                 Console.WriteLine();
-                                Console.WriteLine(new string('_', 55));
+                                Console.WriteLine(new string('_', 70));
                             }
                             break;
 

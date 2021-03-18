@@ -1,4 +1,5 @@
-﻿using Exception;
+﻿using System.Collections.Generic;
+
 namespace Calculator
 {
     public class CalcFacade
@@ -37,7 +38,7 @@ namespace Calculator
             return result;
 
         }
-        public object[,] Calculation_history()
+        public List<object[]> Calculation_history()
         {
 
             return Command.ReaderDataBase();

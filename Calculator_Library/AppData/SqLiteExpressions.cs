@@ -1,7 +1,9 @@
 ﻿using System;
 using Calculator;
 using Microsoft.Data.Sqlite;
-using Exception;
+using Exceptions;
+using System.Collections.Generic;
+
 
 namespace AppData 
 {
@@ -39,12 +41,11 @@ namespace AppData
             
         }
 
-        public object[,] ReaderDataBase()
+        public List<object[]> ReaderDataBase()
 
         {
             try
             {
-                int numberOfItems = GetNumberOfItemsInDB();
                 string sqlExpress = "SELECT * FROM History";
 
                 using (Connect)
@@ -56,24 +57,25 @@ namespace AppData
                     using (SqliteDataReader reader = command.ExecuteReader())
                     {
 
-                        if (reader.HasRows)
-                        {
+                            var history = new List<object[]>();
                             
-                            object[,] mas = new object[numberOfItems, 4];
-                            
-                            for (int i = 0; reader.Read(); i++)
+                            while (reader.Read())
                             {
-
-                                mas[i, 0] = reader.GetValue(0);
-                                mas[i, 1] = reader.GetValue(1);
-                                mas[i, 2] = reader.GetValue(2);
-                                mas[i, 3] = reader.GetValue(3);
+                            history.Add(
+                                new[]
+                                {
+                                reader.GetValue(0),
+                                reader.GetValue(1),
+                                reader.GetValue(2),
+                                reader.GetValue(3)
+                                }
+                                );
                             }
-                            return  mas;
-                        }
-                        else
+                        if(history.Count == 0)
 
                             throw new ArgumentException("There is no history of calculations!");
+
+                        return history;
                     }
                 }
             }
@@ -128,20 +130,6 @@ namespace AppData
             catch
             {
                 throw new DataBExceptions("Database create error");
-            }
-        }
-        public  int GetNumberOfItemsInDB()
-        {
-            
-            using (Connect)
-            {
-                Connect.Open();
-
-                SqliteCommand queryCommand = new SqliteCommand();
-                queryCommand.Connection = Connect;
-                queryCommand.CommandText = "SELECT COUNT(Expression) FROM History";
-                queryCommand.ExecuteNonQuery();
-                return Convert.ToInt32(queryCommand.ExecuteScalar());
             }
         }
     }

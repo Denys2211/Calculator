@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Exception
+namespace Exceptions
 {
-    public class UserExceptions : ArgumentException
+    public class UserExceptions : Exception
     {
         public int Value { get; }
         public UserExceptions(string message, int val)

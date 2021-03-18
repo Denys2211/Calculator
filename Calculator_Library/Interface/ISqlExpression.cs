@@ -8,12 +8,11 @@ namespace Calculator
     {
         void AddInDB(double result, string input);
 
-        object[,] ReaderDataBase();
+        List<object[]> ReaderDataBase();
 
         void DeleteDataBase();
 
         void CreateDataTable();
 
-        int GetNumberOfItemsInDB();
     }
 }

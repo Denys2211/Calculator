@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Exception
+namespace Exceptions
 {
-    public class DataBExceptions : ArgumentException
+    public class DataBExceptions : Exception
     {
         public DataBExceptions(string message)
             : base(message)
