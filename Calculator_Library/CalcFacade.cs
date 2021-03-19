@@ -31,9 +31,9 @@ namespace Calculator
 
             double result = Calculator.EvaluateExp(input);
 
-            Context.ClearList();
+            Context.ClearList(); 
 
-            Command.AddInDB(result, input);
+            Command.AddInDataBase(result, input);
 
             return result;
 
@@ -41,13 +41,13 @@ namespace Calculator
         public List<object[]> Calculation_history()
         {
 
-            return Command.ReaderDataBase();
+            return Command.ToReadDataBase();
 
         }
         public void Toclean_history()
         {
 
-            Command.DeleteDataBase();
+            Command.DeleteDataTable();
             
         }
     }

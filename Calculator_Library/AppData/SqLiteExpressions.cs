@@ -16,12 +16,12 @@ namespace AppData
             CreateDataTable();
 
         }
-        public void AddInDB(double result, string input)
+        public void AddInDataBase(double result, string input)
         {
             try
             {
                 string date_time = (DateTime.Now).ToString();
-                string sqlAdd = $"INSERT INTO History(Expression, Result, DateTime) VALUES ('{input}','{result}','{date_time}')";
+                string sqlExpression = $"INSERT INTO History(Expression, Result, DateTime) VALUES ('{input}','{result}','{date_time}')";
                 using (Connect)
                 {
                     Connect.Open();
@@ -29,7 +29,7 @@ namespace AppData
                     var command = new SqliteCommand();
 
                     command.Connection = Connect;
-                    command.CommandText = sqlAdd;
+                    command.CommandText = sqlExpression;
                     command.ExecuteNonQuery();
                     
                 }
@@ -41,7 +41,7 @@ namespace AppData
             
         }
 
-        public List<object[]> ReaderDataBase()
+        public List<object[]> ToReadDataBase()
 
         {
             try
@@ -90,7 +90,7 @@ namespace AppData
             
         
         }
-        public void DeleteDataBase()
+        public void DeleteDataTable()
         {
             try
             {
@@ -122,7 +122,7 @@ namespace AppData
 
                     var command = new SqliteCommand();
                     command.Connection = Connect;
-                    command.CommandText = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression TEXT NOT NULL, Result DOUBLE NOT NULL, DateTime TEXT NOT NULL)";
+                    command.CommandText = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression NTEXT NOT NULL, Result FLOAT NOT NULL, DateTime DATETIME NOT NULL)";
                     command.ExecuteNonQuery();
 
                 }

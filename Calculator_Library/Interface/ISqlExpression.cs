@@ -6,11 +6,11 @@ namespace Calculator
 {
     interface ISqlExpression
     {
-        void AddInDB(double result, string input);
+        void AddInDataBase(double result, string input);
 
-        List<object[]> ReaderDataBase();
+        List<object[]> ToReadDataBase();
 
-        void DeleteDataBase();
+        void DeleteDataTable();
 
         void CreateDataTable();
 

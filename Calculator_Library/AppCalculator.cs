@@ -14,7 +14,7 @@ namespace Calculator
             ISqlExpression command = new SqLiteExpressions(connection);
             IData data = new DataConsole();
             IContext context = new Context();
-            ICalculator exp_evaluate = new Calc_ExpParentheses(context);
+            ICalculator exp_evaluate = new Calculations(context);
             IAudit audit = new Audit_Input();
             var ide = new CalcFacade(data, command, audit, exp_evaluate, context);
             IDE = ide;

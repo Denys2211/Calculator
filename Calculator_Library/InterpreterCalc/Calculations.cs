@@ -4,14 +4,23 @@ using Calculator;
 
 namespace InterpreterCalc
 {
+    delegate double Operation(IExpression left, IExpression right);
 
-    public class Calc_ExpParentheses : ICalculator
+    public class Calculations : ICalculator
     {
+        Operation Add;
+        Operation Subtract;
+        Operation Division;
+        Operation Multiplication;
         private double Result { get; set; }
         private IContext Context { get; set; }
-        internal Calc_ExpParentheses(IContext context)
+        internal Calculations(IContext context)
         {
             Context = context;
+            Add = (left, right) => left.Interpret(Context) + right.Interpret(Context);
+            Subtract = (left, right) => left.Interpret(Context) - right.Interpret(Context);
+            Division = (left, right) => left.Interpret(Context) / right.Interpret(Context);
+            Multiplication = (left, right) => left.Interpret(Context) * right.Interpret(Context);
         }
         public double EvaluateExp(string input)
         {
@@ -82,7 +91,7 @@ namespace InterpreterCalc
                 switch (list[i])
                 {
                     case "*":
-                        expression = new MultiplicationExpression(Number[i + 1], Number[i - 1]);
+                        expression = new Operations(Number[i + 1], Number[i - 1], Multiplication);
                         Result = expression.Interpret(Context);
                         Context.RemoveList(i - 1);
                         Context.RemoveList(i);
@@ -90,7 +99,7 @@ namespace InterpreterCalc
                         i -= 1;
                         break;
                     case "/":
-                        expression = new DivisionExpression(Number[i + 1], Number[i - 1]);
+                        expression = new Operations(Number[i + 1], Number[i - 1], Division);
                         Result = expression.Interpret(Context);
                         Context.RemoveList(i - 1);
                         Context.RemoveList(i);
@@ -104,7 +113,7 @@ namespace InterpreterCalc
                 switch (list[i])
                 {
                     case "-":
-                        expression = new SubtractExpression(Number[i + 1], Number[i - 1]);
+                        expression = new Operations(Number[i + 1], Number[i - 1], Subtract);
                         Result = expression.Interpret(Context);
                         Context.RemoveList(i - 1);
                         Context.RemoveList(i);
@@ -112,7 +121,7 @@ namespace InterpreterCalc
                         i -= 1;
                         break;
                     case "+":
-                        expression = new AddExpression(Number[i + 1], Number[i - 1]);
+                        expression = new Operations(Number[i + 1], Number[i - 1], Add);
                         Result = expression.Interpret(Context);
                         Context.RemoveList(i - 1);
                         Context.RemoveList(i);

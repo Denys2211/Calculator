@@ -30,11 +30,11 @@ namespace ConsoleUI
                             List<object[]> history= Canculator.IDE.Calculation_history();
                             Console.WriteLine("Id_\t\tExpression\tResult\t\tDateTime");
                             Console.WriteLine(new string('_', 70));
-                            foreach(object[] str in history)
+                            foreach(object[] row in history)
                             {
-                                foreach(object i in str)
+                                foreach(object value in row)
                                 {
-                                    Console.Write(i+"\t\t");
+                                    Console.Write(value + "\t\t");
                                 }
                                 Console.WriteLine();
                                 Console.WriteLine(new string('_', 70));

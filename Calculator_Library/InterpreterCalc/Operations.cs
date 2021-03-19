@@ -3,24 +3,26 @@ using Exceptions;
 
 namespace InterpreterCalc
 {
-    class MultiplicationExpression : IExpression
+    class Operations : IExpression
     {
         private IExpression LeftExpression { get; set; }
         private IExpression RightExpression { get; set; }
+        public Operation Actions{get;set;}
 
-        public MultiplicationExpression(IExpression left, IExpression right)
+        public Operations(IExpression left, IExpression right, Operation act)
         {
             LeftExpression = left;
             RightExpression = right;
+            Actions = act;
         }
 
         public double Interpret(IContext context)
         {
             if(LeftExpression != null && RightExpression != null)
-                return LeftExpression.Interpret(context) * RightExpression.Interpret(context);
+                return Actions(LeftExpression, RightExpression);
             else 
             { 
-                throw new CalcExceptions("Incorrect input! Multiplication failed.");
+                throw new CalcExceptions("Multiplication failed!");
             }
         }
     }
