@@ -10,11 +10,12 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             AppCalculator Canculator = new AppCalculator();
-
+            Canculator.IDE.Notify += DisplayMessage;
             for (; ; )
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("Select an operation:\n\t1 - Show calculation history\n\t2 - Expression calculation\n\t3 - To clean history ");
                     int choice = int.Parse(Console.ReadLine());
                     switch (choice)
@@ -43,7 +44,6 @@ namespace ConsoleUI
 
                         case 3:
                             Canculator.IDE.Toclean_history();
-                            Console.WriteLine("-----------Done!---------");
                             break;
 
                         default:
@@ -76,6 +76,12 @@ namespace ConsoleUI
                     Console.WriteLine("An error has occurred. Repeat the entry!");
                 }
             }
+        }
+        private static void DisplayMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.Blue;
         }
     }
 }

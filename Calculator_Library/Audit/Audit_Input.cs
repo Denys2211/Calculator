@@ -6,8 +6,10 @@ namespace Audit
 {
     public class Audit_Input : IAudit
     {
-        public void СheckNumericCharacter(string input, string[] symbol)
+        
+        public void СheckNumericCharacter(string input, string[] symbol, out int countNumbers)
         {
+            countNumbers = 0;
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
             if (inputString.Length == 0 && input.Length !=0)
             {
@@ -20,6 +22,7 @@ namespace Audit
                 {
                     throw new AudExceptions("This is not a numeric!");
                 }
+                countNumbers++;
             }
         }
         public void CheckQuantity(string input)

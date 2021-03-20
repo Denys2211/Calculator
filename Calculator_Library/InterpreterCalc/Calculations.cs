@@ -8,6 +8,7 @@ namespace InterpreterCalc
 
     public class Calculations : ICalculator
     {
+
         Operation Add;
         Operation Subtract;
         Operation Division;
@@ -75,7 +76,7 @@ namespace InterpreterCalc
             }
             List<String> list = Context.СreatureList(stack);
             IExpression[] Number = new IExpression[list.Count];
-            IExpression expression;
+            Operations expression;
             for (int i = list.Count - 1; i >= 0; i--)
             {
                 if (list[i] != "+" &&
@@ -92,7 +93,7 @@ namespace InterpreterCalc
                 {
                     case "*":
                         expression = new Operations(Number[i + 1], Number[i - 1], Multiplication);
-                        Result = expression.Interpret(Context);
+                        Result = expression.OperationsWithExpression();
                         Context.RemoveList(i - 1);
                         Context.RemoveList(i);
                         Context.SetList(i - 1, Result);
@@ -100,7 +101,7 @@ namespace InterpreterCalc
                         break;
                     case "/":
                         expression = new Operations(Number[i + 1], Number[i - 1], Division);
-                        Result = expression.Interpret(Context);
+                        Result = expression.OperationsWithExpression();
                         Context.RemoveList(i - 1);
                         Context.RemoveList(i);
                         Context.SetList(i - 1, Result);
@@ -114,7 +115,7 @@ namespace InterpreterCalc
                 {
                     case "-":
                         expression = new Operations(Number[i + 1], Number[i - 1], Subtract);
-                        Result = expression.Interpret(Context);
+                        Result = expression.OperationsWithExpression();
                         Context.RemoveList(i - 1);
                         Context.RemoveList(i);
                         Context.SetList(i - 1, Result);
@@ -122,7 +123,7 @@ namespace InterpreterCalc
                         break;
                     case "+":
                         expression = new Operations(Number[i + 1], Number[i - 1], Add);
-                        Result = expression.Interpret(Context);
+                        Result = expression.OperationsWithExpression();
                         Context.RemoveList(i - 1);
                         Context.RemoveList(i);
                         Context.SetList(i - 1, Result);

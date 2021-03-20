@@ -4,6 +4,8 @@ namespace Calculator
 {
     public class CalcFacade
     {
+        public delegate void Handler(string message);
+        public event Handler Notify;
         private IAudit Audit { get; set; }
         private ICalculator Calculator { get; set; }
         private IContext Context { get; set; }
@@ -21,7 +23,7 @@ namespace Calculator
         {
             Data.DataEntry(out string[] symbol);
           
-            Audit.СheckNumericCharacter(input, symbol);
+            Audit.СheckNumericCharacter(input, symbol, out int countNumbers);
 
             Audit.CheckQuantity(input);
 
@@ -31,9 +33,11 @@ namespace Calculator
 
             double result = Calculator.EvaluateExp(input);
 
-            Context.ClearList(); 
+            Context.ClearList();
 
             Command.AddInDataBase(result, input);
+
+            Notify?.Invoke($"Сalculation successful. There will be an operation on the {countNumbers} numbers. ");
 
             return result;
 
@@ -48,7 +52,8 @@ namespace Calculator
         {
 
             Command.DeleteDataTable();
-            
+            Notify?.Invoke($"--------Done!-------- ");
+
         }
     }
 }

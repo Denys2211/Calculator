@@ -3,7 +3,7 @@ namespace Calculator
 {
     interface IAudit
     {
-        void СheckNumericCharacter(string input, string[] symbol);
+        void СheckNumericCharacter(string input, string[] symbol, out int countNumbers);
 
         void CheckQuantity(string input);
 
