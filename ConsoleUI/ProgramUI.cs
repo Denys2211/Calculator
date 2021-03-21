@@ -43,7 +43,7 @@ namespace ConsoleUI
                             break;
 
                         case 3:
-                            Canculator.IDE.Toclean_history();
+                            Canculator.IDE.Clean_history();
                             break;
 
                         default:
@@ -71,7 +71,7 @@ namespace ConsoleUI
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch
+               // catch
                 {
                     Console.WriteLine("An error has occurred. Repeat the entry!");
                 }

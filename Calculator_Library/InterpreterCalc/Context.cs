@@ -18,7 +18,11 @@ namespace InterpreterCalc
 
         public List<String> СreatureList(Stack<string> stack)
         {
-            return List = stack.ToList<String>();
+            List = stack.ToList<String>();
+
+            List.Add("0");
+
+            return List;
         }
 
         public double GetList(int i)

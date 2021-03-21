@@ -8,7 +8,7 @@ namespace Calculator
     {
         void AddInDataBase(double result, string input);
 
-        List<object[]> ToReadDataBase();
+        List<object[]> ReadDataBase();
 
         void DeleteDataTable();
 

@@ -7,22 +7,22 @@ namespace Audit
     public class Audit_Input : IAudit
     {
         
-        public void СheckNumericCharacter(string input, string[] symbol, out int countNumbers)
+        public void СheckNumericCharacter(string input, string[] symbol, out int i)
         {
-            countNumbers = 0;
+            i = 0;
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
             if (inputString.Length == 0 && input.Length !=0)
             {
                 throw new AudExceptions("This is not a numeric!"); 
             }
-            for (int i = 0; i < inputString.Length; i++)
+            while (i < inputString.Length)
             {
                 char chr = inputString[i].ToCharArray()[0];
                 if (!char.IsDigit(chr))
                 {
                     throw new AudExceptions("This is not a numeric!");
                 }
-                countNumbers++;
+                i++;
             }
         }
         public void CheckQuantity(string input)
@@ -41,7 +41,7 @@ namespace Audit
             for (int i = 0; i < input.Length; i++)
             {
                 string symbol = input.Substring(i, 1);
-                if (!char.IsDigit(chr[0]) && chr[0] != '(' && chr[0] != ')')
+                if (!char.IsDigit(chr[0]) && chr[0] != '(' && chr[0] != ')'&& chr[0] != '-' && chr[0] != '+')
                     checkCount++;
                 if (symbol.Equals("("))
                 {

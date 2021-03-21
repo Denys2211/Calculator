@@ -41,7 +41,7 @@ namespace AppData
             
         }
 
-        public List<object[]> ToReadDataBase()
+        public List<object[]> ReadDataBase()
 
         {
             try
@@ -64,10 +64,10 @@ namespace AppData
                             history.Add(
                                 new[]
                                 {
-                                reader.GetValue(0),
-                                reader.GetValue(1),
-                                reader.GetValue(2),
-                                reader.GetValue(3)
+                                reader["_id"],
+                                reader["Expression"],
+                                reader["Result"],
+                                reader["DateTime"]
                                 }
                                 );
                             }

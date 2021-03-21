@@ -87,7 +87,7 @@ namespace InterpreterCalc
                     Number[i] = new NumberExpression(i);
 
             }
-            for (int i = list.Count - 2; i >= 0; i--)
+            for (int i = list.Count - 1; i >= 0; i--)
             {
                 switch (list[i])
                 {
@@ -109,7 +109,7 @@ namespace InterpreterCalc
                         break;
                 }
             }
-            for (int i = list.Count - 2; i >= 0; i--)
+            for (int i = list.Count - 1; i >= 0; i--)
             {
                 switch (list[i])
                 {

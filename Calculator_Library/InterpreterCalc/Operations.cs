@@ -19,7 +19,9 @@ namespace InterpreterCalc
         public double OperationsWithExpression()
         {
             if(LeftExpression != null && RightExpression != null)
+
                 return MathOperation(LeftExpression, RightExpression);
+            
             else 
             { 
                 throw new CalcExceptions("Operations failed!");

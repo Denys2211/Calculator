@@ -45,12 +45,12 @@ namespace Calculator
         public List<object[]> Calculation_history()
         {
 
-            return Command.ToReadDataBase();
+            return Command.ReadDataBase();
 
         }
-        public void Toclean_history()
+        public void Clean_history()
         {
-
+            
             Command.DeleteDataTable();
             Notify?.Invoke($"--------Done!-------- ");
 
