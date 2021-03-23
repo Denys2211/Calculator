@@ -4,11 +4,11 @@ using Calculator;
 
 namespace InterpreterCalc
 {
+
     delegate double Operation(IExpression left, IExpression right);
 
     public class Calculations : ICalculator
     {
-
         Operation Add;
         Operation Subtract;
         Operation Division;
@@ -130,6 +130,7 @@ namespace InterpreterCalc
                         i -= 1;
                         break;
                 }
+
             }
             return Result;
         }

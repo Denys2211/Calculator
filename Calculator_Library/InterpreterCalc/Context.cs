@@ -11,11 +11,8 @@ namespace InterpreterCalc
 
         private List<String> List { get; set; }
 
-        public Stack<string> СreatureStack()
-        {
-            return Stack = new Stack<string>();
-        }
-
+        public Stack<string> СreatureStack() => Stack = new Stack<string>();
+        
         public List<String> СreatureList(Stack<string> stack)
         {
             List = stack.ToList<String>();
@@ -25,10 +22,7 @@ namespace InterpreterCalc
             return List;
         }
 
-        public double GetList(int i)
-        {
-            return double.Parse(List[i]);
-        }
+        public double GetList(int i) => double.Parse(List[i]);
 
         public void SetList(int index, double result)
         {

@@ -51,6 +51,7 @@ namespace Audit
                 }
                 if (symbol.Equals(")"))
                 {
+                    if(checkCount > 0)
                     checkCount--;
                     if (chr[chr.Length - 1] != ')' && char.IsDigit(chr[i + 1]))
                         checkCount++;

@@ -15,7 +15,6 @@ namespace ConsoleUI
             {
                 try
                 {
-                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("Select an operation:\n\t1 - Show calculation history\n\t2 - Expression calculation\n\t3 - To clean history ");
                     int choice = int.Parse(Console.ReadLine());
                     switch (choice)
@@ -28,12 +27,12 @@ namespace ConsoleUI
                             break;
 
                         case 1:
-                            List<object[]> history= Canculator.IDE.Calculation_history();
+                            List<object[]> history = Canculator.IDE.Calculation_history();
                             Console.WriteLine("Id_\t\tExpression\tResult\t\tDateTime");
                             Console.WriteLine(new string('_', 70));
-                            foreach(object[] row in history)
+                            foreach (object[] row in history)
                             {
-                                foreach(object value in row)
+                                foreach (object value in row)
                                 {
                                     Console.Write(value + "\t\t");
                                 }
@@ -71,7 +70,7 @@ namespace ConsoleUI
                 {
                     Console.WriteLine(ex.Message);
                 }
-               // catch
+                catch
                 {
                     Console.WriteLine("An error has occurred. Repeat the entry!");
                 }
@@ -79,9 +78,8 @@ namespace ConsoleUI
         }
         private static void DisplayMessage(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
-            Console.ForegroundColor = ConsoleColor.Blue;
         }
+
     }
 }

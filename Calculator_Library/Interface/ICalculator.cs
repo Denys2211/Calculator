@@ -8,6 +8,8 @@ namespace Calculator
 {
     interface ICalculator
     {
+
         double EvaluateExp(string input);
+
     }
 }

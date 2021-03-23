@@ -9,9 +9,6 @@ namespace InterpreterCalc
         {
             index = variableName;
         }
-        public double Interpret(IContext context)
-        {
-            return context.GetList(index);
-        }
+        public double Interpret(IContext context) => context.GetList(index);
     }
 }

@@ -42,12 +42,9 @@ namespace Calculator
             return result;
 
         }
-        public List<object[]> Calculation_history()
-        {
 
-            return Command.ReadDataBase();
-
-        }
+        public List<object[]> Calculation_history() => Command.ReadDataBase();
+ 
         public void Clean_history()
         {
             
