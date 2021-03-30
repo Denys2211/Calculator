@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using InterpreterCalc;
 
 namespace Calculator
 {
     interface ICalculator
     {
+        double Result { get; }
 
-        double EvaluateExp(string input);
+        int IndexStack { get; }
 
+        void CreateExpression(string input);
+
+        void CalculationExp();
+
+        void CreateOperations(int index);
+
+        void NumberFiltering(List<String> list);
     }
 }

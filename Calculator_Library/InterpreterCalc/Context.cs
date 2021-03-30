@@ -7,19 +7,41 @@ namespace InterpreterCalc
 {
     class Context : IContext
     {
-        public Stack<string> Stack { get; set; }
+        private Stack<string>[] Stack; 
 
-        private List<String> List { get; set; }
+        public List<String> List { get; private set; }
 
-        public Stack<string> СreatureStack() => Stack = new Stack<string>();
-        
-        public List<String> СreatureList(Stack<string> stack)
+        public Stack<string> this[int i]
         {
-            List = stack.ToList<String>();
+            get
+            {
+                return Stack[i];
+               
+            }
+            private set
+            {
+                Stack[i] = value;
+            }
+        }
+
+        public void СreatureStack(int countBracket)
+        {
+
+            Stack = new Stack<string>[countBracket];
+
+            for(int i= countBracket-1; i >= 0; i--)
+            {
+                Stack[i] = new Stack<string>();
+            }
+
+        }
+        public void СreatureList(int indexStack)
+        {
+
+            List = Stack[indexStack].ToList<String>();
 
             List.Add("0");
 
-            return List;
         }
 
         public double GetList(int i) => double.Parse(List[i]);

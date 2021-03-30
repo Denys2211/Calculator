@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 namespace ConsoleUI
 {
+
     class ProgramUI
     {
-        static void Main(string[] args)
+        static void Main()
         {
             AppCalculator Canculator = new AppCalculator();
             Canculator.IDE.Notify += DisplayMessage;

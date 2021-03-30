@@ -5,11 +5,23 @@ namespace Calculator
 {
     interface IContext
     {
-        Stack<string> СreatureStack();
-        List<String> СreatureList(Stack<string> stack);
+
+        Stack<string> this[int i]
+        {
+            get;
+        }
+        List<String> List { get; }
+
+        void СreatureStack(int valueStack);
+
+        void СreatureList(int indexStack);
+
         double GetList(int i);
+
         void SetList(int index, double result);
+
         void RemoveList(int index);
+
         void ClearList();
     }
 }

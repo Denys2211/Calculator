@@ -22,18 +22,28 @@ namespace Calculator
         public double Start(string input)
         {
             Data.DataEntry(out string[] symbol);
-          
+
             Audit.СheckNumericCharacter(input, symbol, out int countNumbers);
 
             Audit.CheckQuantity(input);
 
-            Audit.CorrectInput(input);
+            Audit.CorrectInput(input, out int countBracket);
 
             Audit.CheckAvailability(input);
 
-            double result = Calculator.EvaluateExp(input);
+            Context.СreatureStack(countBracket);
+
+            Calculator.CreateExpression(input);
+          
+            Context.СreatureList(Calculator.IndexStack);
+
+            Calculator.NumberFiltering(Context.List);
+
+            Calculator.CalculationExp();
 
             Context.ClearList();
+
+            double result = Calculator.Result;
 
             Command.AddInDataBase(result, input);
 

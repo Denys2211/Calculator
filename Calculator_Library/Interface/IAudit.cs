@@ -7,7 +7,7 @@ namespace Calculator
 
         void CheckQuantity(string input);
 
-        void CorrectInput(string input);
+        void CorrectInput(string input, out int countBracket);
 
         void CheckAvailability(string input);
     }

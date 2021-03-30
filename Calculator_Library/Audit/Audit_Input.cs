@@ -34,8 +34,9 @@ namespace Audit
 
             }
         }
-        public void CorrectInput(string input)
+        public void CorrectInput(string input, out int countBracket)
         {
+            countBracket = 1;
             int checkCount = 0;
             char[] chr = input.ToCharArray();
             for (int i = 0; i < input.Length; i++)
@@ -45,6 +46,7 @@ namespace Audit
                     checkCount++;
                 if (symbol.Equals("("))
                 {
+                    countBracket++;
                     checkCount++;
                     if (chr[0] != '(' && char.IsDigit(chr[i - 1]))
                         checkCount++;
