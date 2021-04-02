@@ -31,15 +31,13 @@ namespace Calculator
 
             Audit.CheckAvailability(input);
 
-            Context.СreatureStack(countBracket);
+            Context.СreatureList(countBracket);
 
             Calculator.CreateExpression(input);
           
-            Context.СreatureList(Calculator.IndexStack);
+            Calculator.FilterNumbers();
 
-            Calculator.NumberFiltering(Context.List);
-
-            Calculator.CalculationExp();
+            Calculator.CalculateExpression();
 
             Context.ClearList();
 

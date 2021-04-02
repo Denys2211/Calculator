@@ -10,14 +10,12 @@ namespace Calculator
     {
         double Result { get; }
 
-        int IndexStack { get; }
+        int IndexList { get; }
 
         void CreateExpression(string input);
 
-        void CalculationExp();
+        void CalculateExpression();
 
-        void CreateOperations(int index);
-
-        void NumberFiltering(List<String> list);
+        void FilterNumbers();
     }
 }

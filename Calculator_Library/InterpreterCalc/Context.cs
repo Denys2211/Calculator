@@ -1,64 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Calculator;
+using Collections;
 
 namespace InterpreterCalc
 {
     class Context : IContext
     {
-        private Stack<string>[] Stack; 
+        private MyCollection<string>[] List; 
 
-        public List<String> List { get; private set; }
-
-        public Stack<string> this[int i]
+        public MyCollection<string> this[int i]
         {
             get
             {
-                return Stack[i];
+                return List[i];
                
-            }
-            private set
-            {
-                Stack[i] = value;
             }
         }
 
-        public void СreatureStack(int countBracket)
+        public void СreatureList(int countBracket)
         {
 
-            Stack = new Stack<string>[countBracket];
+            List = new MyCollection<string>[countBracket];
 
             for(int i= countBracket-1; i >= 0; i--)
             {
-                Stack[i] = new Stack<string>();
+                List[i] = new MyCollection<string>();
+                List[i][0] = "0";
             }
 
         }
-        public void СreatureList(int indexStack)
+
+        public double GetList(int i, int indexList) => double.Parse(List[indexList][i]);
+
+        public void RemoveList(int index, int indexList)
         {
-
-            List = Stack[indexStack].ToList<String>();
-
-            List.Add("0");
-
-        }
-
-        public double GetList(int i) => double.Parse(List[i]);
-
-        public void SetList(int index, double result)
-        {
-            List[index] = Convert.ToString(result);
-        }
-
-        public void RemoveList(int index)
-        {
-            List.RemoveAt(index);
+            List[indexList].RemoveAt(index);
         }
 
         public void ClearList()
         {
-            List.Clear();
+            //List.Clear();
         }
     }
 

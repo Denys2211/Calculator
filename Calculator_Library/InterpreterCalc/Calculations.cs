@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Collections;
 using Calculator;
 
 namespace InterpreterCalc
@@ -17,10 +17,10 @@ namespace InterpreterCalc
         private IExpression[] Number { get; set; }
         public double Result { get; private set; }
         private IContext Context { get; set; }
-        public int IndexStack { get; private set; }
+        public int IndexList { get; private set; }
         internal Calculations(IContext context)
         {
-            IndexStack = 0;
+            IndexList = 0;
             Context = context;
             Add = (left, right) => left.Interpret(Context) + right.Interpret(Context);
             Subtract = (left, right) => left.Interpret(Context) - right.Interpret(Context);
@@ -39,15 +39,15 @@ namespace InterpreterCalc
 
                 if (!char.IsDigit(chr) && chr != '.' && value != "")
                 {
-                    Context[IndexStack].Push(value);
+                    Context[IndexList].Add(value);
 
                     value = "";
                 }
                 if (symbol.Equals("("))
                 {
-                    IndexStack++;
+                    IndexList++;
 
-                    i = CalculationInBracket(i, symbol, input);
+                    i = CalculationInBracket(i, input);
                 }
 
                 if (symbol.Equals("+") ||
@@ -55,45 +55,45 @@ namespace InterpreterCalc
                     symbol.Equals("*") ||
                     symbol.Equals("/"))
 
-                    Context[IndexStack].Push(symbol);
+                    Context[IndexList].Add(symbol);
 
                 else if (char.IsDigit(chr) || chr == '.')
                 {
                     value += symbol;
 
                     if (i == (input.Length - 1))
-                        Context[IndexStack].Push(value);
+                        Context[IndexList].Add(value);
 
                 }
             }
         }
 
-        public void CalculationExp()
+        public void CalculateExpression()
         {
-            for (int i = Context.List.Count - 1; i >= 0; i--)
+            for (int i = 1; i <= Context[IndexList].Count; ++i)
             {
-                if (Context.List[i] == "/")
+                if (Context[IndexList][i] == "/")
                 {
                     Variabl = Division;
                     CreateOperations(i);
                     i -= 1;
                 }
-                if (Context.List[i] == "*")
+                if (Context[IndexList][i] == "*")
                 {
                     Variabl = Multiplication;
                     CreateOperations(i);
                     i -= 1;
                 }
             }
-            for (int i = Context.List.Count - 1; i >= 0; i--)
+            for (int i = 1; i <= Context[IndexList].Count; ++i)
             {
-                if (Context.List[i] == "+")
+                if (Context[IndexList][i] == "+")
                 {
                     Variabl = Add;
                     CreateOperations(i);
                     i -= 1;
                 }
-                if (Context.List[i] == "-")
+                if (Context[IndexList][i] == "-")
                 {
                     Variabl = Subtract;
                     CreateOperations(i);
@@ -102,37 +102,37 @@ namespace InterpreterCalc
             }
         }
 
-        public void NumberFiltering(List<String> list)
+        public void FilterNumbers()
         {
-            Number = new IExpression[list.Count];
+            Number = new IExpression[Context[IndexList].Count];
 
-            for (int i = list.Count - 1; i >= 0; i--)
+            for (int i = Context[IndexList].Count-1; i >= 0; i--)
             {
-                if (list[i] != "+" &&
-                    list[i] != "-" &&
-                    list[i] != "*" &&
-                    list[i] != "/")
+                if (Context[IndexList][i] != "+" &&
+                    Context[IndexList][i] != "-" &&
+                    Context[IndexList][i] != "*" &&
+                    Context[IndexList][i] != "/")
 
-                    Number[i] = new NumberExpression(i);
+                    Number[i] = new NumberExpression(i, IndexList);
 
             }
         }
-        public void CreateOperations(int index)
+        private void CreateOperations(int index)
         {
             
-            Operations expression = new Operations(Number[index + 1], Number[index - 1], Variabl);
+            Operations expression = new Operations(Number[index - 1], Number[index + 1], Variabl);
 
             Result = expression.OperationsWithExpression();
 
-            Context.RemoveList(index - 1);
+            Context.RemoveList(index - 1, IndexList);
 
-            Context.RemoveList(index);
+            Context.RemoveList(index - 1, IndexList);
 
-            Context.SetList(index - 1, Result);
+            Context[IndexList][index - 1] = Convert.ToString(Result);
 
         }
 
-        public int CalculationInBracket(int i, string symbol, string input)
+        private int CalculationInBracket(int i, string input)
         {
             string innerExp = "";
             i++;
@@ -140,7 +140,7 @@ namespace InterpreterCalc
 
             for (; i < input.Length; i++)
             {
-                symbol = input.Substring(i, 1);
+               string symbol = input.Substring(i, 1);
 
                 if (symbol.Equals("(")) bracketCount++;
 
@@ -153,15 +153,13 @@ namespace InterpreterCalc
             }
             CreateExpression(innerExp);
 
-            Context.СreatureList(IndexStack);
+            FilterNumbers();
 
-            NumberFiltering(Context.List);
+            CalculateExpression();
 
-            CalculationExp();
+            IndexList--;
 
-            Context[IndexStack - 1].Push(Result.ToString());
-
-            IndexStack--;
+            Context[IndexList].Add(Result.ToString());
 
             return i;
 

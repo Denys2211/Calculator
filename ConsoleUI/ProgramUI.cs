@@ -71,7 +71,7 @@ namespace ConsoleUI
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch
+                //catch
                 {
                     Console.WriteLine("An error has occurred. Repeat the entry!");
                 }

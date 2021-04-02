@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <None Remove="AppData\DataConsole.cs~RF3cfffccf.TMP" />
+    <None Remove="InterpreterCalc\Calculations.cs~RF549d66f8.TMP" />
   </ItemGroup>
 
   <ItemGroup>

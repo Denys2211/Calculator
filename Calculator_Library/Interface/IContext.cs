@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
+using Collections;
 
 namespace Calculator
 {
     interface IContext
     {
 
-        Stack<string> this[int i]
+        MyCollection<string> this[int i]
         {
             get;
         }
-        List<String> List { get; }
 
-        void СreatureStack(int valueStack);
+        void СreatureList(int valueList);
 
-        void СreatureList(int indexStack);
+        double GetList(int i, int IndexList);
 
-        double GetList(int i);
-
-        void SetList(int index, double result);
-
-        void RemoveList(int index);
+        void RemoveList(int index, int IndexList);
 
         void ClearList();
     }

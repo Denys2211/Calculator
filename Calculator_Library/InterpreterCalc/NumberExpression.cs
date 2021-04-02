@@ -4,11 +4,13 @@ namespace InterpreterCalc
 {
     class NumberExpression : IExpression
     {
-        int index;
-        public NumberExpression(int variableName)
+        private int Index { get; set; }
+        private int IndexList { get; set; }
+        public NumberExpression(int variableName, int IndexList)
         {
-            index = variableName;
+            Index = variableName;
+            this.IndexList = IndexList;
         }
-        public double Interpret(IContext context) => context.GetList(index);
+        public double Interpret(IContext context) => double.Parse(context[IndexList][Index]);
     }
 }
