@@ -20,7 +20,6 @@ namespace InterpreterCalc
         public int IndexList { get; private set; }
         internal Calculations(IContext context)
         {
-            IndexList = 0;
             Context = context;
             Add = (left, right) => left.Interpret(Context) + right.Interpret(Context);
             Subtract = (left, right) => left.Interpret(Context) - right.Interpret(Context);
@@ -70,7 +69,7 @@ namespace InterpreterCalc
 
         public void CalculateExpression()
         {
-            for (int i = 1; i <= Context[IndexList].Count; ++i)
+            for (int i = 1; i < Context[IndexList].Count; ++i)
             {
                 if (Context[IndexList][i] == "/")
                 {
@@ -85,7 +84,7 @@ namespace InterpreterCalc
                     i -= 1;
                 }
             }
-            for (int i = 1; i <= Context[IndexList].Count; ++i)
+            for (int i = 1; i < Context[IndexList].Count; ++i)
             {
                 if (Context[IndexList][i] == "+")
                 {

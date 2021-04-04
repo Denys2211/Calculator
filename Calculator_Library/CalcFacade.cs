@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Collections;
 
 namespace Calculator
 {
@@ -23,29 +24,27 @@ namespace Calculator
         {
             Data.DataEntry(out string[] symbol);
 
-            Audit.СheckNumericCharacter(input, symbol, out int countNumbers);
+            Audit.СheckNumericCharacter(input, symbol);
 
             Audit.CheckQuantity(input);
 
-            Audit.CorrectInput(input, out int countBracket);
+            Audit.CorrectInput(input);
 
             Audit.CheckAvailability(input);
 
-            Context.СreatureList(countBracket);
+            Context.СreateList(Audit.CountBracket);
 
             Calculator.CreateExpression(input);
-          
+
             Calculator.FilterNumbers();
 
             Calculator.CalculateExpression();
-
-            Context.ClearList();
 
             double result = Calculator.Result;
 
             Command.AddInDataBase(result, input);
 
-            Notify?.Invoke($"Сalculation successful. There will be an operation on the {countNumbers} numbers. ");
+            Notify?.Invoke($"Сalculation successful. There will be an operation on the {Audit.CountNumbers} numbers. ");
 
             return result;
 
@@ -58,6 +57,12 @@ namespace Calculator
             
             Command.DeleteDataTable();
             Notify?.Invoke($"--------Done!-------- ");
+
+        }
+        public MyCollection<string> List()
+        {
+
+           return  Context[0];
 
         }
     }

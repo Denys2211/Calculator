@@ -18,7 +18,7 @@ namespace InterpreterCalc
             }
         }
 
-        public void СreatureList(int countBracket)
+        public void СreateList(int countBracket)
         {
 
             List = new MyCollection<string>[countBracket];
@@ -36,11 +36,6 @@ namespace InterpreterCalc
         public void RemoveList(int index, int indexList)
         {
             List[indexList].RemoveAt(index);
-        }
-
-        public void ClearList()
-        {
-            //List.Clear();
         }
     }
 

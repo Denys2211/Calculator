@@ -6,23 +6,25 @@ namespace Audit
 {
     public class Audit_Input : IAudit
     {
-        
-        public void СheckNumericCharacter(string input, string[] symbol, out int i)
+        public int CountBracket { get; private set; }
+
+        public int CountNumbers { get; private set; }
+
+        public void СheckNumericCharacter(string input, string[] symbol)
         {
-            i = 0;
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
             if (inputString.Length == 0 && input.Length !=0)
             {
                 throw new AudExceptions("This is not a numeric!"); 
             }
-            while (i < inputString.Length)
+            while (CountNumbers < inputString.Length)
             {
-                char chr = inputString[i].ToCharArray()[0];
+                char chr = inputString[CountNumbers].ToCharArray()[0];
                 if (!char.IsDigit(chr))
                 {
                     throw new AudExceptions("This is not a numeric!");
                 }
-                i++;
+                CountNumbers++;
             }
         }
         public void CheckQuantity(string input)
@@ -34,9 +36,9 @@ namespace Audit
 
             }
         }
-        public void CorrectInput(string input, out int countBracket)
+        public void CorrectInput(string input)
         {
-            countBracket = 1;
+            CountBracket = 1;
             int checkCount = 0;
             char[] chr = input.ToCharArray();
             for (int i = 0; i < input.Length; i++)
@@ -46,7 +48,7 @@ namespace Audit
                     checkCount++;
                 if (symbol.Equals("("))
                 {
-                    countBracket++;
+                    CountBracket++;
                     checkCount++;
                     if (chr[0] != '(' && char.IsDigit(chr[i - 1]))
                         checkCount++;
@@ -55,7 +57,7 @@ namespace Audit
                 {
                     if(checkCount > 0)
                     checkCount--;
-                    if (chr[chr.Length - 1] != ')' && char.IsDigit(chr[i + 1]))
+                    if (chr[^1] != ')' && char.IsDigit(chr[i + 1]))
                         checkCount++;
                 }
                 if (symbol.Equals("+") || symbol.Equals("-") || symbol.Equals("/") || symbol.Equals("*"))
@@ -64,7 +66,7 @@ namespace Audit
                         checkCount++;
                 }
             } 
-            if (checkCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[chr.Length - 1]) && chr[chr.Length - 1] != ')') )
+            if (checkCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[^1]) && chr[^1] != ')') )
             {
 
                 throw new AudExceptions("Not the correct expression. ");

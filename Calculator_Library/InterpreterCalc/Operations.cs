@@ -18,13 +18,17 @@ namespace InterpreterCalc
 
         public double OperationsWithExpression()
         {
-            if(LeftExpression != null && RightExpression != null)
+            try
+            {
+                if (LeftExpression != null && RightExpression != null)
 
-                return MathOperation(LeftExpression, RightExpression);
-            
-            else 
-            { 
-                throw new CalcExceptions("Operations failed!");
+                    return MathOperation(LeftExpression, RightExpression);
+                else
+                    throw new CalcExceptions("Operations failed! There are no numbers.");
+            }
+             catch
+            {
+                 throw new CalcExceptions("Operations failed!");
             }
         }
     }

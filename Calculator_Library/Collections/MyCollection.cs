@@ -1,19 +1,25 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Collections
 {
-    class MyCollection<T>
+    public class MyCollection<T> : IEnumerable<T>
     {
-        private T[] list;
+        public T[] list;
         public int Count { get; private set; }
         public MyCollection()
         {
             Count = 1;
-            list = new T[20];
+            list = new T[4];
 
         }
+        
+        IEnumerator IEnumerable.GetEnumerator() => new MyCollectionEnumerator<T>(list);
+
+        public IEnumerator<T> GetEnumerator() => new MyCollectionEnumerator<T>(list);
+        
         public T this[int i]
         {
             get
@@ -30,7 +36,7 @@ namespace Collections
         {
             if (Count == list.Length)
             {
-                Array.Resize<T>(ref list, list.Length + 10);
+                Array.Resize<T>(ref list, list.Length + 1);
             }
 
             list[Count] = value;
@@ -39,15 +45,9 @@ namespace Collections
         
         public void RemoveAt(int index) 
         {
-            T[] newList = new T[list.Length - 1];
 
-            for (int i = 0; i < index; i++)
-                newList[i] = list[i];
+            list = list.Where((val, idx) => idx != index).ToArray();
 
-            for(int i = index + 1; i < list.Length; i++)
-                newList[i-1] = list[i];
-
-            list = newList;
             Count--;
         }
     }
