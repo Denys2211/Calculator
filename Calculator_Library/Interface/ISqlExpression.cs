@@ -9,13 +9,11 @@ namespace Calculator
 
         void AddInDataBase(string name, SqliteConnection connection, params string[] inpu);
 
-        object[][] ReadDataBase(string name, SqliteConnection connection);
+        List<List<object>> ReadDataBase(string name, SqliteConnection connection);
 
         void DeleteDataTable(string name, SqliteConnection connection);
 
         void CreateDataTable(string name, SqliteConnection connection);
-
-        int GetNumberOfItemsInDB(string name, SqliteConnection connection);
 
     }
 }

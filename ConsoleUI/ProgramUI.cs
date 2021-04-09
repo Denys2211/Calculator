@@ -28,10 +28,10 @@ namespace ConsoleUI
                             break;
 
                         case 1:
-                            object[][] history = Canculator.IDE.Calculation_history();
+                            List<List<object>> history = Canculator.IDE.Calculation_history();
                             Console.WriteLine("Id_\t\tExpression\tResult\t\tDateTime");
                             Console.WriteLine(new string('_', 70));
-                            foreach (object[] row in history)
+                            foreach (List<object> row in history)
                             {
                                 foreach (object value in row)
                                 {
@@ -47,10 +47,10 @@ namespace ConsoleUI
                             break;
 
                         case 4:
-                            object[][] logger = Canculator.IDE.ReadLogger();
+                            List<List<object>> logger = Canculator.IDE.ReadLogger();
                             Console.WriteLine("Id_\tDateTime\t\tMessage");
                             Console.WriteLine(new string('_', 70));
-                            foreach (object[] row in logger)
+                            foreach (List<object> row in logger)
                             {
                                 foreach (object value in row)
                                 {

@@ -1,5 +1,5 @@
 ﻿using AppData;
-using Collections;
+using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
 
 namespace Calculator
@@ -79,7 +79,7 @@ namespace Calculator
 
         }
 
-        public object[][] Calculation_history() => SqlExpress.ReadDataBase("History", Connection);
+        public List<List<object>> Calculation_history() => SqlExpress.ReadDataBase("History", Connection);
 
         public void Clean_history()
         {
@@ -90,7 +90,7 @@ namespace Calculator
 
         }
 
-        public object[][] ReadLogger() => SqlExpress.ReadDataBase("Log", Connection);
+        public List<List<object>> ReadLogger() => SqlExpress.ReadDataBase("Log", Connection);
 
     }
 }

@@ -2,6 +2,7 @@
 using Calculator;
 using Microsoft.Data.Sqlite;
 using Exceptions;
+using System.Collections.Generic;
 
 namespace AppData 
 {
@@ -51,12 +52,11 @@ namespace AppData
             
         }
 
-        public object[][] ReadDataBase(string name, SqliteConnection connection)
+        public List<List<object>> ReadDataBase(string name, SqliteConnection connection)
 
         {
             try
             {
-                int numberOfItems = GetNumberOfItemsInDB(name, connection);
 
                 string SqlExp = $"SELECT * FROM {name}";
 
@@ -68,25 +68,21 @@ namespace AppData
 
                     using SqliteDataReader reader = command.ExecuteReader();
 
-                    if (reader.HasRows)
+                    var table = new List<List<object>>();
+
+                    for (int i = 0; reader.Read(); i++)
                     {
+                        table.Add(new List<object>());
 
-                        object[][] table = new object[numberOfItems][];
+                        for (int j = 0; j < reader.FieldCount; j++)
 
-                        for (int i = 0; reader.Read(); i++)
-                        {
-                            table[i] = new object[reader.FieldCount];
+                            table[i].Add(reader[j]);
 
-                            for (int j = 0; j < reader.FieldCount; j++)
-
-                                table[i][j] = reader[j];
-
-                        }
-                        return table;
                     }
-                    else
-
+                    if (table.Count == 0)
                         throw new ArgumentException("There is no history!!!");
+
+                    return table;
                 }
             }
             catch (ArgumentException ex)
@@ -161,25 +157,6 @@ namespace AppData
             catch
             {
                 throw new DataBExceptions("Database create error");
-            }
-        }
-        public int GetNumberOfItemsInDB(string name, SqliteConnection connection)
-        {
-            string SqlExp = $"SELECT COUNT(_id) FROM {name}";
-
-            using (connection)
-            {
-                connection.Open();
-
-                SqliteCommand queryCommand = new SqliteCommand
-                {
-                    Connection = connection,
-
-                    CommandText = SqlExp
-                };
-                queryCommand.ExecuteNonQuery();
-
-                return Convert.ToInt32(queryCommand.ExecuteScalar());
             }
         }
     }
