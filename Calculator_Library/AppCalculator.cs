@@ -11,12 +11,12 @@ namespace Calculator
         public AppCalculator()
         {
             var connection = new SqliteConnection("Data Source=usersdata.db");
-            ISqlExpression command = new SqLiteExpressions(connection);
+            ISqlExpression sqlExpress = new SqLiteExpressions();
             IData data = new DataConsole();
             IContext context = new Context();
             IAudit audit = new Audit_Input();
             ICalculator exp_evaluate = new Calculations(context);
-            var ide = new CalcFacade(data, command, audit, exp_evaluate, context);
+            var ide = new CalcFacade(data, sqlExpress, audit, exp_evaluate, context, connection);
             IDE = ide;
         }
     }

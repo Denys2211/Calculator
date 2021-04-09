@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Microsoft.Data.Sqlite;
 
 namespace Calculator
 {
     interface ISqlExpression
     {
-        void AddInDataBase(double result, string input);
 
-        List<object[]> ReadDataBase();
+        void AddInDataBase(string name, SqliteConnection connection, params string[] inpu);
 
-        void DeleteDataTable();
+        object[][] ReadDataBase(string name, SqliteConnection connection);
 
-        void CreateDataTable();
+        void DeleteDataTable(string name, SqliteConnection connection);
+
+        void CreateDataTable(string name, SqliteConnection connection);
+
+        int GetNumberOfItemsInDB(string name, SqliteConnection connection);
 
     }
 }

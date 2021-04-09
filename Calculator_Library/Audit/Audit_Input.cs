@@ -6,23 +6,33 @@ namespace Audit
 {
     public class Audit_Input : IAudit
     {
+
+        public readonly string NUMER_CHARACTER = "This is not a numeric! ";
+
+        public readonly string QUANTITY = "You enter one number. ";
+
+        public readonly string CORRECT_INPUT= "Not the correct expression. ";
+
+        public readonly string AVAILABILITY = "No data to calculate. ";
+
         public int CountBracket { get; private set; }
 
         public int CountNumbers { get; private set; }
 
         public void СheckNumericCharacter(string input, string[] symbol)
         {
+            int CountNumbers = 0;
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
             if (inputString.Length == 0 && input.Length !=0)
             {
-                throw new AudExceptions("This is not a numeric!"); 
+                throw new AudExceptions(NUMER_CHARACTER); 
             }
             while (CountNumbers < inputString.Length)
             {
                 char chr = inputString[CountNumbers].ToCharArray()[0];
                 if (!char.IsDigit(chr))
                 {
-                    throw new AudExceptions("This is not a numeric!");
+                    throw new AudExceptions(NUMER_CHARACTER);
                 }
                 CountNumbers++;
             }
@@ -32,7 +42,7 @@ namespace Audit
             if (input.Length == 1)
             {
 
-                throw new AudExceptions("You enter one number. ");
+                throw new AudExceptions(QUANTITY);
 
             }
         }
@@ -69,7 +79,7 @@ namespace Audit
             if (checkCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[^1]) && chr[^1] != ')') )
             {
 
-                throw new AudExceptions("Not the correct expression. ");
+                throw new AudExceptions(CORRECT_INPUT);
 
             }
         }
@@ -77,7 +87,7 @@ namespace Audit
         {
             if (input == string.Empty)
             {
-                throw new AudExceptions("You did not enter numbers to calculate. ");
+                throw new AudExceptions(AVAILABILITY);
             }
         }
     }

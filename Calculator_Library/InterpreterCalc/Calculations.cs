@@ -10,10 +10,7 @@ namespace InterpreterCalc
     public class Calculations : ICalculator
     {
         private Operation Variabl { get; set; }
-        private Operation Add { get; set; }
-        private Operation Subtract { get; set; }
-        private Operation Division { get; set; }
-        private Operation Multiplication { get; set; }
+        private readonly Operation[] MathOp;
         private IExpression[] Number { get; set; }
         public double Result { get; private set; }
         private IContext Context { get; set; }
@@ -21,10 +18,13 @@ namespace InterpreterCalc
         internal Calculations(IContext context)
         {
             Context = context;
-            Add = (left, right) => left.Interpret(Context) + right.Interpret(Context);
-            Subtract = (left, right) => left.Interpret(Context) - right.Interpret(Context);
-            Division = (left, right) => left.Interpret(Context) / right.Interpret(Context);
-            Multiplication = (left, right) => left.Interpret(Context) * right.Interpret(Context);
+            MathOp = new Operation[]
+            {
+                (left, right) => left.Interpret(Context) + right.Interpret(Context),
+                (left, right) => left.Interpret(Context) - right.Interpret(Context),
+                (left, right) => left.Interpret(Context) / right.Interpret(Context),
+                (left, right) => left.Interpret(Context) * right.Interpret(Context)
+            };
         }
         public void CreateExpression(string input)
         {
@@ -73,13 +73,13 @@ namespace InterpreterCalc
             {
                 if (Context[IndexList][i] == "/")
                 {
-                    Variabl = Division;
+                    Variabl = MathOp[2];
                     CreateOperations(i);
                     i -= 1;
                 }
                 if (Context[IndexList][i] == "*")
                 {
-                    Variabl = Multiplication;
+                    Variabl = MathOp[3];
                     CreateOperations(i);
                     i -= 1;
                 }
@@ -88,13 +88,13 @@ namespace InterpreterCalc
             {
                 if (Context[IndexList][i] == "+")
                 {
-                    Variabl = Add;
+                    Variabl = MathOp[0];
                     CreateOperations(i);
                     i -= 1;
                 }
                 if (Context[IndexList][i] == "-")
                 {
-                    Variabl = Subtract;
+                    Variabl = MathOp[1];
                     CreateOperations(i);
                     i -= 1;
                 }
@@ -128,7 +128,7 @@ namespace InterpreterCalc
             Context.RemoveList(index - 1, IndexList);
 
             Context[IndexList][index - 1] = Convert.ToString(Result);
-
+            
         }
 
         private int CalculationInBracket(int i, string input)

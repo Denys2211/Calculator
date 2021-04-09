@@ -7,16 +7,18 @@ namespace Collections
 {
     public class MyCollection<T> : IEnumerable<T>
     {
-        public T[] list;
-        public int Count { get; private set; }
+        private T[] list;
+
+        public int Count { get; private set; } = 1;
+
         public MyCollection()
         {
-            Count = 1;
+
             list = new T[4];
 
         }
         
-        IEnumerator IEnumerable.GetEnumerator() => new MyCollectionEnumerator<T>(list);
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IEnumerator<T> GetEnumerator() => new MyCollectionEnumerator<T>(list);
         

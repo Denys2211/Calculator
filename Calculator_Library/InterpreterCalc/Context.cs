@@ -25,8 +25,10 @@ namespace InterpreterCalc
 
             for(int i= countBracket-1; i >= 0; i--)
             {
-                List[i] = new MyCollection<string>();
-                List[i][0] = "0";
+                List[i] = new MyCollection<string>
+                {
+                    [0] = "0"
+                };
             }
 
         }

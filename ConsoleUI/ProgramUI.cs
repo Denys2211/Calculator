@@ -16,7 +16,7 @@ namespace ConsoleUI
             {
                 try
                 {
-                    Console.WriteLine("Select an operation:\n\t1 - Show calculation history\n\t2 - Expression calculation\n\t3 - To clean history ");
+                    Console.WriteLine("Select an operation:\n\t1 - Show calculation history\n\t2 - Expression calculation\n\t3 - To clean history\n\t4 - Show log");
                     int choice = int.Parse(Console.ReadLine());
                     switch (choice)
                     {
@@ -28,7 +28,7 @@ namespace ConsoleUI
                             break;
 
                         case 1:
-                            List<object[]> history = Canculator.IDE.Calculation_history();
+                            object[][] history = Canculator.IDE.Calculation_history();
                             Console.WriteLine("Id_\t\tExpression\tResult\t\tDateTime");
                             Console.WriteLine(new string('_', 70));
                             foreach (object[] row in history)
@@ -44,6 +44,21 @@ namespace ConsoleUI
 
                         case 3:
                             Canculator.IDE.Clean_history();
+                            break;
+
+                        case 4:
+                            object[][] logger = Canculator.IDE.ReadLogger();
+                            Console.WriteLine("Id_\tDateTime\t\tMessage");
+                            Console.WriteLine(new string('_', 70));
+                            foreach (object[] row in logger)
+                            {
+                                foreach (object value in row)
+                                {
+                                    Console.Write(value + "\t");
+                                }
+                                Console.WriteLine();
+                                Console.WriteLine(new string('_', 70));
+                            }
                             break;
 
                         default:

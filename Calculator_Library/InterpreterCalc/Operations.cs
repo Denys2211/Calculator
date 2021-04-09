@@ -5,8 +5,12 @@ namespace InterpreterCalc
 {
     class Operations 
     {
+        public readonly string OPERATION = "Mathematical operation failed! ";
+
         private IExpression LeftExpression { get; set; }
+
         private IExpression RightExpression { get; set; }
+
         public Operation MathOperation { get; set; }
 
         public Operations(IExpression left, IExpression right, Operation mathOp)
@@ -24,11 +28,11 @@ namespace InterpreterCalc
 
                     return MathOperation(LeftExpression, RightExpression);
                 else
-                    throw new CalcExceptions("Operations failed! There are no numbers.");
+                    throw new CalcExceptions(OPERATION +"There are no numbers.");
             }
              catch
             {
-                 throw new CalcExceptions("Operations failed!");
+                 throw new CalcExceptions(OPERATION);
             }
         }
     }

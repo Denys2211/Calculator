@@ -2,34 +2,44 @@
 using Calculator;
 using Microsoft.Data.Sqlite;
 using Exceptions;
-using System.Collections.Generic;
-
 
 namespace AppData 
 {
     public class SqLiteExpressions : ISqlExpression
     {
-        private SqliteConnection Connect { get; set; }
-        public SqLiteExpressions(SqliteConnection connection)
-        {
-            Connect = connection;
-            CreateDataTable();
 
-        }
-        public void AddInDataBase(double result, string input)
+        public void AddInDataBase( string name, SqliteConnection connection, params string[] input)
         {
             try
             {
+                CreateDataTable(name, connection);
+
                 string date_time = (DateTime.Now).ToString();
-                string sqlExpression = $"INSERT INTO History(Expression, Result, DateTime) VALUES ('{input}','{result}','{date_time}')";
-                using (Connect)
+
+                string sqlExp;
+
+                if(name =="History")
+
+                    sqlExp = $"INSERT INTO History(Expression, Result, DateTime) VALUES ('{input[0]}','{input[1]}','{date_time}')";
+
+                else if (name == "Log")
+
+                    sqlExp = $"INSERT INTO Log(DateTime, Message) VALUES ('{date_time}','{input[0]}')";
+
+                else
+
+                    throw new DataBExceptions("Database Add error");
+
+                using (connection)
                 {
-                    Connect.Open();
+                    connection.Open();
 
-                    var command = new SqliteCommand();
+                    var command = new SqliteCommand
+                    {
+                        Connection = connection,
 
-                    command.Connection = Connect;
-                    command.CommandText = sqlExpression;
+                        CommandText = sqlExp
+                    };
                     command.ExecuteNonQuery();
                     
                 }
@@ -41,42 +51,42 @@ namespace AppData
             
         }
 
-        public List<object[]> ReadDataBase()
+        public object[][] ReadDataBase(string name, SqliteConnection connection)
 
         {
             try
             {
-                string sqlExpress = "SELECT * FROM History";
+                int numberOfItems = GetNumberOfItemsInDB(name, connection);
 
-                using (Connect)
+                string SqlExp = $"SELECT * FROM {name}";
+
+                using (connection)
                 {
-                    Connect.Open();
+                    connection.Open();
 
-                    SqliteCommand command = new SqliteCommand(sqlExpress, Connect);
-                    
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    SqliteCommand command = new SqliteCommand(SqlExp, connection);
+
+                    using SqliteDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
                     {
 
-                            var history = new List<object[]>();
-                            
-                            while (reader.Read())
-                            {
-                            history.Add(
-                                new[]
-                                {
-                                reader["_id"],
-                                reader["Expression"],
-                                reader["Result"],
-                                reader["DateTime"]
-                                }
-                                );
-                            }
-                        if(history.Count == 0)
+                        object[][] table = new object[numberOfItems][];
 
-                            throw new ArgumentException("There is no history of calculations!");
+                        for (int i = 0; reader.Read(); i++)
+                        {
+                            table[i] = new object[reader.FieldCount];
 
-                        return history;
+                            for (int j = 0; j < reader.FieldCount; j++)
+
+                                table[i][j] = reader[j];
+
+                        }
+                        return table;
                     }
+                    else
+
+                        throw new ArgumentException("There is no history!!!");
                 }
             }
             catch (ArgumentException ex)
@@ -87,23 +97,27 @@ namespace AppData
             {
                 throw new DataBExceptions("Database reader error");
             }
-            
-        
+
         }
-        public void DeleteDataTable()
+        public void DeleteDataTable(string name, SqliteConnection connection)
         {
             try
             {
-                using (Connect)
+
+                using (connection)
                 {
-                    Connect.Open();
+                    connection.Open();
 
-                    var command = new SqliteCommand();
+                    var command = new SqliteCommand
+                    {
+                        Connection = connection,
 
-                    command.Connection = Connect;
-                    command.CommandText = "DELETE FROM History";
+                        CommandText = $"DELETE FROM {name}"
+                    };
                     command.ExecuteNonQuery();
-                    command.CommandText = "UPDATE SQLITE_SEQUENCE SET SEQ = 0 WHERE NAME = 'History'";
+
+                    command.CommandText = $"UPDATE SQLITE_SEQUENCE SET SEQ = 0 WHERE NAME = '{name}'"; 
+
                     command.ExecuteNonQuery();
                 }
             }
@@ -112,17 +126,34 @@ namespace AppData
                 throw new DataBExceptions("Database clean error");
             }
         }
-        public void CreateDataTable()
+        public void CreateDataTable(string name, SqliteConnection connection)
         {
             try
             {
-                using (Connect)
-                {
-                    Connect.Open();
+                string SqlExp;
 
-                    var command = new SqliteCommand();
-                    command.Connection = Connect;
-                    command.CommandText = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression NTEXT NOT NULL, Result FLOAT NOT NULL, DateTime DATETIME NOT NULL)";
+                if (name == "History")
+
+                SqlExp = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression NTEXT NOT NULL, Result FLOAT NOT NULL, DateTime DATETIME NOT NULL)";
+
+                else if (name == "Log")
+
+                SqlExp = "CREATE table IF NOT EXISTS Log(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, DateTime DATETIME NOT NULL, Message NTEXT NOT NULL)";
+                
+                else
+
+                    throw new DataBExceptions("Database create error");
+
+                using (connection)
+                {
+                    connection.Open();
+
+                    var command = new SqliteCommand
+                    {
+                        Connection = connection,
+
+                        CommandText = SqlExp
+                    };
                     command.ExecuteNonQuery();
 
                 }
@@ -130,6 +161,25 @@ namespace AppData
             catch
             {
                 throw new DataBExceptions("Database create error");
+            }
+        }
+        public int GetNumberOfItemsInDB(string name, SqliteConnection connection)
+        {
+            string SqlExp = $"SELECT COUNT(_id) FROM {name}";
+
+            using (connection)
+            {
+                connection.Open();
+
+                SqliteCommand queryCommand = new SqliteCommand
+                {
+                    Connection = connection,
+
+                    CommandText = SqlExp
+                };
+                queryCommand.ExecuteNonQuery();
+
+                return Convert.ToInt32(queryCommand.ExecuteScalar());
             }
         }
     }
