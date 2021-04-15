@@ -1,6 +1,9 @@
-﻿using AppData;
+﻿using System.Threading;
 using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
+using Logger;
+using System;
+
 
 namespace Calculator
 {
@@ -14,8 +17,10 @@ namespace Calculator
         private SqliteConnection Connection { get; set; }
         private IData Data { get; set; }
         private ISqlExpression SqlExpress { get; set; }
-        internal CalcFacade(IData data, ISqlExpression sqlExpress, IAudit audit, ICalculator exp_evaluate, IContext context, SqliteConnection connection)
+        private ILogger Log { get; set; }
+        internal CalcFacade(IData data, ISqlExpression sqlExpress, IAudit audit, ICalculator exp_evaluate, IContext context, SqliteConnection connection, ILogger log)
         {
+            this.Log = log;
             this.Connection = connection;
             Audit = audit;
             Calculator = exp_evaluate;
@@ -25,55 +30,43 @@ namespace Calculator
         }
         public double Start(string input)
         {
-            SqlExpress.AddInDataBase("Log", Connection,"///////Start of calculation///////");
+            Log.WritteFile($"[{DateTime.Now}]\t///////Start of calculation///////");
 
             Data.DataEntry(out string[] symbol);
-
-            SqlExpress.AddInDataBase("Log", Connection, "Read data");
+            Log.WritteFile($"[{DateTime.Now}]\tRead data");
 
             Audit.СheckNumericCharacter(input, symbol);
-
-            SqlExpress.AddInDataBase("Log", Connection, "Сheck numeric character");
+            Log.WritteFile($"[{DateTime.Now}]\tСheck numeric character");
 
             Audit.CheckQuantity(input);
-
-            SqlExpress.AddInDataBase("Log", Connection, "Check quantity");
+            Log.WritteFile($"[{DateTime.Now}]\tCheck quantity");
 
             Audit.CorrectInput(input);
-
-            SqlExpress.AddInDataBase("Log", Connection, "Check correct input");
+            Log.WritteFile($"[{DateTime.Now}]\tCheck correct input");
 
             Audit.CheckAvailability(input);
-
-            SqlExpress.AddInDataBase("Log", Connection, "Check availability");
+            Log.WritteFile($"[{DateTime.Now}]\tCheck availability");
 
             Context.СreateList(Audit.CountBracket);
-
-            SqlExpress.AddInDataBase("Log", Connection, "Сreate list");
+            Log.WritteFile($"[{DateTime.Now}]\tСreate list");
 
             Calculator.CreateExpression(input);
-
-            SqlExpress.AddInDataBase("Log", Connection, "Create expression");
+            Log.WritteFile($"[{DateTime.Now}]\tCreate expression");
 
             Calculator.FilterNumbers();
-
-            SqlExpress.AddInDataBase("Log", Connection, "Filter numbers");
+            Log.WritteFile($"[{DateTime.Now}]\tFilter numbers");
 
             Calculator.CalculateExpression();
-
-            SqlExpress.AddInDataBase("Log", Connection, "Calculate expression");
+            Log.WritteFile($"[{DateTime.Now}]\tCalculate expression");
 
             double result = Calculator.Result;
-
-            SqlExpress.AddInDataBase("Log", Connection, "Read result");
+            Log.WritteFile($"[{DateTime.Now}]\tRead result");
 
             SqlExpress.AddInDataBase("History", Connection, input, result.ToString());
-
-            SqlExpress.AddInDataBase("Log", Connection, "Add in data base result");
+            Log.WritteFile($"[{DateTime.Now}]\tAdd in data base result");
 
             Notify?.Invoke($"Сalculation successful. There will be an operation on the {Audit.CountNumbers} numbers. ");
-
-            SqlExpress.AddInDataBase("Log", Connection, "Finish!!!");
+            Log.WritteFile($"[{DateTime.Now}]\tFinish!!!");
 
             return result;
 
@@ -90,7 +83,7 @@ namespace Calculator
 
         }
 
-        public List<List<object>> ReadLogger() => SqlExpress.ReadDataBase("Log", Connection);
+        public string ReadLogger() => Log.ReaderFile();
 
     }
 }

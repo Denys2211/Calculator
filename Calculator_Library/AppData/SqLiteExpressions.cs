@@ -23,10 +23,6 @@ namespace AppData
 
                     sqlExp = $"INSERT INTO History(Expression, Result, DateTime) VALUES ('{input[0]}','{input[1]}','{date_time}')";
 
-                else if (name == "Log")
-
-                    sqlExp = $"INSERT INTO Log(DateTime, Message) VALUES ('{date_time}','{input[0]}')";
-
                 else
 
                     throw new DataBExceptions("Database Add error");
@@ -132,13 +128,10 @@ namespace AppData
 
                 SqlExp = "CREATE table IF NOT EXISTS History(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, Expression NTEXT NOT NULL, Result FLOAT NOT NULL, DateTime DATETIME NOT NULL)";
 
-                else if (name == "Log")
-
-                SqlExp = "CREATE table IF NOT EXISTS Log(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, DateTime DATETIME NOT NULL, Message NTEXT NOT NULL)";
-                
                 else
-
+                
                     throw new DataBExceptions("Database create error");
+                
 
                 using (connection)
                 {

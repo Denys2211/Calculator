@@ -5,27 +5,33 @@ using Calculator;
 namespace InterpreterCalc
 {
 
-    delegate double Operation(IExpression left, IExpression right);
+    delegate NumberExpression Operation(NumberExpression left, NumberExpression right);
 
     public class Calculations : ICalculator
     {
         private Operation Variabl { get; set; }
         private readonly Operation[] MathOp;
-        private IExpression[] Number { get; set; }
+        private NumberExpression[] Number { get; set; }
         public double Result { get; private set; }
         private IContext Context { get; set; }
         public int IndexList { get; private set; }
         internal Calculations(IContext context)
         {
             Context = context;
-            MathOp = new Operation[]
-            {
-                (left, right) => left.Interpret(Context) + right.Interpret(Context),
-                (left, right) => left.Interpret(Context) - right.Interpret(Context),
-                (left, right) => left.Interpret(Context) / right.Interpret(Context),
-                (left, right) => left.Interpret(Context) * right.Interpret(Context)
-            };
+            MathOp = CreateMasMathOperation();
         }
+
+        private Operation[] CreateMasMathOperation()
+        {
+            return new Operation[]
+                        {
+                (left, right) => left + right,
+                (left, right) => left - right,
+                (left, right) => left / right,
+                (left, right) => left * right
+                        };
+        }
+
         public void CreateExpression(string input)
         {
 
@@ -103,17 +109,19 @@ namespace InterpreterCalc
 
         public void FilterNumbers()
         {
-            Number = new IExpression[Context[IndexList].Count];
+            Number = new NumberExpression[Context[IndexList].Count];
 
-            for (int i = Context[IndexList].Count-1; i >= 0; i--)
+            for (int i = Context[IndexList].Count - 1; i >= 0; i--)
             {
                 if (Context[IndexList][i] != "+" &&
                     Context[IndexList][i] != "-" &&
                     Context[IndexList][i] != "*" &&
                     Context[IndexList][i] != "/")
-
-                    Number[i] = new NumberExpression(i, IndexList);
-
+                {
+                    Number[i] = i;
+                    Number[i].IndexList = IndexList;
+                    Number[i].Context = Context;
+                }
             }
         }
         private void CreateOperations(int index)
@@ -121,7 +129,7 @@ namespace InterpreterCalc
             
             Operations expression = new Operations(Number[index - 1], Number[index + 1], Variabl);
 
-            Result = expression.OperationsWithExpression();
+            Result = expression.Interpret();
 
             Context.RemoveList(index - 1, IndexList);
 

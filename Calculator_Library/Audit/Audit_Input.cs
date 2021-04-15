@@ -21,7 +21,6 @@ namespace Audit
 
         public void СheckNumericCharacter(string input, string[] symbol)
         {
-            int CountNumbers = 0;
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
             if (inputString.Length == 0 && input.Length !=0)
             {

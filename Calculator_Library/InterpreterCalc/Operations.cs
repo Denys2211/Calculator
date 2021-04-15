@@ -1,34 +1,35 @@
 ﻿using Calculator;
 using Exceptions;
+using System;
 
 namespace InterpreterCalc
 {
-    class Operations 
+    class Operations : IExpression
     {
         public readonly string OPERATION = "Mathematical operation failed! ";
 
-        private IExpression LeftExpression { get; set; }
+        private NumberExpression LeftExpression { get; set; }
 
-        private IExpression RightExpression { get; set; }
+        private NumberExpression RightExpression { get; set; }
 
         public Operation MathOperation { get; set; }
 
-        public Operations(IExpression left, IExpression right, Operation mathOp)
+        public Operations(NumberExpression left, NumberExpression right, Operation mathOp)
         {
             LeftExpression = left;
             RightExpression = right;
             MathOperation = mathOp;
         }
 
-        public double OperationsWithExpression()
+        public double Interpret()
         {
             try
             {
-                if (LeftExpression != null && RightExpression != null)
-
-                    return MathOperation(LeftExpression, RightExpression);
-                else
-                    throw new CalcExceptions(OPERATION +"There are no numbers.");
+                 return (double)MathOperation(LeftExpression, RightExpression);
+            }
+            catch(DivideByZeroException x)
+            {
+                throw new CalcExceptions(x.Message);
             }
              catch
             {
