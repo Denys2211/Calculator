@@ -1,7 +1,7 @@
 ﻿using Calculator;
 
 namespace InterpreterCalc
-{
+{   
     struct NumberExpression : IExpression
     {
         
@@ -13,7 +13,7 @@ namespace InterpreterCalc
 
         private double Value { get; set; }
 
-        public static implicit operator NumberExpression(int value) => new NumberExpression { Value = value, Index = value };
+        public static implicit operator NumberExpression(int value) => new NumberExpression { Index = value };
 
         public static explicit operator double(NumberExpression instance1) => instance1.Value;
 

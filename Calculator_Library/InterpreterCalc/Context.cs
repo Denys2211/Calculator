@@ -5,27 +5,20 @@ using Collections;
 
 namespace InterpreterCalc
 {
-    class Context : IContext
+    internal class Context : IContext
     {
-        private MyCollection<string>[] List; 
+        public MyCollection<string>[] CalcExpression { get; private set; }
 
-        public MyCollection<string> this[int i]
-        {
-            get
-            {
-                return List[i];
-               
-            }
-        }
+        public MyCollection<string> this[int i] => CalcExpression[i];
 
         public void СreateList(int countBracket)
         {
 
-            List = new MyCollection<string>[countBracket];
+            CalcExpression = new MyCollection<string>[countBracket];
 
             for(int i= countBracket-1; i >= 0; i--)
             {
-                List[i] = new MyCollection<string>
+                CalcExpression[i] = new MyCollection<string>
                 {
                     [0] = "0"
                 };
@@ -33,11 +26,11 @@ namespace InterpreterCalc
 
         }
 
-        public double GetList(int i, int indexList) => double.Parse(List[indexList][i]);
+        public double GetList(int i, int indexList) => double.Parse(CalcExpression[indexList][i]);
 
         public void RemoveList(int index, int indexList)
         {
-            List[indexList].RemoveAt(index);
+            CalcExpression[indexList].RemoveAt(index);
         }
     }
 

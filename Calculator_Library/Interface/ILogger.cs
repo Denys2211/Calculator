@@ -6,7 +6,7 @@ namespace Calculator
 {
     interface ILogger
     {
-        void WritteFile(string text);
+        void WriteFile(string text);
 
         string ReaderFile();
     }

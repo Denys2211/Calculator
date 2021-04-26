@@ -1,4 +1,5 @@
 ﻿using Calculator;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -6,35 +7,20 @@ namespace Logger
 {
     class CalcLogger : ILogger
     {
-        readonly string path = @"D:\CalculatorXXI\";
-
-        readonly string subpath = @"Logger\";
+        readonly string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
         public CalcLogger()
         {
-            CreateDirectory();
+
         }
-
-        private void CreateDirectory()
+        public async void WriteFile(string text)
         {
-
-            DirectoryInfo dirInfo = new DirectoryInfo(path);
-
-            if (!dirInfo.Exists)
-            {
-                dirInfo.Create();
-            }
-            dirInfo.CreateSubdirectory(subpath);
-        }
-       public async void WritteFile(string text)
-        {
-            using StreamWriter sw = new StreamWriter(path+subpath+"Log.txt", true, System.Text.Encoding.Default);
-
+            using var sw = new StreamWriter(folderPath + "Log.txt", true, System.Text.Encoding.Default);
             await sw.WriteLineAsync(text);
         }
         public string ReaderFile()
         {
-            using StreamReader sr = new StreamReader(path + subpath + "Log.txt", System.Text.Encoding.Default);
+            using var sr = new StreamReader(folderPath + "Log.txt", System.Text.Encoding.Default);
 
             return sr.ReadToEnd();
         }

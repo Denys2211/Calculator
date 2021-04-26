@@ -1,8 +1,10 @@
 ﻿using AppData;
 using Audit;
 using InterpreterCalc;
-using Microsoft.Data.Sqlite;
+using SQLite;
 using Logger;
+using System;
+using System.IO;
 
 namespace Calculator
 {
@@ -12,8 +14,9 @@ namespace Calculator
         public AppCalculator()
         {
             ILogger log = new CalcLogger();
-            var connection = new SqliteConnection("Data Source=usersdata.db");
-            ISqlExpression sqlExpress = new SqLiteExpressions();
+            var connection = new SQLiteConnection(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "usersdata.db"));
+            DataRepository sqlExpress = new HistoryRepository();
             IData data = new DataConsole();
             IContext context = new Context();
             IAudit audit = new Audit_Input();

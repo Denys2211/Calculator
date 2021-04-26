@@ -7,7 +7,7 @@ using InterpreterCalc;
 namespace Calculator
 {
     interface ICalculator
-    {
+    { 
         double Result { get; }
 
         int IndexList { get; }

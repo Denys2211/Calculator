@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="XamarinUI.Views.AboutPage"
+             xmlns:vm="clr-namespace:XamarinUI.ViewModels"
+             Title="{Binding Title}" >
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+ 
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="DarkGray"
+                          Offset="0.2" />
+            <GradientStop Color="#494085"
+                          Offset="0.9" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    
+    <Grid Margin="0,0,0,0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout >
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView Margin="0,-216,0,0" VerticalOptions="FillAndExpand">
+                    <Image Source="fon2.png" VerticalOptions="Center" HeightRequest="500"  />
+                </ContentView>
+            </StackLayout>
+        </StackLayout>
+
+        <ScrollView  Grid.Row="1" Margin="0,-9,0,0" >
+            <StackLayout Padding="6" >
+                <Label Text="Start developing now" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
+                <Frame BorderColor="Gray" BackgroundColor="#e1e1e1" CornerRadius="30" HasShadow="True" >
+                    <Label FontSize="16" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="My page "/>
+                                    <Span Text="https://www.facebook.com/denis.tsurkanovskyy" FontAttributes="Bold"/>
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+        
+        <ScrollView  Grid.Row="1" Margin="0,-90,0,0" >
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView Margin="0,190,0,0" VerticalOptions="FillAndExpand">
+                    <Image Source="fon3.png" VerticalOptions="Center" HeightRequest="250" />
+                </ContentView>
+            </StackLayout>
+        </ScrollView>
+        
+        <ScrollView  Grid.Row="1" Margin="0,-20,0,40" >
+            <StackLayout Orientation="Horizontal" >
+                <ImageButton Source="facebook"  HeightRequest="90"  VerticalOptions="Center" Margin="80,270,0,80"  CornerRadius="50" 
+                        Command="{Binding OpenWebCommand2}" 
+                        BackgroundColor="GhostWhite" />
+                
+                <ImageButton Source="instagram"  HeightRequest="90" VerticalOptions="Center"   Margin="80,270,0,80"  CornerRadius="50"
+                        Command="{Binding OpenWebCommand1}"
+                        BackgroundColor="GhostWhite"  />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

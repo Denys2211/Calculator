@@ -1,7 +1,7 @@
 ﻿using System;
 using Calculator;
 using Exceptions;
-using System.Collections.Generic;
+using SQLite;
 
 namespace ConsoleUI
 {
@@ -28,16 +28,13 @@ namespace ConsoleUI
                             break;
 
                         case 1:
-                            List<List<object>> history = Canculator.IDE.Calculation_history();
+                            var history = Canculator.IDE.Calculation_history();
                             Console.WriteLine("Id_\t\tExpression\tResult\t\tDateTime");
                             Console.WriteLine(new string('_', 70));
-                            foreach (List<object> row in history)
+
+                            foreach (AppData.History row in history)
                             {
-                                foreach (object value in row)
-                                {
-                                    Console.Write(value + "\t\t");
-                                }
-                                Console.WriteLine();
+                                Console.WriteLine($"{row.Id}\t{row.Expression}\t{row.Result}\t{row.DateTime}");
                                 Console.WriteLine(new string('_', 70));
                             }
                             break;

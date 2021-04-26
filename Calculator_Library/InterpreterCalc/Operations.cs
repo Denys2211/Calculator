@@ -31,7 +31,7 @@ namespace InterpreterCalc
             {
                 throw new CalcExceptions(x.Message);
             }
-             catch
+            catch
             {
                  throw new CalcExceptions(OPERATION);
             }

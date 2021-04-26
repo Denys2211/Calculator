@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Globalization;
 using Collections;
 using Calculator;
 
 namespace InterpreterCalc
 {
-
-    delegate NumberExpression Operation(NumberExpression left, NumberExpression right);
+    internal delegate NumberExpression Operation(NumberExpression left, NumberExpression right);
 
     public class Calculations : ICalculator
     {
-        private Operation Variabl { get; set; }
+        private Operation Variable { get; set; }
         private readonly Operation[] MathOp;
         private NumberExpression[] Number { get; set; }
         public double Result { get; private set; }
@@ -21,7 +21,7 @@ namespace InterpreterCalc
             MathOp = CreateMasMathOperation();
         }
 
-        private Operation[] CreateMasMathOperation()
+        private static Operation[] CreateMasMathOperation()
         {
             return new Operation[]
                         {
@@ -35,12 +35,12 @@ namespace InterpreterCalc
         public void CreateExpression(string input)
         {
 
-            string value = "";
-            for (int i = 0; i < input.Length; i++)
+            var value = "";
+            for (var i = 0; i < input.Length; i++)
             {
-                string symbol = input.Substring(i, 1);
+                var symbol = input.Substring(i, 1);
 
-                char chr = symbol.ToCharArray()[0];
+                var chr = symbol.ToCharArray()[0];
 
                 if (!char.IsDigit(chr) && chr != '.' && value != "")
                 {
@@ -79,13 +79,13 @@ namespace InterpreterCalc
             {
                 if (Context[IndexList][i] == "/")
                 {
-                    Variabl = MathOp[2];
+                    Variable = MathOp[2];
                     CreateOperations(i);
                     i -= 1;
                 }
                 if (Context[IndexList][i] == "*")
                 {
-                    Variabl = MathOp[3];
+                    Variable = MathOp[3];
                     CreateOperations(i);
                     i -= 1;
                 }
@@ -94,13 +94,13 @@ namespace InterpreterCalc
             {
                 if (Context[IndexList][i] == "+")
                 {
-                    Variabl = MathOp[0];
+                    Variable = MathOp[0];
                     CreateOperations(i);
                     i -= 1;
                 }
                 if (Context[IndexList][i] == "-")
                 {
-                    Variabl = MathOp[1];
+                    Variable = MathOp[1];
                     CreateOperations(i);
                     i -= 1;
                 }
@@ -112,7 +112,6 @@ namespace InterpreterCalc
             Number = new NumberExpression[Context[IndexList].Count];
 
             for (int i = Context[IndexList].Count - 1; i >= 0; i--)
-            {
                 if (Context[IndexList][i] != "+" &&
                     Context[IndexList][i] != "-" &&
                     Context[IndexList][i] != "*" &&
@@ -122,12 +121,11 @@ namespace InterpreterCalc
                     Number[i].IndexList = IndexList;
                     Number[i].Context = Context;
                 }
-            }
         }
         private void CreateOperations(int index)
         {
             
-            Operations expression = new Operations(Number[index - 1], Number[index + 1], Variabl);
+            var expression = new Operations(Number[index - 1], Number[index + 1], Variable);
 
             Result = expression.Interpret();
 
@@ -135,8 +133,8 @@ namespace InterpreterCalc
 
             Context.RemoveList(index - 1, IndexList);
 
-            Context[IndexList][index - 1] = Convert.ToString(Result);
-            
+            Context[IndexList][index - 1] = Result.ToString();
+
         }
 
         private int CalculationInBracket(int i, string input)
@@ -166,7 +164,7 @@ namespace InterpreterCalc
 
             IndexList--;
 
-            Context[IndexList].Add(Result.ToString());
+            Context[IndexList].Add(Result.ToString(CultureInfo.InvariantCulture));
 
             return i;
 
