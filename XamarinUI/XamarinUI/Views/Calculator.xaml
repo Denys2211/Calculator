@@ -2,19 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinUI.Views.Calculator"
-             xmlns:vm="clr-namespace:XamarinUI.ViewModels"
-             Title ="Calculator"
-             x:Name="CalculatorViewModel">
+             xmlns:local="clr-namespace:XamarinUI.ViewModels"
+             Title ="Calculator">
 
-    <ContentPage.BindingContext>
-        <vm:CalculatorViewModel />
-    </ContentPage.BindingContext>
-    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="History"  />
     </ContentPage.ToolbarItems>
 
     <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Black">
+
+        <Grid.BindingContext>
+            <local:CalculatorViewModel />
+        </Grid.BindingContext>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
@@ -32,70 +31,70 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label x:Name="resultText" FontSize="48" FontAttributes="Bold" BackgroundColor="Black" Text="0"
+        <Label FontSize="48" FontAttributes="Bold" BackgroundColor="Black" Text="{Binding DisplayText}"
               TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
               LineBreakMode="NoWrap" Grid.ColumnSpan="4" />
 
         <Button Text="7" Grid.Row="1" Grid.Column="0"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber"/>
+               FontSize="36" BorderRadius="0" CommandParameter="7" Command="{Binding AddCharCommand}"/>
         <Button Text="8" Grid.Row="1" Grid.Column="1"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="8" Command="{Binding AddCharCommand}"/>
         <Button Text="9" Grid.Row="1" Grid.Column="2"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="9" Command="{Binding AddCharCommand}"/>
 
         <Button Text="4" Grid.Row="2" Grid.Column="0"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="4" Command="{Binding AddCharCommand}"/>
         <Button Text="5" Grid.Row="2" Grid.Column="1"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="5" Command="{Binding AddCharCommand}"/>
         <Button Text="6" Grid.Row="2" Grid.Column="2"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="6" Command="{Binding AddCharCommand}"/>
 
         <Button Text="1" Grid.Row="3" Grid.Column="0"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="1" Command="{Binding AddCharCommand}"/>
         <Button Text="2" Grid.Row="3" Grid.Column="1"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="2" Command="{Binding AddCharCommand}"/>
         <Button Text="3" Grid.Row="3" Grid.Column="2"
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber"/>
+               FontSize="36" BorderRadius="0" CommandParameter="3" Command="{Binding AddCharCommand}"/>
         <Button Text="0" Grid.Row="4" Grid.Column="0" 
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="0" Command="{Binding AddCharCommand}"/>
         <Button Text="(" Grid.Row="4" Grid.Column="1" 
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter="(" Command="{Binding AddCharCommand}"/>
         <Button Text=")" Grid.Row="4" Grid.Column="2" 
                BackgroundColor="WhiteSmoke" TextColor="Black"
-               FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+               FontSize="36" BorderRadius="0" CommandParameter=")" Command="{Binding AddCharCommand}"/>
 
         <Button Text="/" Grid.Row="1" Grid.Column="3"
                 BackgroundColor="DarkBlue" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelectNumber"/>
+                FontSize="36" BorderRadius="0" CommandParameter="/" Command="{Binding AddCharCommand}"/>
         <Button Text="*" Grid.Row="2" Grid.Column="3"
                 BackgroundColor="DarkGreen" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+                FontSize="36" BorderRadius="0" CommandParameter="*" Command="{Binding AddCharCommand}"/>
         <Button Text="-" Grid.Row="3" Grid.Column="3"
-                BackgroundColor="DarkGoldenrod" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+                BackgroundColor="DarkGoldenrod"  TextColor="White"
+                FontSize="36" BorderRadius="0" CommandParameter="-" Command="{Binding AddCharCommand}"/>
         <Button Text="+" Grid.Row="4" Grid.Column="3"
                 BackgroundColor="DarkMagenta" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelectNumber" />
+                FontSize="36" BorderRadius="0" CommandParameter="+" Command="{Binding AddCharCommand}"/>
 
-        <Button Text="C" Grid.Row="5" Grid.Column="0"
+        <Button Text="&#x21E6;" Grid.Row="5" Grid.Column="0"
                 BackgroundColor="#808080" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnClear" />
+                FontSize="36" BorderRadius="0" CommandParameter="&#x21E6;" Command="{Binding DeleteCharCommand}" />
 
         <Button Text="=" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"
                 BackgroundColor="DarkOliveGreen" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnCalculate" />
+                FontSize="36" BorderRadius="0" CommandParameter="=" Command="{Binding CalculateCommand}" />
 
     </Grid>
-  
+
 </ContentPage>

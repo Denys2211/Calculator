@@ -14,40 +14,78 @@ namespace XamarinUI.ViewModels
 {
     class CalculatorViewModel : BaseViewModel
     {
-		//private string Expression { get; set; }
+        public ICommand AddCharCommand { protected set; get; }
 
-		public CalculatorViewModel()
+        public ICommand DeleteCharCommand { protected set; get; }
+
+        public ICommand CalculateCommand { get; }
+
+        public AppCalculator Canculator { get; private set; }
+
+        string inputString = "";
+
+        string displayText = "0";
+
+        public string InputString
         {
-            Title = "Calculator";
-		}
-		//void OnSelectNumber(object sender, EventArgs e)
-		//{
+            protected set
+            {
+                if (inputString != value)
+                {
+                    inputString = value;
+                    OnPropertyChanged("InputString");
+                    DisplayText = inputString;
 
-		//	Button button = (Button)sender;
-		//	string pressed = button.Text;
-		//	Expression += pressed;
-		
-		//		resultText.Text = Expression;
+                    ((Command)DeleteCharCommand).ChangeCanExecute();
+                }
+            }
 
-		//}
+            get { return inputString; }
+        }
 
-		//void OnCalculate(object sender, EventArgs e)
-		//{
-		//	if (resultText.Text != "0")
-		//	{
-		//		AppCalculator Canculator = new AppCalculator();
-		//		double result = Canculator.IDE.Start(resultText.Text);
-		//		resultText.Text = result.ToString();
-		//		Expression = resultText.Text;
+        public string DisplayText
+        {
+            protected set
+            {
+                if (displayText != value)
+                {
+                    displayText = value;
+                    OnPropertyChanged("DisplayText");
+                }
+            }
+            get { return displayText; }
+        }
+        public CalculatorViewModel()
+        {
 
-		//	}
+            Canculator = new AppCalculator();
 
-		//}
-		//void OnClear(object sender, EventArgs e)
-		//{
-		//	Expression = "";
-		//	resultText.Text = "0";
+            AddCharCommand = new Command<string>((key) =>
+            {
+                InputString += key;
+            });
 
-		//}
-	}
+            DeleteCharCommand = new Command(() =>
+            {
+                InputString = InputString.Substring(0, InputString.Length - 1);
+            },
+                () =>
+                {
+                    return InputString.Length > 0;
+                });
+            CalculateCommand = new Command(() => OnCalculate());
+        }
+
+        void OnCalculate()
+        {
+            if (DisplayText != "0")
+            {
+
+                double result = Canculator.IDE.Start(DisplayText);
+                DisplayText = result.ToString();
+
+            }
+
+        }
+    }
 }
