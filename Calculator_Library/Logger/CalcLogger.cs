@@ -15,12 +15,12 @@ namespace Logger
         }
         public async void WriteFile(string text)
         {
-            using var sw = new StreamWriter(folderPath + "Log.txt", true, System.Text.Encoding.Default);
+            using var sw = new StreamWriter(folderPath + "CalcLog.txt", true, System.Text.Encoding.Default);
             await sw.WriteLineAsync(text);
         }
         public string ReaderFile()
         {
-            using var sr = new StreamReader(folderPath + "Log.txt", System.Text.Encoding.Default);
+            using var sr = new StreamReader(folderPath + "CalcLog.txt", System.Text.Encoding.Default);
 
             return sr.ReadToEnd();
         }

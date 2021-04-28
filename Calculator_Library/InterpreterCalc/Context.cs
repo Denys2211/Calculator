@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Calculator;
 using Collections;
@@ -26,7 +27,12 @@ namespace InterpreterCalc
 
         }
 
-        public double GetList(int i, int indexList) => double.Parse(CalcExpression[indexList][i]);
+        public double GetList(int i, int indexList)
+        {
+
+            return double.Parse(CalcExpression[indexList][i]);
+                
+        }
 
         public void RemoveList(int index, int indexList)
         {

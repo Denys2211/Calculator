@@ -25,15 +25,15 @@ namespace InterpreterCalc
         {
             try
             {
-                 return (double)MathOperation(LeftExpression, RightExpression);
+                return (double)MathOperation(LeftExpression, RightExpression);
             }
-            catch(DivideByZeroException x)
+            catch(CalcExceptions ex)
             {
-                throw new CalcExceptions(x.Message);
+                throw new CalcExceptions(ex.Message);
             }
             catch
             {
-                 throw new CalcExceptions(OPERATION);
+                throw new CalcExceptions(OPERATION);
             }
         }
     }

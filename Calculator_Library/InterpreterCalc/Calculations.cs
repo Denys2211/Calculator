@@ -21,7 +21,7 @@ namespace InterpreterCalc
             MathOp = CreateMasMathOperation();
         }
 
-        private static Operation[] CreateMasMathOperation()
+        private  Operation[] CreateMasMathOperation()
         {
             return new Operation[]
                         {
@@ -164,7 +164,7 @@ namespace InterpreterCalc
 
             IndexList--;
 
-            Context[IndexList].Add(Result.ToString(CultureInfo.InvariantCulture));
+            Context[IndexList].Add(Result.ToString());
 
             return i;
 

@@ -30,14 +30,12 @@ namespace XamarinUI.ViewModels
         {
             protected set
             {
-                if (inputString != value)
-                {
-                    inputString = value;
-                    OnPropertyChanged("InputString");
-                    DisplayText = inputString;
+                
+                inputString = value;
+                OnPropertyChanged("InputString");
 
-                    ((Command)DeleteCharCommand).ChangeCanExecute();
-                }
+                ((Command)DeleteCharCommand).ChangeCanExecute();
+               
             }
 
             get { return inputString; }
@@ -45,13 +43,10 @@ namespace XamarinUI.ViewModels
 
         public string DisplayText
         {
-            protected set
+             set
             {
-                if (displayText != value)
-                {
                     displayText = value;
                     OnPropertyChanged("DisplayText");
-                }
             }
             get { return displayText; }
         }
@@ -78,12 +73,26 @@ namespace XamarinUI.ViewModels
 
         void OnCalculate()
         {
-            if (DisplayText != "0")
+            try
             {
-
-                double result = Canculator.IDE.Start(DisplayText);
-                DisplayText = result.ToString();
-
+                double result = Canculator.IDE.Start(inputString);
+                DisplayText = "= " + result.ToString();
+            }
+            catch (DataBExceptions ex)
+            {
+                DisplayText = ex.Message;
+            }
+            catch (CalcExceptions ex)
+            {
+                DisplayText = ex.Message;
+            }
+            catch (AudExceptions ex)
+            {
+                DisplayText = ex.Message;
+            }
+            catch
+            {
+                DisplayText = "An error has occurred. Repeat the entry!";
             }
 
         }

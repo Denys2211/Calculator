@@ -16,7 +16,8 @@
         </Grid.BindingContext>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -31,67 +32,70 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label FontSize="48" FontAttributes="Bold" BackgroundColor="Black" Text="{Binding DisplayText}"
+        <Label FontSize="48" FontAttributes="Bold" BackgroundColor="Black" Text="{Binding InputString}"
               TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
               LineBreakMode="NoWrap" Grid.ColumnSpan="4" />
+        <Label FontSize="24" Grid.Row="1" FontAttributes="Bold" BackgroundColor="Black" Text="{Binding DisplayText}"
+              TextColor="Gray" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+              LineBreakMode="NoWrap" Grid.ColumnSpan="4" />
 
-        <Button Text="7" Grid.Row="1" Grid.Column="0"
+        <Button Text="7" Grid.Row="2" Grid.Column="0"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="7" Command="{Binding AddCharCommand}"/>
-        <Button Text="8" Grid.Row="1" Grid.Column="1"
+        <Button Text="8" Grid.Row="2" Grid.Column="1"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="8" Command="{Binding AddCharCommand}"/>
-        <Button Text="9" Grid.Row="1" Grid.Column="2"
+        <Button Text="9" Grid.Row="2" Grid.Column="2"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="9" Command="{Binding AddCharCommand}"/>
 
-        <Button Text="4" Grid.Row="2" Grid.Column="0"
+        <Button Text="4" Grid.Row="3" Grid.Column="0"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="4" Command="{Binding AddCharCommand}"/>
-        <Button Text="5" Grid.Row="2" Grid.Column="1"
+        <Button Text="5" Grid.Row="3" Grid.Column="1"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="5" Command="{Binding AddCharCommand}"/>
-        <Button Text="6" Grid.Row="2" Grid.Column="2"
+        <Button Text="6" Grid.Row="3" Grid.Column="2"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="6" Command="{Binding AddCharCommand}"/>
 
-        <Button Text="1" Grid.Row="3" Grid.Column="0"
+        <Button Text="1" Grid.Row="4" Grid.Column="0"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="1" Command="{Binding AddCharCommand}"/>
-        <Button Text="2" Grid.Row="3" Grid.Column="1"
+        <Button Text="2" Grid.Row="4" Grid.Column="1"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="2" Command="{Binding AddCharCommand}"/>
-        <Button Text="3" Grid.Row="3" Grid.Column="2"
+        <Button Text="3" Grid.Row="4" Grid.Column="2"
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="3" Command="{Binding AddCharCommand}"/>
-        <Button Text="0" Grid.Row="4" Grid.Column="0" 
+        <Button Text="0" Grid.Row="5" Grid.Column="0" 
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="0" Command="{Binding AddCharCommand}"/>
-        <Button Text="(" Grid.Row="4" Grid.Column="1" 
+        <Button Text="(" Grid.Row="5" Grid.Column="1" 
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter="(" Command="{Binding AddCharCommand}"/>
-        <Button Text=")" Grid.Row="4" Grid.Column="2" 
+        <Button Text=")" Grid.Row="5" Grid.Column="2" 
                BackgroundColor="WhiteSmoke" TextColor="Black"
                FontSize="36" BorderRadius="0" CommandParameter=")" Command="{Binding AddCharCommand}"/>
 
-        <Button Text="/" Grid.Row="1" Grid.Column="3"
+        <Button Text="/" Grid.Row="2" Grid.Column="3"
                 BackgroundColor="DarkBlue" TextColor="White"
                 FontSize="36" BorderRadius="0" CommandParameter="/" Command="{Binding AddCharCommand}"/>
-        <Button Text="*" Grid.Row="2" Grid.Column="3"
+        <Button Text="*" Grid.Row="3" Grid.Column="3"
                 BackgroundColor="DarkGreen" TextColor="White"
                 FontSize="36" BorderRadius="0" CommandParameter="*" Command="{Binding AddCharCommand}"/>
-        <Button Text="-" Grid.Row="3" Grid.Column="3"
+        <Button Text="-" Grid.Row="4" Grid.Column="3"
                 BackgroundColor="DarkGoldenrod"  TextColor="White"
                 FontSize="36" BorderRadius="0" CommandParameter="-" Command="{Binding AddCharCommand}"/>
-        <Button Text="+" Grid.Row="4" Grid.Column="3"
+        <Button Text="+" Grid.Row="5" Grid.Column="3"
                 BackgroundColor="DarkMagenta" TextColor="White"
                 FontSize="36" BorderRadius="0" CommandParameter="+" Command="{Binding AddCharCommand}"/>
 
-        <Button Text="&#x21E6;" Grid.Row="5" Grid.Column="0"
+        <Button Text="&#x21E6;" Grid.Row="6" Grid.Column="0"
                 BackgroundColor="#808080" TextColor="White"
                 FontSize="36" BorderRadius="0" CommandParameter="&#x21E6;" Command="{Binding DeleteCharCommand}" />
 
-        <Button Text="=" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"
+        <Button Text="=" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3"
                 BackgroundColor="DarkOliveGreen" TextColor="White"
                 FontSize="36" BorderRadius="0" CommandParameter="=" Command="{Binding CalculateCommand}" />
 

@@ -1,4 +1,6 @@
 ﻿using Calculator;
+using Exceptions;
+using System;
 
 namespace InterpreterCalc
 {   
@@ -27,7 +29,10 @@ namespace InterpreterCalc
         }
         public static NumberExpression operator /(NumberExpression instance1, NumberExpression instance2)
         {
+            if (instance2.Interpret() == 0)
+                throw new CalcExceptions("Division by 0!!!");
             return new NumberExpression { Value = instance1.Interpret() / instance2.Interpret() };
+           
         }
         public static NumberExpression operator *(NumberExpression instance1, NumberExpression instance2)
         {
