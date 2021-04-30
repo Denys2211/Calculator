@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.PresentationMode="ModalAnimated"
+             xmlns:local="clr-namespace:XamarinUI.ViewModels"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             x:Class="XamarinUI.Views.History"
+             Title="Hisory">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear" Command="{Binding ViewHistoryCommand }" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="DarkGray"
+                          Offset="0.2" />
+            <GradientStop Color="#494085"
+                          Offset="0.9" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    
+    <ContentPage.BindingContext>
+        <local:HistoryViewModel />
+    </ContentPage.BindingContext>
+    
+    <StackLayout Padding="10.10">
+        <Label Text="HISTORY" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
+        <Frame Padding="10" BorderColor="Gray" BackgroundColor="#e1e1e1" CornerRadius="0" HasShadow="True" >
+            
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+                <GradientStop Color="WhiteSmoke"
+                          Offset="0.2" />
+                    <GradientStop Color="#78a7b3"
+                          Offset="0.9" />
+                </LinearGradientBrush>
+            </Frame.Background>
+            
+                <Grid >
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Grid.ColumnSpan="2" LineBreakMode="WordWrap"  FontSize="16" FontAttributes="Italic"  TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="{Binding TextHistory_Expression}"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Column="2"  LineBreakMode="WordWrap" FontSize="16" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="{Binding TextHistory_Result}"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Column="3"  Grid.ColumnSpan="3" FontSize="16" TextColor="Black" FontAttributes="Bold">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="{Binding TextHistory_DateTime}"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+        </Frame>
+        
+        <Button Text="Clean"  Grid.Column="6" 
+               BackgroundColor="#277b8f" TextColor="Black"
+               FontSize="Default" BorderRadius="0"  Command="{Binding Clean}"/>
+    </StackLayout>
+</ContentPage>

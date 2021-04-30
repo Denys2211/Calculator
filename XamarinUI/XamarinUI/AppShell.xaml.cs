@@ -11,6 +11,7 @@ namespace XamarinUI
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(History), typeof(History));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

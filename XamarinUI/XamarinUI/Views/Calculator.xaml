@@ -5,8 +5,12 @@
              xmlns:local="clr-namespace:XamarinUI.ViewModels"
              Title ="Calculator">
 
+    <ContentPage.BindingContext>
+        <local:CalculatorViewModel />
+    </ContentPage.BindingContext>
+    
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="History"  />
+        <ToolbarItem IconImageSource="History" Command="{Binding ViewHistoryCommand }" />
     </ContentPage.ToolbarItems>
 
     <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Black">
@@ -34,7 +38,7 @@
 
         <Label FontSize="48" FontAttributes="Bold" BackgroundColor="Black" Text="{Binding InputString}"
               TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
-              LineBreakMode="NoWrap" Grid.ColumnSpan="4" />
+              LineBreakMode="NoWrap" LineHeight="10" Grid.ColumnSpan="4" />
         <Label FontSize="24" Grid.Row="1" FontAttributes="Bold" BackgroundColor="Black" Text="{Binding DisplayText}"
               TextColor="Gray" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
               LineBreakMode="NoWrap" Grid.ColumnSpan="4" />

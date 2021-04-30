@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
+using Calculator;
 
 namespace XamarinUI.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        public static AppCalculator Canculator { get; set; }
+
         bool isBusy = false;
         public bool IsBusy
         {
