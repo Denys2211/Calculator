@@ -17,9 +17,9 @@ namespace Calculator
         private IContext Context { get; set; }
         private SQLiteConnection Connection { get; set; }
         private IData Data { get; set; }
-        private DataRepository SqlExpress { get; set; }
+        private IDataRepository SqlExpress { get; set; }
         private ILogger Log { get; set; }
-        internal CalcFacade(IData data, DataRepository sqlExpress, IAudit audit, ICalculator exp_evaluate, IContext context, SQLiteConnection connection, ILogger log)
+        internal CalcFacade(IData data, IDataRepository sqlExpress, IAudit audit, ICalculator exp_evaluate, IContext context, SQLiteConnection connection, ILogger log)
         {
             Log = log;
             Connection = connection;
@@ -36,17 +36,17 @@ namespace Calculator
             Data.DataEntry(out string[] symbol);
             WriteLog("Read data");
 
-            Audit.СheckNumericCharacter(input, symbol);
-            WriteLog("Сheck numeric character");
+            Audit.CheckAvailability(input);
+            WriteLog("Check availability");
 
             Audit.CheckQuantity(input);
             WriteLog("Check quantity");
 
+            Audit.СheckNumericCharacter(input, symbol);
+            WriteLog("Сheck numeric character");
+
             Audit.CorrectInput(input);
             WriteLog("Check correct input");
-
-            Audit.CheckAvailability(input);
-            WriteLog("Check availability");
 
             Context.СreateList(Audit.CountBracket);
             WriteLog("Сreate list");
@@ -63,7 +63,7 @@ namespace Calculator
             double result = Calculator.Result;
             WriteLog("Read result");
 
-            SqlExpress.AddInDataBase("History", Connection, input, result.ToString());
+            SqlExpress.AddInDataBase("History", Connection, result, input);
             WriteLog("Add in data base result");
 
             Notify?.Invoke($"Сalculation successful. There will be an operation on the {Audit.CountNumbers} numbers. ");

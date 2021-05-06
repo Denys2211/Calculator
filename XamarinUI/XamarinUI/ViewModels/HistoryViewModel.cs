@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Windows.Input;
 using Xamarin.Essentials;
+using System.Globalization;
 
 namespace XamarinUI.ViewModels
 {
@@ -17,11 +18,7 @@ namespace XamarinUI.ViewModels
     {
         public ICommand Clean { get; set; }
 
-        public string TextHistory_Id { get; set; }
-
         public string TextHistory_Expression { get; set; }
-
-        public string TextHistory_Result { get; set; }
 
         public string TextHistory_DateTime { get; set; }
 
@@ -39,19 +36,29 @@ namespace XamarinUI.ViewModels
 
             foreach (AppData.History row in historyData)
             {
-                TextHistory_Id += $"{row.Id}\n";
+                TextHistory_Expression += $"{row.Id} -> ";
 
-                TextHistory_Expression += $"{row.Expression}\n";
+                TextHistory_Expression += $"{row.Expression}";
 
-                TextHistory_Result += $"= {row.Result}\n";
+                TextHistory_Expression += $" = {row.Result}";
 
-                TextHistory_DateTime += $"{row.DateTime}\n";
+                TextHistory_Expression += $"-> {row.DateTime}\n";
+
+                TextHistory_Expression += new string('_', 44) + "\n";
+
+
             }
         }
         public void CleanHistory()
         {
 
             Canculator.IDE.Clean_history();
+
+            TextHistory_Expression = "";
+            OnPropertyChanged("TextHistory_Expression");
+
+            TextHistory_DateTime = "";
+            OnPropertyChanged("TextHistory_DateTime");
 
         }
         

@@ -27,16 +27,21 @@ namespace XamarinUI.ViewModels
 
             DeleteCharCommand = new Command(() =>
             {
-                InputString = InputString.Substring(0, InputString.Length - 1);
+                InputString = InputString[0..^1];
             },
                 () =>
                 {
                     return InputString.Length > 0;
                 });
+
+            DeleteEverything = new Command(() => InputString ="");
+
             CalculateCommand = new Command(() => OnCalculate());
 
             ViewHistoryCommand = new Command(OnViewHistory);
         }
+
+        public ICommand DeleteEverything { protected set; get; }
 
         public ICommand AddCharCommand { protected set; get; }
 
@@ -47,8 +52,6 @@ namespace XamarinUI.ViewModels
         public ICommand ViewHistoryCommand { get; }
 
         string inputString = "";
-
-        string displayText = "0";
 
         public IEnumerable<AppData.History> HistoryData { get; set; }
 
@@ -67,39 +70,29 @@ namespace XamarinUI.ViewModels
             get { return inputString; }
         }
 
-        public string DisplayText
-        {
-             set
-            {
-                    displayText = value;
-                    OnPropertyChanged("DisplayText");
-            }
-            get { return displayText; }
-        }
-        
-
         void OnCalculate()
         {
             try
             {
                 double result = Canculator.IDE.Start(inputString);
-                DisplayText = "= " + result.ToString();
+                InputString = result.ToString();
             }
             catch (DataBExceptions ex)
             {
-                DisplayText = ex.Message;
+
+                DisplayMessage(ex.Message);
             }
             catch (CalcExceptions ex)
             {
-                DisplayText = ex.Message;
+                DisplayMessage(ex.Message);
             }
             catch (AudExceptions ex)
             {
-                DisplayText = ex.Message;
+                DisplayMessage(ex.Message);
             }
             catch
             {
-                DisplayText = "An error has occurred. Repeat the entry!";
+                DisplayMessage("An error has occurred!");
             }
 
         }

@@ -30,7 +30,7 @@ namespace InterpreterCalc
         public double GetList(int i, int indexList)
         {
 
-            return double.Parse(CalcExpression[indexList][i]);
+            return double.Parse(CalcExpression[indexList][i], CultureInfo.InvariantCulture);
                 
         }
 

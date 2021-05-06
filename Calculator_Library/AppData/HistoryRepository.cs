@@ -6,10 +6,10 @@ using System.Collections.Generic;
 
 namespace AppData 
 {
-    public class HistoryRepository : DataRepository
+    public class HistoryRepository : IDataRepository
     {
-        static object locker = new object();
-        public  void AddInDataBase( string name, SQLiteConnection connection, params string[] input)
+        static readonly object locker = new object();
+        public  void AddInDataBase( string name, SQLiteConnection connection, double result, params string[] input)
         {
             try
             {
@@ -17,7 +17,7 @@ namespace AppData
 
                 if (name == "History")
 
-                    connection.Execute($"INSERT INTO History(Expression, Result, DateTime) VALUES ('{input[0]}','{input[1]}','{DateTime.Now}')");
+                    connection.Execute($"INSERT INTO History(Expression, Result, DateTime) VALUES ('{input[0]}','{result}','{DateTime.Now}')");
 
                 else
 

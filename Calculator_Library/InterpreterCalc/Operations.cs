@@ -27,7 +27,7 @@ namespace InterpreterCalc
             {
                 return (double)MathOperation(LeftExpression, RightExpression);
             }
-            catch(CalcExceptions ex)
+            catch (CalcExceptions ex)
             {
                 throw new CalcExceptions(ex.Message);
             }

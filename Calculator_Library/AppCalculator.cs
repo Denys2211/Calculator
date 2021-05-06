@@ -16,7 +16,7 @@ namespace Calculator
             ILogger log = new CalcLogger();
             var connection = new SQLiteConnection(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "usersdata.db"));
-            DataRepository sqlExpress = new HistoryRepository();
+            IDataRepository sqlExpress = new HistoryRepository();
             IData data = new DataConsole();
             IContext context = new Context();
             IAudit audit = new Audit_Input();

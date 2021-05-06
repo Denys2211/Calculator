@@ -7,13 +7,13 @@ namespace Audit
     public class Audit_Input : IAudit
     {
 
-        public readonly string NUMER_CHARACTER = "This is not a numeric! ";
+        public readonly string number_haracter = "This is not a numeric! ";
 
-        public readonly string QUANTITY = "You enter one number. ";
+        public readonly string quantity = "You enter one number! ";
 
-        public readonly string CORRECT_INPUT= "Not the correct expression. ";
+        public readonly string correct_input= "Not the correct expression! ";
 
-        public readonly string AVAILABILITY = "No data to calculate. ";
+        public readonly string availability = "No data to calculate! ";
 
         public int CountBracket { get; private set; }
 
@@ -24,26 +24,29 @@ namespace Audit
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
             if (inputString.Length == 0 && input.Length !=0)
             {
-                throw new AudExceptions(NUMER_CHARACTER); 
+                throw new AudExceptions(number_haracter); 
             }
             while (CountNumbers < inputString.Length)
             {
                 char chr = inputString[CountNumbers].ToCharArray()[0];
                 if (!char.IsDigit(chr))
                 {
-                    throw new AudExceptions(NUMER_CHARACTER);
+                    throw new AudExceptions(number_haracter);
                 }
                 CountNumbers++;
             }
         }
         public void CheckQuantity(string input)
         {
-            if (input.Length == 1)
+
+            char[] chr = input.ToCharArray();
+            for (int i = 0; i < input.Length; i++)
             {
-
-                throw new AudExceptions(QUANTITY);
-
+                if (!char.IsDigit(chr[i]) && chr[i] !=',')
+                    return;
             }
+                throw new AudExceptions(quantity);
+
         }
         public void CorrectInput(string input)
         {
@@ -59,14 +62,15 @@ namespace Audit
                 {
                     CountBracket++;
                     checkCount++;
-                    if (chr[0] != '(' && char.IsDigit(chr[i - 1]))
+                    if ((i + 1 < chr.Length && !char.IsDigit(chr[i + 1]) && chr[i + 1] !='-') || (chr[0] != '(' && char.IsDigit(chr[i - 1])))
                         checkCount++;
                 }
                 if (symbol.Equals(")"))
                 {
-                    if(checkCount > 0)
                     checkCount--;
-                    if (chr[^1] != ')' && char.IsDigit(chr[i + 1]))
+                    if(checkCount < 0)
+                        throw new AudExceptions(correct_input);
+                    if (i + 1 < chr.Length && !char.IsDigit(chr[i - 1]) && char.IsDigit(chr[i + 1]))
                         checkCount++;
                 }
                 if (symbol.Equals("+") || symbol.Equals("-") || symbol.Equals("/") || symbol.Equals("*"))
@@ -78,15 +82,16 @@ namespace Audit
             if (checkCount != 0 || (chr.Length != 0 && !char.IsDigit(chr[^1]) && chr[^1] != ')') )
             {
 
-                throw new AudExceptions(CORRECT_INPUT);
+                throw new AudExceptions(correct_input);
 
             }
         }
         public void CheckAvailability(string input)
         {
+
             if (input == string.Empty)
             {
-                throw new AudExceptions(AVAILABILITY);
+                throw new AudExceptions(availability);
             }
         }
     }

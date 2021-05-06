@@ -42,7 +42,7 @@ namespace InterpreterCalc
 
                 var chr = symbol.ToCharArray()[0];
 
-                if (!char.IsDigit(chr) && chr != '.' && value != "")
+                if (!char.IsDigit(chr) && chr != ',' && value != "")
                 {
                     Context[IndexList].Add(value);
 
@@ -62,8 +62,10 @@ namespace InterpreterCalc
 
                     Context[IndexList].Add(symbol);
 
-                else if (char.IsDigit(chr) || chr == '.')
+                else if (char.IsDigit(chr) || chr == ',')
                 {
+                    if (symbol == ",")
+                        symbol = ".";
                     value += symbol;
 
                     if (i == (input.Length - 1))

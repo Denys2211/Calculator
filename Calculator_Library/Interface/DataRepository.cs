@@ -6,10 +6,10 @@ using SQLite;
 
 namespace Calculator
 {
-    interface DataRepository
+    interface IDataRepository
     {
 
-        void AddInDataBase(string name, SQLiteConnection connection, params string[] inpu);
+        void AddInDataBase(string name, SQLiteConnection connection, double result, params string[] inpu);
 
         IEnumerable<History> ReadDataBase(string name, SQLiteConnection connection);
 

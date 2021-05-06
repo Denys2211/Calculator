@@ -11,7 +11,7 @@ namespace AppData
         public int Id { get; set; }
 
         public string Expression { get; set; }
-        public double Result { get; set; }
+        public string Result { get; set; }
         public string DateTime { get; set; }
     }
 }

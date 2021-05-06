@@ -17,10 +17,8 @@ namespace XamarinUI.Views
     {
 		public Calculator()
         {
-
 			InitializeComponent();
-
+			BaseViewModel.DisplayMessage += (mess) => DisplayAlert("Notification", $"{mess}", "ОK");
 		}
-
 	}
 }
