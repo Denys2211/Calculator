@@ -10,12 +10,11 @@ using XamarinUI.ViewModels;
 namespace XamarinUI.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class LogPage : ContentPage
     {
-        public LoginPage()
+        public LogPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
         }
     }
 }

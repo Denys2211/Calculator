@@ -18,6 +18,9 @@
     <Compile Update="Views\Calculator.xaml.cs">
       <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\LogPage.xaml.cs">
+      <DependentUpon>LogPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

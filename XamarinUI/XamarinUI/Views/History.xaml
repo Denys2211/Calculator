@@ -41,8 +41,8 @@
                 </LinearGradientBrush>
             </Frame.Background>
             
-                <StackLayout >
-                    <Label LineBreakMode="WordWrap" HorizontalTextAlignment="Center"  FontSize="16" FontAttributes="None"  TextColor="Black">
+                <StackLayout Margin="20,0,0,0">
+                    <Label LineBreakMode="WordWrap" HorizontalTextAlignment="Start"  FontSize="16" FontAttributes="None"  TextColor="Black">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>

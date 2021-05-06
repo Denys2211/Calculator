@@ -18,29 +18,16 @@
                           Offset="0.9" />
         </LinearGradientBrush>
     </ContentPage.Background>
-    
-    <Grid Margin="0,0,0,0">
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
+    <ScrollView>
         <StackLayout >
+            
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                 <ContentView Margin="0,-216,0,0" VerticalOptions="FillAndExpand">
                     <Image Source="fon2.png" VerticalOptions="Center" HeightRequest="500"  />
                 </ContentView>
             </StackLayout>
-        </StackLayout>
-
-        <ScrollView  Grid.Row="1" Margin="0,-9,0,0" >
-            <StackLayout Padding="6" >
+            
                 <Label Text="Start developing now" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
                 <Frame BorderColor="Gray" BackgroundColor="#e1e1e1" CornerRadius="30" HasShadow="True" >
                     <Label FontSize="16" TextColor="Black">
@@ -54,27 +41,22 @@
                         </Label.FormattedText>
                     </Label>
                 </Frame>
-            </StackLayout>
-        </ScrollView>
-        
-        <ScrollView  Grid.Row="1" Margin="0,-90,0,0" >
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Margin="0,190,0,0" VerticalOptions="FillAndExpand">
-                    <Image Source="fon3.png" VerticalOptions="Center" HeightRequest="250" />
-                </ContentView>
-            </StackLayout>
-        </ScrollView>
-        
-        <ScrollView  Grid.Row="1" Margin="0,-20,0,40" >
-            <StackLayout Orientation="Horizontal" >
-                <ImageButton Source="facebook"  HeightRequest="90"  VerticalOptions="Center" Margin="80,270,0,80"  CornerRadius="50" 
+            
+            <ContentView Margin="0,0,0,0" VerticalOptions="FillAndExpand">
+                <Image Source="fon3.png" VerticalOptions="Center" HeightRequest="250" />
+            </ContentView>
+
+            <StackLayout Orientation="Horizontal" Margin="0,-190,0,120" HorizontalOptions="Center" VerticalOptions="Center">
+                <ImageButton Source="facebook"  HeightRequest="90" Margin="20,0,0,0"  CornerRadius="50" 
                         Command="{Binding OpenWebCommand2}" 
                         BackgroundColor="GhostWhite" />
-                
-                <ImageButton Source="instagram"  HeightRequest="90" VerticalOptions="Center"   Margin="80,270,0,80"  CornerRadius="50"
+
+                <ImageButton Source="instagram"  HeightRequest="90" Margin="80,0,0,0"  CornerRadius="50"
                         Command="{Binding OpenWebCommand1}"
                         BackgroundColor="GhostWhite"  />
             </StackLayout>
-        </ScrollView>
-    </Grid>
+            
+        </StackLayout>
+    </ScrollView>
+    
 </ContentPage>

@@ -20,17 +20,15 @@ namespace XamarinUI.ViewModels
 
         public string TextHistory_Expression { get; set; }
 
-        public string TextHistory_DateTime { get; set; }
-
         public HistoryViewModel()
         {
 
-            RedDataBase();
+            ReadDataBase();
 
             Clean = new Command(() =>CleanHistory()); 
 
         }
-        public void RedDataBase()
+        public void ReadDataBase()
         {
             var historyData = Canculator.IDE.Calculation_history();
 
@@ -44,7 +42,7 @@ namespace XamarinUI.ViewModels
 
                 TextHistory_Expression += $"-> {row.DateTime}\n";
 
-                TextHistory_Expression += new string('_', 44) + "\n";
+                TextHistory_Expression += new string('_', 42) + "\n";
 
 
             }
@@ -56,9 +54,6 @@ namespace XamarinUI.ViewModels
 
             TextHistory_Expression = "";
             OnPropertyChanged("TextHistory_Expression");
-
-            TextHistory_DateTime = "";
-            OnPropertyChanged("TextHistory_DateTime");
 
         }
         

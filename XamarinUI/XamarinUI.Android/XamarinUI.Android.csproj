@@ -39,6 +39,7 @@
     <BundleAssemblies>false</BundleAssemblies>
     <MandroidI18n />
     <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
