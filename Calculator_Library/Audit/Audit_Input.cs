@@ -17,24 +17,14 @@ namespace Audit
 
         public int CountBracket { get; private set; }
 
-        public int CountNumbers { get; private set; }
-
         public void СheckNumericCharacter(string input, string[] symbol)
         {
             string[] inputString = input.Split(symbol, StringSplitOptions.RemoveEmptyEntries);
-            if (inputString.Length == 0 && input.Length !=0)
+            if (inputString.Length == 0 && input.Length != 0)
             {
                 throw new AudExceptions(number_haracter); 
             }
-            while (CountNumbers < inputString.Length)
-            {
-                char chr = inputString[CountNumbers].ToCharArray()[0];
-                if (!char.IsDigit(chr))
-                {
-                    throw new AudExceptions(number_haracter);
-                }
-                CountNumbers++;
-            }
+            
         }
         public void CheckQuantity(string input)
         {
@@ -42,7 +32,7 @@ namespace Audit
             char[] chr = input.ToCharArray();
             for (int i = 0; i < input.Length; i++)
             {
-                if (!char.IsDigit(chr[i]) && chr[i] !=',')
+                if (!char.IsDigit(chr[i]) && chr[i] != ',')
                     return;
             }
                 throw new AudExceptions(quantity);
@@ -62,7 +52,11 @@ namespace Audit
                 {
                     CountBracket++;
                     checkCount++;
-                    if ((i + 1 < chr.Length && !char.IsDigit(chr[i + 1]) && chr[i + 1] !='-') || (chr[0] != '(' && char.IsDigit(chr[i - 1])))
+                    if (i + 1 < chr.Length && !char.IsDigit(chr[i + 1]) && chr[i + 1] !='-' && chr[i + 1] != '(')
+                        checkCount++;
+                    if (chr[0] != '(' && char.IsDigit(chr[i - 1]))
+                        checkCount++;
+                    if(i + 2 < chr.Length && chr[i + 2] == ')')
                         checkCount++;
                 }
                 if (symbol.Equals(")"))
@@ -73,6 +67,11 @@ namespace Audit
                     if (i + 1 < chr.Length && !char.IsDigit(chr[i - 1]) && char.IsDigit(chr[i + 1]))
                         checkCount++;
                 }
+
+                if (symbol.Equals(","))
+                    if (!char.IsDigit(chr[i + 1]))
+                        checkCount++;
+
                 if (symbol.Equals("+") || symbol.Equals("-") || symbol.Equals("/") || symbol.Equals("*"))
                 {
                     if (i + 1 < chr.Length && !char.IsDigit(chr[i + 1]) && chr[i + 1] != '(' && chr[i + 1] != ')')

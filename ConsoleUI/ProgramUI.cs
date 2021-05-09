@@ -40,7 +40,7 @@ namespace ConsoleUI
                             break;
 
                         case 3:
-                            Canculator.IDE.Clean_history();
+                            Canculator.IDE.Clean_Log();
                             break;
 
                         case 4:

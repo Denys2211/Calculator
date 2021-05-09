@@ -24,6 +24,10 @@ namespace Logger
 
             return sr.ReadToEnd();
         }
+        public void CleanLog()
+        {
+            using var clean =  new FileStream(folderPath + "CalcLog.txt", FileMode.Truncate);
+        }
 
     }
 }

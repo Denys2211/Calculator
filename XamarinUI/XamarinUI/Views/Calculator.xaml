@@ -8,8 +8,9 @@
         <local:CalculatorViewModel />
     </ContentPage.BindingContext>
     
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="History" Command="{Binding ViewHistoryCommand }" />
+    <ContentPage.ToolbarItems >
+        <ToolbarItem IconImageSource="History"  Command="{Binding ViewCommand[0] }" />
+        <ToolbarItem IconImageSource="Log" Command="{Binding ViewCommand[1] }" />
     </ContentPage.ToolbarItems>
 
     <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Black">

@@ -1,14 +1,15 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Shell.PresentationMode="ModalAnimated"
              xmlns:local="clr-namespace:XamarinUI.ViewModels"
+             Shell.PresentationMode="Animated"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true"
+             ios:Page.UseSafeArea="true" Shell.FlyoutItemIsVisible="True"
              x:Class="XamarinUI.Views.LogPage"
-             Title="Log">
+             Title="Log" Shell.NavBarIsVisible="True">
+    <!---->
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Clear" Command="{Binding ViewHistoryCommand }" />
+        <ToolbarItem IconImageSource="Clean" Command="{Binding CleanLog }" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Background>
@@ -26,7 +27,6 @@
     </ContentPage.BindingContext>
 
     <StackLayout Padding="10.10">
-        <Label Text="LOG" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
         <ScrollView>
             <Frame Padding="10" BorderColor="Gray" BackgroundColor="#e1e1e1" CornerRadius="20" HasShadow="True" >
 

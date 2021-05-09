@@ -34,11 +34,11 @@ namespace XamarinUI.ViewModels
                     return InputString.Length > 0;
                 });
 
-            DeleteEverything = new Command(() => InputString ="");
+            DeleteEverything = new Command(() => InputString = "");
 
             CalculateCommand = new Command(() => OnCalculate());
 
-            ViewHistoryCommand = new Command(OnViewHistory);
+            ViewCommand = new ICommand[] { new Command(OnViewHistory), new Command(OnViewLog) };
         }
 
         public ICommand DeleteEverything { protected set; get; }
@@ -49,7 +49,7 @@ namespace XamarinUI.ViewModels
 
         public ICommand CalculateCommand { get; }
 
-        public ICommand ViewHistoryCommand { get; }
+        public ICommand[] ViewCommand { get; }
 
         string inputString = "";
 
@@ -100,6 +100,12 @@ namespace XamarinUI.ViewModels
         {
 
             await Shell.Current.GoToAsync(nameof(History));
+
+        }
+        async void OnViewLog(object obj)
+        {
+
+            await Shell.Current.GoToAsync(nameof(LogPage));
 
         }
 

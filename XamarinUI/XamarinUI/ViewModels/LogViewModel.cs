@@ -9,7 +9,7 @@ namespace XamarinUI.ViewModels
 {
     public class LogViewModel : BaseViewModel
     {
-
+        public ICommand CleanLog { get; protected set; }
         public string TextLog { get; set; }
 
         public LogViewModel()
@@ -17,19 +17,22 @@ namespace XamarinUI.ViewModels
 
             ReadLog();
 
+            CleanLog = new Command(() => Clean());
+
         }
         public void ReadLog()
         {
             var log = Canculator.IDE.ReadLogger();
-           
-                TextLog = $" {log}\n";
+
+            TextLog = $" {log}\n";
 
         }
-        public void CleanHistory()
+        public void Clean()
         {
 
-           
-            OnPropertyChanged("TextHistory_Expression");
+            Canculator.IDE.Clean_Log();
+            TextLog = "";
+            OnPropertyChanged("TextLog");
 
         }
     }

@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinUI.Views.AboutPage"
              xmlns:vm="clr-namespace:XamarinUI.ViewModels"
+             Shell.PresentationMode="Modal"
              Title="{Binding Title}" >
     
     <ContentPage.BindingContext>
@@ -48,11 +49,11 @@
 
             <StackLayout Orientation="Horizontal" Margin="0,-190,0,120" HorizontalOptions="Center" VerticalOptions="Center">
                 <ImageButton Source="facebook"  HeightRequest="90" Margin="20,0,0,0"  CornerRadius="50" 
-                        Command="{Binding OpenWebCommand2}" 
+                        Command="{Binding OpenWebCommand[1]}" 
                         BackgroundColor="GhostWhite" />
 
                 <ImageButton Source="instagram"  HeightRequest="90" Margin="80,0,0,0"  CornerRadius="50"
-                        Command="{Binding OpenWebCommand1}"
+                        Command="{Binding OpenWebCommands[0]}"
                         BackgroundColor="GhostWhite"  />
             </StackLayout>
             

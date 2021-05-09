@@ -39,12 +39,12 @@ namespace Calculator
             Audit.CheckAvailability(input);
             WriteLog("Check availability");
 
-            Audit.CheckQuantity(input);
-            WriteLog("Check quantity");
-
             Audit.СheckNumericCharacter(input, symbol);
             WriteLog("Сheck numeric character");
 
+            Audit.CheckQuantity(input);
+            WriteLog("Check quantity");
+            
             Audit.CorrectInput(input);
             WriteLog("Check correct input");
 
@@ -66,7 +66,6 @@ namespace Calculator
             SqlExpress.AddInDataBase("History", Connection, result, input);
             WriteLog("Add in data base result");
 
-            Notify?.Invoke($"Сalculation successful. There will be an operation on the {Audit.CountNumbers} numbers. ");
             WriteLog("Finish!!!");
 
             return result;
@@ -90,6 +89,13 @@ namespace Calculator
         {
 
             Log.WriteFile($"[{DateTime.Now}]\t{text}");
+
+        }
+
+        public void Clean_Log()
+        {
+
+            Log.CleanLog();
 
         }
 

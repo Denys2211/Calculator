@@ -12,11 +12,13 @@ namespace XamarinUI
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(History), typeof(History));
+            Routing.RegisterRoute(nameof(LogPage), typeof(LogPage));
+            Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
         }
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
+        private async void OnMenuItemClickedAbout(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync("AboutPage");
         }
     }
 }

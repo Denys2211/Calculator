@@ -9,5 +9,7 @@ namespace Calculator
         void WriteFile(string text);
 
         string ReaderFile();
+
+        void CleanLog();
     }
 }
