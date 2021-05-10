@@ -18,42 +18,23 @@ namespace XamarinUI.ViewModels
     {
         public ICommand Clean { get; set; }
 
-        public string TextHistory_Expression { get; set; }
-
         public HistoryViewModel()
         {
-
-            ReadDataBase();
 
             Clean = new Command(() =>CleanHistory()); 
 
         }
-        public void ReadDataBase()
+        public static IEnumerable<AppData.History> ReadDataBase()
         {
-            var historyData = Canculator.IDE.Calculation_history();
+            return Canculator.IDE.Calculation_history();
 
-            foreach (AppData.History row in historyData)
-            {
-                TextHistory_Expression += $"{row.Id} -> ";
-
-                TextHistory_Expression += $"{row.Expression}";
-
-                TextHistory_Expression += $" = {row.Result}";
-
-                TextHistory_Expression += $"-> {row.DateTime}\n";
-
-                TextHistory_Expression += new string('_', 42) + "\n";
-
-
-            }
         }
         public void CleanHistory()
         {
 
             Canculator.IDE.Clean_history();
 
-            TextHistory_Expression = "";
-            OnPropertyChanged("TextHistory_Expression");
+            History.ViewHistoryStackLayout.Children.Clear();
 
         }
         

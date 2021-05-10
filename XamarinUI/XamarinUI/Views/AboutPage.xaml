@@ -49,7 +49,7 @@
 
             <StackLayout Orientation="Horizontal" Margin="0,-190,0,120" HorizontalOptions="Center" VerticalOptions="Center">
                 <ImageButton Source="facebook"  HeightRequest="90" Margin="20,0,0,0"  CornerRadius="50" 
-                        Command="{Binding OpenWebCommand[1]}" 
+                        Command="{Binding OpenWebCommands[1]}" 
                         BackgroundColor="GhostWhite" />
 
                 <ImageButton Source="instagram"  HeightRequest="90" Margin="80,0,0,0"  CornerRadius="50"

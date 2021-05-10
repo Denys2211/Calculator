@@ -24,32 +24,4 @@
         <local:HistoryViewModel />
     </ContentPage.BindingContext>
     
-    <StackLayout Padding="10.10">
-        <ScrollView>
-        <Frame Padding="10" BorderColor="Gray" BackgroundColor="#e1e1e1" CornerRadius="20" HasShadow="True" >
-            
-            <Frame.Background>
-                <LinearGradientBrush StartPoint="0,0"
-                             EndPoint="1,1">
-                <GradientStop Color="WhiteSmoke"
-                          Offset="0.2" />
-                    <GradientStop Color="#78a7b3"
-                          Offset="0.9" />
-                </LinearGradientBrush>
-            </Frame.Background>
-            
-                <StackLayout Margin="20,0,0,0">
-                    <Label LineBreakMode="WordWrap" HorizontalTextAlignment="Start"  FontSize="16" FontAttributes="None"  TextColor="Black">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                    <Span Text="{Binding TextHistory_Expression}"/>
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                    </Label>
-                </StackLayout>
-        </Frame>
-        </ScrollView>
-    </StackLayout>
 </ContentPage>

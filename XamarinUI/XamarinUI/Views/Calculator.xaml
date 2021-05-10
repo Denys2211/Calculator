@@ -36,9 +36,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label FontSize="40" FontAttributes="Bold" BackgroundColor="Black" Text="{Binding InputString}"
-              TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-              LineBreakMode="TailTruncation" MaxLines="2" Visual="Material" WidthRequest="20"  Grid.RowSpan="1"  Grid.ColumnSpan="4" />
+        <Label FontSize="35" FontAttributes="Bold" BackgroundColor="Black" Text="{Binding InputString}"
+              TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="End"
+              LineBreakMode="HeadTruncation" MaxLines="2" Visual="Material" WidthRequest="20"  Grid.RowSpan="1"  Grid.ColumnSpan="4" />
 
         <ImageButton Source="Delete" Grid.Row="1"  Grid.Column="2" CornerRadius="100" Margin="50,35,0,0" 
                 BackgroundColor="Black"  Command="{Binding DeleteEverything}" />
