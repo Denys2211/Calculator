@@ -13,7 +13,7 @@ using Xamarin.Essentials;
 
 namespace XamarinUI.ViewModels
 {
-    class CalculatorViewModel : BaseViewModel
+    public class CalculatorViewModel : BaseViewModel
     {
         public CalculatorViewModel()
         {
@@ -59,12 +59,12 @@ namespace XamarinUI.ViewModels
         {
             protected set
             {
-                
+
                 inputString = value;
                 OnPropertyChanged("InputString");
 
                 ((Command)DeleteCharCommand).ChangeCanExecute();
-               
+
             }
 
             get { return inputString; }
@@ -96,7 +96,7 @@ namespace XamarinUI.ViewModels
             }
 
         }
-         async void OnViewHistory(object obj)
+        async void OnViewHistory(object obj)
         {
 
             await Shell.Current.GoToAsync(nameof(History));
