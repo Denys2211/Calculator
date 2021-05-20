@@ -8,16 +8,16 @@
         <local:CalculatorViewModel />
     </ContentPage.BindingContext>
     
-    <ContentPage.ToolbarItems >
-        <ToolbarItem IconImageSource="History"  Command="{Binding ViewCommand[0] }" />
-        <ToolbarItem IconImageSource="Log" Command="{Binding ViewCommand[1] }" />
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="History" Command="{Binding ViewCommand[0] }" />
+        <ToolbarItem Order="Secondary" Text="Log" Command="{Binding ViewCommand[1] }" />
     </ContentPage.ToolbarItems>
 
     <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Black">
 
-        <Grid.BindingContext>
-            <local:CalculatorViewModel />
-        </Grid.BindingContext>
+  <Grid.BindingContext>
+        <local:CalculatorViewModel/>
+    </Grid.BindingContext>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -40,9 +40,9 @@
               TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="End"
               LineBreakMode="HeadTruncation" MaxLines="2" Visual="Material" WidthRequest="20"  Grid.RowSpan="1"  Grid.ColumnSpan="4" />
 
-        <ImageButton Source="Delete" Grid.Row="1"  Grid.Column="2" CornerRadius="100" Margin="50,35,0,0" 
+        <ImageButton Source="{local:ImageResource XamarinUI.images.Delete.png}" Grid.Row="1"  Grid.Column="2" CornerRadius="50" Margin="50,30,0,0" 
                 BackgroundColor="Black"  Command="{Binding DeleteEverything}" />
-        <ImageButton Source="DeleteOne" Grid.Row="1"  Grid.Column="3" CornerRadius="100" Margin="20,30,10,0" 
+        <ImageButton Source="{local:ImageResource XamarinUI.images.DeleteOne.png}" Grid.Row="1"  Grid.Column="3" CornerRadius="50" Margin="20,30,10,0" 
                 BackgroundColor="Black"  Command="{Binding DeleteCharCommand}" />
         
         <Button Text="7" Grid.Row="2" Grid.Column="0"

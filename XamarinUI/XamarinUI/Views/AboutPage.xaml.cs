@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace XamarinUI.Views
 {
@@ -12,9 +10,5 @@ namespace XamarinUI.Views
             InitializeComponent();
         }
 
-        private void StackLayout_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-
-        }
     }
 }

@@ -18,13 +18,17 @@ namespace XamarinUI.ViewModels
     {
         public ICommand Clean { get; set; }
 
+        public IEnumerable<AppData.History> ListHistory { get; private set; }
+
         public HistoryViewModel()
         {
 
-            Clean = new Command(() =>CleanHistory()); 
+            Clean = new Command(() =>CleanHistory());
+
+            ListHistory = ReadDataBase();
 
         }
-        public static IEnumerable<AppData.History> ReadDataBase()
+        public IEnumerable<AppData.History> ReadDataBase()
         {
             return Canculator.IDE.Calculation_history();
 
@@ -34,7 +38,7 @@ namespace XamarinUI.ViewModels
 
             Canculator.IDE.Clean_history();
 
-            History.ViewHistoryStackLayout.Children.Clear();
+            //History.ViewHistoryStackLayout.Children.Clear();
 
         }
         

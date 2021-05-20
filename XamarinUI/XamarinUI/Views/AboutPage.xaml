@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinUI.Views.AboutPage"
              xmlns:vm="clr-namespace:XamarinUI.ViewModels"
-             Shell.PresentationMode="Modal"
+             Shell.PresentationMode="NotAnimated"
              Title="{Binding Title}" >
     
     <ContentPage.BindingContext>
@@ -24,8 +24,8 @@
         <StackLayout >
             
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Margin="0,-216,0,0" VerticalOptions="FillAndExpand">
-                    <Image Source="fon2.png" VerticalOptions="Center" HeightRequest="500"  />
+                <ContentView Margin="0,-170,0,0" VerticalOptions="FillAndExpand">
+                    <Image Source="{vm:ImageResource XamarinUI.images.fon2.png}" Aspect="AspectFill" WidthRequest="430" VerticalOptions="Center" HeightRequest="500"   />
                 </ContentView>
             </StackLayout>
             
@@ -44,15 +44,15 @@
                 </Frame>
             
             <ContentView Margin="0,0,0,0" VerticalOptions="FillAndExpand">
-                <Image Source="fon3.png" VerticalOptions="Center" HeightRequest="250" />
+                <Image Source="{vm:ImageResource XamarinUI.images.fon3.png}" VerticalOptions="Center" HeightRequest="250" />
             </ContentView>
 
-            <StackLayout Orientation="Horizontal" Margin="0,-190,0,120" HorizontalOptions="Center" VerticalOptions="Center">
-                <ImageButton Source="facebook"  HeightRequest="90" Margin="20,0,0,0"  CornerRadius="50" 
+            <StackLayout Orientation="Horizontal" Margin="0,-160,0,130" HorizontalOptions="Center" VerticalOptions="Center">
+                <ImageButton Source="{vm:ImageResource XamarinUI.images.facebook.png}"  HeightRequest="90" Margin="20,0,0,30"  CornerRadius="45" 
                         Command="{Binding OpenWebCommands[1]}" 
                         BackgroundColor="GhostWhite" />
 
-                <ImageButton Source="instagram"  HeightRequest="90" Margin="80,0,0,0"  CornerRadius="50"
+                <ImageButton Source="{vm:ImageResource XamarinUI.images.instagram.png}"  HeightRequest="90" Margin="80,0,0,30"  CornerRadius="45"
                         Command="{Binding OpenWebCommands[0]}"
                         BackgroundColor="GhostWhite"  />
             </StackLayout>

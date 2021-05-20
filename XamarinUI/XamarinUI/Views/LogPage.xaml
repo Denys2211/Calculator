@@ -6,10 +6,9 @@
              ios:Page.UseSafeArea="true" Shell.FlyoutItemIsVisible="True"
              x:Class="XamarinUI.Views.LogPage"
              Title="Log" Shell.NavBarIsVisible="True">
-    <!---->
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="Clean" Command="{Binding CleanLog }" />
+        <ToolbarItem Text="X" Command="{Binding CleanLog }" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Background>
@@ -18,7 +17,7 @@
             <GradientStop Color="DarkGray"
                           Offset="0.2" />
             <GradientStop Color="#494085"
-                          Offset="0.9" />
+                         Offset="0.9" />
         </LinearGradientBrush>
     </ContentPage.Background>
 

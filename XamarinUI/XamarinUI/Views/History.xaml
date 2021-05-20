@@ -7,21 +7,63 @@
              ios:Page.UseSafeArea="true"
              x:Class="XamarinUI.Views.History"
              Title="Hisory">
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="Clean" Command="{Binding Clean }" />
+        <ToolbarItem Text="X" Command="{Binding Clean }" />
     </ContentPage.ToolbarItems>
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0"
-                             EndPoint="1,1">
-            <GradientStop Color="DarkGray"
-                          Offset="0.2" />
-            <GradientStop Color="#494085"
-                          Offset="0.9" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
+    
     
     <ContentPage.BindingContext>
         <local:HistoryViewModel />
     </ContentPage.BindingContext>
+
+
+     <StackLayout>
+         <ListView x:Name="historyList" ItemsSource="{Binding ListHistory}" SeparatorVisibility="None"  HasUnevenRows="True" >
+
+                  <ListView.Background>
+                      <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+                      <GradientStop Color="DarkGray"
+                          Offset="0.2" />
+                      <GradientStop Color="#494085"
+                          Offset="0.9" />
+                      </LinearGradientBrush>
+                  </ListView.Background>
+
+             <ListView.ItemTemplate>
+
+                 <DataTemplate>
+
+                     <ViewCell >
+                         <ViewCell.View>
+                             <StackLayout Orientation="Vertical">
+                                 <Label  HorizontalOptions="Start" Margin="30,10,0,0" >
+                                     <Label.FormattedText>
+                                         <FormattedString>
+                                             <Span Text="{Binding Id, StringFormat='{0}) '}" FontSize="Small" />
+                                             <Span Text="{Binding DateTime}" FontSize="Small" />
+                                         </FormattedString>
+                                     </Label.FormattedText>
+                                 </Label >
+                                 <Frame CornerRadius="15" Padding="5,5,5,5" HasShadow="True" Margin="20,0,20,0" >
+                                      <Label HorizontalTextAlignment="Center" FontSize="Default">
+                                          <Label.FormattedText>
+                                              <FormattedString>
+                                                  <Span Text="{Binding Expression, StringFormat='{0} = '}"/>
+                                                  <Span Text="{Binding Result }"/>  
+                                              </FormattedString>
+                                          </Label.FormattedText>
+                                      </Label>
+                                 </Frame>
+                                 
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
     
 </ContentPage>

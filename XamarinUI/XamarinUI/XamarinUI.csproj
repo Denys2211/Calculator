@@ -24,8 +24,57 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="images\fon2.png" />
+    <EmbeddedResource Include="images\Clean.png" />
+    <EmbeddedResource Include="images\Delete.png" />
+    <EmbeddedResource Include="images\DeleteOne.png" />
+    <EmbeddedResource Include="images\facebook.png" />
+    <EmbeddedResource Include="images\fon.png" />
+    <EmbeddedResource Include="images\fon3.png" />
+    <EmbeddedResource Include="images\fon5.png" />
+    <EmbeddedResource Include="images\fon6.png" />
+    <EmbeddedResource Include="images\fon7png.png" />
+    <EmbeddedResource Include="images\fon8.png" />
+    <EmbeddedResource Include="images\fon9.png" />
+    <EmbeddedResource Include="images\fon10.png" />
+    <EmbeddedResource Include="images\fon11.png" />
+    <EmbeddedResource Include="images\fon12.png" />
+    <EmbeddedResource Include="images\fon13.png" />
+    <EmbeddedResource Include="images\History.png" />
+    <EmbeddedResource Include="images\icon_about.png" />
+    <EmbeddedResource Include="images\icon_feed.png" />
+    <EmbeddedResource Include="images\instagram.png" />
+    <EmbeddedResource Include="images\Log.png" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="Views\History.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="images\fon2.png" />
+    <None Remove="images\Clean.png" />
+    <None Remove="images\Delete.png" />
+    <None Remove="images\DeleteOne.png" />
+    <None Remove="images\facebook.png" />
+    <None Remove="images\fon.png" />
+    <None Remove="images\fon3.png" />
+    <None Remove="images\fon5.png" />
+    <None Remove="images\fon6.png" />
+    <None Remove="images\fon7png.png" />
+    <None Remove="images\fon8.png" />
+    <None Remove="images\fon9.png" />
+    <None Remove="images\fon10.png" />
+    <None Remove="images\fon11.png" />
+    <None Remove="images\fon12.png" />
+    <None Remove="images\fon13.png" />
+    <None Remove="images\History.png" />
+    <None Remove="images\icon_about.png" />
+    <None Remove="images\icon_feed.png" />
+    <None Remove="images\instagram.png" />
+    <None Remove="images\Log.png" />
   </ItemGroup>
 </Project>
