@@ -38,19 +38,19 @@
                      <ViewCell >
                          <ViewCell.View>
                              <StackLayout Orientation="Vertical">
-                                 <Label  HorizontalOptions="Start" Margin="30,10,0,0" >
+                                 <Label  HorizontalOptions="Start" Margin="30,10,0,0" TextColor="Black">
                                      <Label.FormattedText>
                                          <FormattedString>
-                                             <Span Text="{Binding Id, StringFormat='{0}) '}" FontSize="Small" />
+                                             <Span Text="{Binding Id, StringFormat='{0})-'}" FontSize="Small" />
                                              <Span Text="{Binding DateTime}" FontSize="Small" />
                                          </FormattedString>
                                      </Label.FormattedText>
                                  </Label >
                                  <Frame CornerRadius="15" Padding="5,5,5,5" HasShadow="True" Margin="20,0,20,0" >
-                                      <Label HorizontalTextAlignment="Center" FontSize="Default">
+                                      <Label HorizontalTextAlignment="Center" FontSize="Medium" TextColor="Black">
                                           <Label.FormattedText>
                                               <FormattedString>
-                                                  <Span Text="{Binding Expression, StringFormat='{0} = '}"/>
+                                                  <Span Text="{Binding Expression, StringFormat='{0} = '}" />
                                                   <Span Text="{Binding Result }"/>  
                                               </FormattedString>
                                           </Label.FormattedText>
