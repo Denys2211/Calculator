@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.6" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CustomerFacade\" />
+    <Folder Include="CustomerFacade\Collections\" />
+    <Folder Include="CustomerFacade\Audit\" />
+    <Folder Include="CustomerFacade\CoreModels\" />
+    <Folder Include="CustomerFacade\Exception\" />
+    <Folder Include="CustomerFacade\CustomerInterpreter\" />
+    <Folder Include="CustomerFacade\CustomerLogger\" />
+  </ItemGroup>
+</Project>

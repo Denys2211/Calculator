@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Calculator_Library\Calculator_Library.csproj" />
+    <ProjectReference Include="..\Calculator_Library\Calculator_Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,17 +1,9 @@
 ﻿using System;
-using Calculator;
-using Exceptions;
-
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using XamarinUI.Views;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Windows.Input;
-using Xamarin.Essentials;
-using System.Globalization;
 using System.Collections.ObjectModel;
+using Calculator.CustomerFacade.CoreModels;
 
 namespace XamarinUI.ViewModels
 {
@@ -19,20 +11,20 @@ namespace XamarinUI.ViewModels
     {
         public ICommand Clean { get; set; }
 
-        public ObservableCollection<AppData.History> ListHistory { get; private set; }
+        public ObservableCollection<History> ListHistory { get; private set; }
 
         public HistoryViewModel()
         {
 
-            Clean = new Command(() =>CleanHistory());
+            Clean = new Command(() => CleanHistory());
 
             ListHistory = ReadDataBase();
 
         }
-        public ObservableCollection<AppData.History> ReadDataBase()
+        public ObservableCollection<History> ReadDataBase()
         {
 
-            ObservableCollection<AppData.History> historyReverse = new ObservableCollection<AppData.History>(Canculator.IDE.Calculation_history().Reverse());
+            ObservableCollection<History> historyReverse = new ObservableCollection<History>(Canculator.IDE.Calculation_history().Reverse());
             
             return historyReverse;
 

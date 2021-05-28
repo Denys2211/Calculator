@@ -11,13 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Calculator_Library\Calculator_Library.csproj" />
+    <ProjectReference Include="..\..\Calculator_Library\Calculator_Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Calculator.xaml.cs">
-      <DependentUpon>Calculator.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\LogPage.xaml.cs">
       <DependentUpon>LogPage.xaml</DependentUpon>
     </Compile>
@@ -45,11 +42,6 @@
     <EmbeddedResource Include="images\icon_feed.png" />
     <EmbeddedResource Include="images\instagram.png" />
     <EmbeddedResource Include="images\Log.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Views\History.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\" />

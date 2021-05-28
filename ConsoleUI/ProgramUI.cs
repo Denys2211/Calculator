@@ -1,7 +1,7 @@
 ﻿using System;
 using Calculator;
-using Exceptions;
-using SQLite;
+using Calculator.CustomerFacade.CoreModels;
+using Calculator.CustomerFacade.Exceptions;
 
 namespace ConsoleUI
 {
@@ -32,7 +32,7 @@ namespace ConsoleUI
                             Console.WriteLine("Id_\t\tExpression\tResult\t\tDateTime");
                             Console.WriteLine(new string('_', 70));
 
-                            foreach (AppData.History row in history)
+                            foreach (History row in history)
                             {
                                 Console.WriteLine($"{row.Id}\t{row.Expression}\t{row.Result}\t{row.DateTime}");
                                 Console.WriteLine(new string('_', 70));

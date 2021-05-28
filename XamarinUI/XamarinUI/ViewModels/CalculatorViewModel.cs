@@ -1,15 +1,9 @@
-﻿using System;
-using Calculator;
-using Exceptions;
-
+﻿using Calculator;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using XamarinUI.Views;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Windows.Input;
-using Xamarin.Essentials;
+using Calculator.CustomerFacade.Exceptions;
 
 namespace XamarinUI.ViewModels
 {
@@ -53,7 +47,7 @@ namespace XamarinUI.ViewModels
 
         string inputString = "";
 
-        public IEnumerable<AppData.History> HistoryData { get; set; }
+        public IEnumerable<Calculator.CustomerFacade.CoreModels.History> HistoryData { get; set; }
 
         public string InputString
         {
@@ -80,26 +74,27 @@ namespace XamarinUI.ViewModels
             catch (DataBExceptions ex)
             {
 
-                DisplayMessage(ex.Message);
+                App.Current.MainPage.DisplayAlert("Notification",ex.Message,"Ok");
             }
             catch (CalcExceptions ex)
             {
-                DisplayMessage(ex.Message);
+                App.Current.MainPage.DisplayAlert("Notification", ex.Message, "Ok");
             }
             catch (AudExceptions ex)
             {
-                DisplayMessage(ex.Message);
+                App.Current.MainPage.DisplayAlert("Notification", ex.Message, "Ok");
             }
             catch
             {
-                DisplayMessage("An error has occurred!");
+                App.Current.MainPage.DisplayAlert("Notification", "An error has occurred!", "Ok");
+
             }
 
         }
         async void OnViewHistory(object obj)
         {
 
-            await Shell.Current.GoToAsync(nameof(History));
+            await Shell.Current.GoToAsync(nameof(HistoryPage));
 
         }
         async void OnViewLog(object obj)

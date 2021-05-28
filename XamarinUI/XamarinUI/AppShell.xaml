@@ -41,7 +41,7 @@
     </Shell.Resources>
 
     <FlyoutItem Title="Calculator" Icon="{vm:ImageResource XamarinUI.images.icon_feed.png}">
-        <ShellContent Route="Calculator" ContentTemplate="{DataTemplate local:Calculator}" />
+        <ShellContent Route="Calculator" ContentTemplate="{DataTemplate local:CalculatorPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="About" StyleClass="MenuItemLayoutStyle" >

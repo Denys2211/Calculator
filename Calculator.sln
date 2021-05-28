@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{0C3876E7-537E-4CE0-9F7B-3C134525CC52}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator_Library", "Calculator_Library\Calculator_Library.csproj", "{994D70F7-F93D-4783-9681-838081EB4F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator_Core", "Calculator_Library\Calculator_Core.csproj", "{994D70F7-F93D-4783-9681-838081EB4F2E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinUI.Android", "XamarinUI\XamarinUI.Android\XamarinUI.Android.csproj", "{6FBBFE92-C26F-4686-9B27-83C6A9E34BF1}"
 EndProject

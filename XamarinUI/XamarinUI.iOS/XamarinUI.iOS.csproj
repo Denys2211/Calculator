@@ -138,8 +138,14 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\XamarinUI\XamarinUI.csproj">
-      <Project>{EB6C9A54-95E0-43DC-8F1F-A3A11B78CAF4}</Project>
+      <Project>{87787DA7-C57A-4D7C-844C-D4F6760E1321}</Project>
       <Name>XamarinUI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DeleteOne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Delete.png" />
   </ItemGroup>
 </Project>

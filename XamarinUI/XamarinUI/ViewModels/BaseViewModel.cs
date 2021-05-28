@@ -9,7 +9,6 @@ namespace XamarinUI.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public static AppCalculator Canculator { get; set; }
-        public static Action<string> DisplayMessage;
         bool isBusy = false;
         public bool IsBusy
         {
